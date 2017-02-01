@@ -1,0 +1,8 @@
+# OS and IDE
+.DS_Store
+Thumbs.db
+sftp-config.json
+.remote-sync.json
+
+# NPM
+/node_modules

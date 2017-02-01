@@ -1,0 +1,23 @@
+{
+  "name": "liarbustr",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebj54/liarbustr.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sebj54/liarbustr/issues"
+  },
+  "homepage": "https://github.com/sebj54/liarbustr#readme",
+  "dependencies": {
+    "normalize.css": "^5.0.0",
+    "vue": "^2.1.10"
+  }
+}
