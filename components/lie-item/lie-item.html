@@ -1,0 +1,45 @@
+<article class="lie-item" :class="{ '-is-a-lie': isALie, '-is-not-a-lie': !isALie }">
+    <h2 class="lie-item-title">{{ title }}</h2>
+
+    <p class="lie-item-liar">{{ liar }}</p>
+
+    <figure class="lie-item-figure">
+        <img :src="pictures.main" :alt="liar + '\'s picture'" class="lie-item-picture -main">
+    </figure>
+
+    <div class="lie-item-text">
+        <p class="lie-item-text-chunk">{{ text }}</p>
+    </div>
+
+    <div class="lie-item-votes">
+        <div class="lie-item-vote -liar">
+            <span class="lie-item-vote-title">Liar</span>
+            <span class="lie-item-vote-count">{{ votes.liar }}</span>
+            <button type="button" class="lie-item-vote-btn" @click="voteLiar">+1</button>
+        </div>
+        <div class="lie-item-vote -not-liar">
+            <span class="lie-item-vote-title">Not liar</span>
+            <span class="lie-item-vote-count">{{ votes.notLiar }}</span>
+            <button type="button" class="lie-item-vote-btn" @click="voteNotLiar">+1</button>
+        </div>
+    </div>
+
+    <div class="lie-item-sources-wrapper">
+        <ul class="lie-item-sources -statements" v-for="source in sources.statements">
+            <li class="lie-item-source">
+                <a :href="source" class="lie-item-source-link -statement">{{ source }}</a>
+            </li>
+        </ul>
+        <ul class="lie-item-sources -refutations" v-for="source in sources.refutations">
+            <li class="lie-item-source">
+                <a :href="source" class="lie-item-source-link -refutation">{{ source }}</a>
+            </li>
+        </ul>
+        <ul class="lie-item-sources -confirmations" v-for="source in sources.confirmations">
+            <li class="lie-item-source">
+                <a :href="source" class="lie-item-source-link -confirmation">{{ source }}</a>
+            </li>
+        </ul>
+    </div>
+
+</article>
