@@ -1,8 +1,7 @@
 Vue.component('lie-item', app.resolveTemplate('lie-item', {
-    data: function()
-    {
-        return fakeDatas.lies[0]
-    },
+    props: [
+        'lie'
+    ],
     computed: {
         isALie: function()
         {
@@ -12,7 +11,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
     methods: {
         vote: function(type)
         {
-            this.votes[type]++
+            this.lie.votes[type]++
         },
         voteLiar: function()
         {

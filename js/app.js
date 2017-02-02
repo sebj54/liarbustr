@@ -8,7 +8,10 @@ var app = {
     init: function()
     {
         app.vue = new Vue({
-            el: '#app'
+            el: '#app',
+            data: {
+                fakeDatas: fakeDatas
+            }
         })
     },
 
