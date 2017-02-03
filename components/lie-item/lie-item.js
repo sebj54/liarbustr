@@ -5,7 +5,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
     computed: {
         isALie: function()
         {
-            return this.votes.liar > this.votes.notLiar
+            return this.lie.votes.liar > this.lie.votes.notLiar
         }
     },
     methods: {
