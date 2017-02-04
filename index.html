@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="css/app.css">
     <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/firebase/firebase.js"></script>
     <script src="js/app.js"></script>
     <script src="js/fakedatas.js"></script>
     <script src="components/lie-item/lie-item.js"></script>
@@ -18,20 +19,4 @@
         <lies-list :lies="fakeDatas.lies"></lies-list>
     </div>
 </body>
-
-
-<script src="https://www.gstatic.com/firebasejs/3.6.8/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyAIGDDnLz2_fLIzeyaVMzLZTQKFoAwJncM",
-    authDomain: "liar-bustr.firebaseapp.com",
-    databaseURL: "https://liar-bustr.firebaseio.com",
-    storageBucket: "liar-bustr.appspot.com",
-    messagingSenderId: "622874178146"
-  };
-  firebase.initializeApp(config);
-</script>
-
-
 </html>

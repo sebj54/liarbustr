@@ -3,10 +3,19 @@
  * @type {Object}
  */
 var app = {
+    firebaseConfig: {
+        apiKey: 'AIzaSyAIGDDnLz2_fLIzeyaVMzLZTQKFoAwJncM',
+        authDomain: 'liar-bustr.firebaseapp.com',
+        databaseURL: 'https://liar-bustr.firebaseio.com',
+        storageBucket: 'liar-bustr.appspot.com',
+        messagingSenderId: '622874178146'
+    },
     vue: null,
 
     init: function()
     {
+        firebase.initializeApp(app.firebaseConfig)
+
         app.vue = new Vue({
             el: '#app',
             data: {
