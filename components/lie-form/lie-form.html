@@ -1,0 +1,24 @@
+<form action="" class="lie-form">
+    <div class="lie-form-group -title">
+        <label :for="fieldId('title')" class="lie-form-label -title">What's the lie exactly?</label>
+        <input type="text" name="title" :id="fieldId('title')" class="lie-form-field -title" placeholder="e.g. Santa Claus exists" v-model="lie.title">
+    </div>
+    <div class="lie-form-group -liar">
+        <label :for="fieldId('liar')" class="lie-form-label -liar">Who told that lie?</label>
+        <input type="text" name="liar" :id="fieldId('liar')" class="lie-form-field -liar" placeholder="e.g. Donald J. Trump" v-model="lie.liar">
+    </div>
+    <div class="lie-form-group -text">
+        <label :for="fieldId('text')" class="lie-form-label -text">Tell us a bit more about that lie:</label>
+        <textarea name="text" :id="fieldId('text')" class="lie-form-field -text" placeholder="e.g. context, when, where, why?" v-model="lie.text"></textarea>
+    </div>
+    <div class="lie-form-group -picture">
+        <label :for="fieldId('picture-main')" class="lie-form-label -picture -main">Display that liar, add a picture</label>
+        <input type="url" name="picture[main]" :id="fieldId('picture-main')" class="lie-form-field -picture -main" placeholder="e.g. http://website.com/files/picture.jpg" v-model="lie.pictures.main">
+    </div>
+    <fieldset class="lie-form-sources-wrapper">
+        <legend class="lie-form-sources-legend">Prove that lie has been said, add a source!</legend>
+        <lie-form-source v-model="lie.sources.statements[index]" :index="index" placeholder="e.g. http://emailsanta.com/Santa-Claus-FAQ/is-santa-real.asp" type="statement" v-for="(statement, index) in lie.sources.statements"></lie-form-source>
+        <button type="button" class="lie-form-add-source" @click="addStatement">Add another source</button>
+    </fieldset>
+    <button type="submit" class="lie-form-submit">Reveal that lie!</button>
+</form>

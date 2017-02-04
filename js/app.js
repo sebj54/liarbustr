@@ -76,11 +76,12 @@ var app = {
 
     /**
      * Get a template from a name
-     * @param  {string} name Template name
+     * @param  {string} name Template name (filename without .html or path related to components directory)
      */
     resolveTemplate: function(name, component)
     {
-        var path = '/components/' + name + '/' + name + '.html'
+        var fullName = (name.indexOf('/') !== -1) ? name : name + '/' + name
+        var path = '/components/' + fullName + '.html'
 
         if (!component)
         {

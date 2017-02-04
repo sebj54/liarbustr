@@ -1,0 +1,4 @@
+<div class="lie-form-group -source" :class="'-' + type">
+    <label :for="fieldId('source')" class="lie-form-label -source" :class="'-' + type">Source #{{ index + 1}}</label>
+    <input type="url" :name="'sources[' + type + '][]'" :id="fieldId('source')" class="lie-form-field -source" :class="'-' + type" :placeholder="placeholder" v-model="source">
+</div>
