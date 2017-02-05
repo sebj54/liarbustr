@@ -17,7 +17,11 @@
     </div>
     <fieldset class="lie-form-sources-wrapper">
         <legend class="lie-form-sources-legend">Prove that lie has been said, add a source!</legend>
-        <lie-form-source v-model="lie.sources.statements[index]" :index="index" placeholder="e.g. http://emailsanta.com/Santa-Claus-FAQ/is-santa-real.asp" type="statement" v-for="(statement, index) in lie.sources.statements"></lie-form-source>
+        <div class="lie-form-group -source -statement"  v-for="(statement, index) in lie.sources.statements">
+            <label :for="fieldId('source')" class="lie-form-label -source -statement">Source #{{ index + 1}}</label>
+            <input type="url" :name="'sources[statements][]'" :id="fieldId('source')" class="lie-form-field -source -statement" placeholder="e.g. http://emailsanta.com/Santa-Claus-FAQ/is-santa-real.asp" v-model="lie.sources.statements[index]">
+        </div>
+
         <button type="button" class="lie-form-add-source" @click="addStatement">Add another source</button>
     </fieldset>
     <button type="submit" class="lie-form-submit">Reveal that lie!</button>
