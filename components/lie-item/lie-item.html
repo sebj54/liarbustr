@@ -8,7 +8,7 @@
     </figure>
 
     <div class="lie-item-text">
-        <p class="lie-item-text-chunk">{{ lie.text }}</p>
+        <p class="lie-item-text-chunk" v-for="textChunk in lieTextChunks">{{ textChunk }}</p>
     </div>
 
     <div class="lie-item-votes">

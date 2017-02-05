@@ -6,6 +6,10 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         isALie: function()
         {
             return this.lie.votes.liar > this.lie.votes.notLiar
+        },
+        lieTextChunks: function()
+        {
+            return this.lie.text.split('\n')
         }
     },
     methods: {
