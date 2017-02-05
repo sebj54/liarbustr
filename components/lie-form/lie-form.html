@@ -1,4 +1,4 @@
-<form action="" class="lie-form">
+<form action="" class="lie-form" @submit.prevent="saveLie">
     <div class="lie-form-group -title">
         <label :for="fieldId('title')" class="lie-form-label -title">What's the lie exactly?</label>
         <input type="text" name="title" :id="fieldId('title')" class="lie-form-field -title" placeholder="e.g. Santa Claus exists" v-model="lie.title">

@@ -26,5 +26,25 @@ var fakeDatas = {
                 main: 'http://braindamaged.fr/wp-content/uploads/2016/07/donald-trump-reine-des-neiges-comme-d%C3%A9fense.jpg?w=640'
             }
         }
-    ]
+    ],
+    lieEmptyStructure: function()
+    {
+        return {
+            title: '',
+            liar: '',
+            text: '',
+            votes: {
+                liar: 1,
+                notLiar: 0
+            },
+            sources: {
+                statements: [],
+                refutations: [],
+                confirmations: []
+            },
+            pictures: {
+                main: null
+            }
+        }
+    }
 }

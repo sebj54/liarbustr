@@ -7,23 +7,7 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
     data: function()
     {
         return {
-            lie: {
-                title: '',
-                liar: '',
-                text: '',
-                votes: {
-                    liar: 1,
-                    notLiar: 0
-                },
-                sources: {
-                    statements: [''],
-                    refutations: [],
-                    confirmations: []
-                },
-                pictures: {
-                    main: null
-                }
-            }
+            lie: fakeDatas.lieEmptyStructure()
         }
     },
     methods: {
@@ -35,7 +19,18 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
         {
             this.addSource('statements')
         },
-        fieldId: fieldId
+        fieldId: fieldId,
+        saveLie: function()
+        {
+            fakeDatas.lies.push(this.lie)
+
+            this.lie = fakeDatas.lieEmptyStructure()
+            setTimeout(this.addStatement) // setTimeout is mandatory for rendering to avoid not cleared source input
+        }
+    },
+    created: function()
+    {
+        this.addStatement()
     }
 }))
 
