@@ -65,7 +65,7 @@ var app = {
             }
             else
             {
-                wrappedErrorCallback
+                wrappedErrorCallback()
             }
         }
 
