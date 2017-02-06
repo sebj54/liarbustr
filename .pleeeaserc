@@ -1,0 +1,5 @@
+{
+    "in": ["css/app.scss"],
+    "out": "css/app.min.css",
+    "sass": true
+}
