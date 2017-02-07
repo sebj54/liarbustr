@@ -1,1 +1,13 @@
 @import url(../node_modules/normalize.css/normalize.css);
+@import "colors";
+
+@import "../components/app-header/app-header";
+
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
