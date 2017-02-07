@@ -6,3 +6,6 @@ sftp-config.json
 
 # NPM
 /node_modules
+
+# LIARBUSTR
+css/app.min.css
