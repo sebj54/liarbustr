@@ -8,11 +8,11 @@ var app = {
      * @type {Object}
      */
     firebaseConfig: {
-        apiKey: 'AIzaSyAIGDDnLz2_fLIzeyaVMzLZTQKFoAwJncM',
-        authDomain: 'liar-bustr.firebaseapp.com',
-        databaseURL: 'https://liar-bustr.firebaseio.com',
-        storageBucket: 'liar-bustr.appspot.com',
-        messagingSenderId: '622874178146'
+        apiKey: "AIzaSyC2HAMgUYDOJdp_69RQbp4N-uyxeGqr_WI",
+        authDomain: "liarbustr.firebaseapp.com",
+        databaseURL: "https://liarbustr.firebaseio.com",
+        storageBucket: "liarbustr.appspot.com",
+        messagingSenderId: "405782866530"
     },
     /**
      * Current language
@@ -55,6 +55,14 @@ var app = {
             router: new VueRouter({
                 routes: router.routes
             })
+        })
+
+        firebase.auth().onAuthStateChanged(function(firebaseUser)
+        {
+            if (firebaseUser)
+            {
+                user.fetchUser(firebaseUser)
+            }
         })
     },
 
