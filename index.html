@@ -8,17 +8,18 @@
 
     <link rel="stylesheet" href="css/app.min.css">
     <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="node_modules/firebase/firebase.js"></script>
-    <script src="js/app.js"></script>
     <script src="js/fakedatas.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/app.js"></script>
     <script src="components/lie-item/lie-item.js"></script>
     <script src="components/lies-list/lies-list.js"></script>
     <script src="components/lie-form/lie-form.js"></script>
 </head>
 <body>
     <div id="app">
-        <lies-list :lies="fakeDatas.lies"></lies-list>
-        <lie-form></lie-form>
+        <router-view></router-view>
     </div>
 </body>
 </html>

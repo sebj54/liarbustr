@@ -18,9 +18,9 @@ var app = {
 
         app.vue = new Vue({
             el: '#app',
-            data: {
-                fakeDatas: fakeDatas
-            }
+            router: new VueRouter({
+                routes: router.routes // short for routes: routes
+            })
         })
     },
 
