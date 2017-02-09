@@ -10,6 +10,11 @@ var app = {
         storageBucket: 'liar-bustr.appspot.com',
         messagingSenderId: '622874178146'
     },
+    lang: null,
+    locales: {
+        en: {},
+        fr: {}
+    },
     vue: null,
 
     /**
@@ -18,6 +23,16 @@ var app = {
     init: function()
     {
         firebase.initializeApp(app.firebaseConfig)
+
+        // Set locales - load only 2 first languages for performance reasons and because vue-i18n requires at least two languages
+        var availableLangs = Object.keys(app.locales)
+        app.changeLocale(availableLangs[1])
+        app.changeLocale(availableLangs[0], true) // fallback lang
+
+        Vue.config.missingHandler = function (lang, key, vm)
+        {
+            console.warn('Translation error: (lang: "' + lang + '" for key: "' + key + '")')
+        }
 
         app.vue = new Vue({
             el: '#app',
@@ -78,6 +93,29 @@ var app = {
     },
 
     /**
+     * Get locale
+     * @param  {string} lang Lang locale
+     * @return {function} Promise-like function
+     */
+    getLocale: function(lang)
+    {
+        return function(resolve, reject)
+        {
+            app.get(
+                '/locales/' + lang + '.json',
+                function(locale)
+                {
+                    return resolve((typeof locale === 'object') ? locale : {})
+                },
+                function()
+                {
+                    return reject()
+                }
+            )
+        }
+    },
+
+    /**
      * Get a template from a name
      * @param  {string} name Template name (filename without .html or path related to components directory)
      */
@@ -99,6 +137,31 @@ var app = {
                 resolve(component)
             })
         }
+    },
+
+    /**
+     * Change locale
+     * @param  {string} lang Locale string (e.g. 'en', 'fr')
+     * @param  {Boolean} isFallback true if locale is fallback
+     */
+    changeLocale: function(lang, isFallback)
+    {
+        Vue.locale(
+            lang,
+            function()
+            {
+                return app.getLocale(lang)
+            },
+            function()
+            {
+                if (isFallback)
+                {
+                    Vue.config.fallbackLang = lang
+                }
+
+                Vue.config.lang = lang
+            }
+        )
     },
 
     /**
