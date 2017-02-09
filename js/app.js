@@ -12,6 +12,9 @@ var app = {
     },
     vue: null,
 
+    /**
+     * Init function
+     */
     init: function()
     {
         firebase.initializeApp(app.firebaseConfig)
@@ -19,7 +22,7 @@ var app = {
         app.vue = new Vue({
             el: '#app',
             router: new VueRouter({
-                routes: router.routes // short for routes: routes
+                routes: router.routes
             })
         })
     },
