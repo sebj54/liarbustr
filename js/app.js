@@ -39,7 +39,7 @@ var app = {
         {
             if (app.isCallback(errorCallback))
             {
-                errorCallback(data, xhr)
+                errorCallback(xhr)
             }
         }
 
