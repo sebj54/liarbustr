@@ -1,4 +1,12 @@
+/**
+ * Fake datas - temporary data provider
+ * @type {Object}
+ */
 var fakeDatas = {
+    /**
+     * Available lies
+     * @type {Array}
+     */
     lies: [
         {
             title: 'If you were a Muslim, you could come in, if you were a Christian, it was impossible.',
@@ -27,6 +35,10 @@ var fakeDatas = {
             }
         }
     ],
+    /**
+     * Get empty structure of a lie
+     * @return {object} Lie
+     */
     lieEmptyStructure: function()
     {
         return {

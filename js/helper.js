@@ -1,3 +1,7 @@
+/**
+ * Helper - Provide useful methods
+ * @type {Object}
+ */
 var _ = {
     /**
      * Test if a variable is a valid callback (a function)

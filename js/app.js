@@ -3,6 +3,10 @@
  * @type {Object}
  */
 var app = {
+    /**
+     * Firebase config parameters
+     * @type {Object}
+     */
     firebaseConfig: {
         apiKey: 'AIzaSyAIGDDnLz2_fLIzeyaVMzLZTQKFoAwJncM',
         authDomain: 'liar-bustr.firebaseapp.com',
@@ -10,11 +14,23 @@ var app = {
         storageBucket: 'liar-bustr.appspot.com',
         messagingSenderId: '622874178146'
     },
+    /**
+     * Current language
+     * @type {string}
+     */
     lang: null,
+    /**
+     * Available translations
+     * @type {Object}
+     */
     locales: {
         en: {},
         fr: {}
     },
+    /**
+     * Vue instance
+     * @type {Vue}
+     */
     vue: null,
 
     /**

@@ -1,5 +1,19 @@
+/**
+ * Router - Contain routes and routes-related properties and methods
+ * @type {Object}
+ */
 var router = {
+    /**
+     * Available routes
+     * @type {Array}
+     */
     routes: [],
+
+    /**
+     * Add a route with lazy loading
+     * @param {string} route Route URL (e.g. 'home')
+     * @param {string|null} path View filename (optional, default: /{route})
+     */
     add: function(route, path)
     {
         route = '/' + route
@@ -32,6 +46,6 @@ var router = {
         return this
     }
 }
-.add('', '/home')
+.add('', '/home') // Default route
 .add('lies')
 .add('lie-form')
