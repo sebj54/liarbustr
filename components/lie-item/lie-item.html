@@ -4,7 +4,7 @@
     <p class="lie-item-liar">{{ lie.liar }}</p>
 
     <figure class="lie-item-figure">
-        <img :src="lie.pictures.main" :alt="lie.liar + '\'s picture'" class="lie-item-picture -main">
+        <img :src="lie.pictures.main" :alt="$t('lie.picture', { liar: lie.liar })" class="lie-item-picture -main">
     </figure>
 
     <div class="lie-item-text">
@@ -13,12 +13,12 @@
 
     <div class="lie-item-votes">
         <div class="lie-item-vote -liar">
-            <span class="lie-item-vote-title">Liar</span>
+            <span class="lie-item-vote-title">{{ $t('lie.votes.liar') }}</span>
             <span class="lie-item-vote-count">{{ lie.votes.liar }}</span>
             <button type="button" class="lie-item-vote-btn" @click="voteLiar">+1</button>
         </div>
         <div class="lie-item-vote -not-liar">
-            <span class="lie-item-vote-title">Not liar</span>
+            <span class="lie-item-vote-title">{{ $t('lie.votes.notLiar') }}</span>
             <span class="lie-item-vote-count">{{ lie.votes.notLiar }}</span>
             <button type="button" class="lie-item-vote-btn" @click="voteNotLiar">+1</button>
         </div>

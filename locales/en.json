@@ -1,2 +1,27 @@
 {
+    "msc": {
+        "lie-form": "I accuse",
+        "lies-list": "Lies"
+    },
+    "lie": {
+        "picture": "{liar}'s picture",
+        "votes": {
+            "liar": "Liar",
+            "notLiar": "Not liar"
+        }
+    },
+    "lieForm": {
+        "liar": "Who told that lie?",
+        "pictures": {
+            "main": "Display that liar, add a picture"
+        },
+        "sources": {
+            "add": "Add another source",
+            "legend": "Prove that lie has been said, add a source!",
+            "number": "Source #{number}"
+        },
+        "submit": "Reveal that lie!",
+        "text": "Tell us a bit more about that lie",
+        "title": "What's the lie exactly?"
+    }
 }

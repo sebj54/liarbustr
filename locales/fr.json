@@ -1,2 +1,27 @@
 {
+    "msc": {
+        "lie-form": "J'accuse",
+        "lies-list": "Mensonges"
+    },
+    "lie": {
+        "picture": "Photographie de {liar}",
+        "votes": {
+            "liar": "Menteur",
+            "notLiar": "Pas menteur"
+        }
+    },
+    "lieForm": {
+        "liar": "Qui a dit ce mensonge ?",
+        "pictures": {
+            "main": "Affichez ce menteur, ajoutez une photo"
+        },
+        "sources": {
+            "add": "Ajouter une source",
+            "legend": "Prouvez que ce mensonge a été dit, ajoutez une source !",
+            "number": "Source #{number}"
+        },
+        "submit": "Révélez ce mensonge !",
+        "text": "Dites-nous en plus à propos de ce mensonge",
+        "title": "Quel est le mensonge exactement ?"
+    }
 }
