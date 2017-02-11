@@ -101,17 +101,36 @@ var app = {
     {
         return function(resolve, reject)
         {
-            app.get(
-                '/locales/' + lang + '.json',
-                function(locale)
+            var result = null
+
+            if (app.locales.hasOwnProperty(lang))
+            {
+                if (_.isEmptyObject(app.locales[lang]))
                 {
-                    return resolve((typeof locale === 'object') ? locale : {})
-                },
-                function()
-                {
-                    return reject()
+                    app.get(
+                        '/locales/' + lang + '.json',
+                        function(locale)
+                        {
+                            app.locales[lang] = (typeof locale === 'object') ? locale : {}
+                            result = resolve(app.locales[lang])
+                        },
+                        function()
+                        {
+                            result = reject()
+                        }
+                    )
                 }
-            )
+                else
+                {
+                    result = resolve(app.locales[lang])
+                }
+            }
+            else
+            {
+                result = reject()
+            }
+
+            return result
         }
     },
 
@@ -162,16 +181,6 @@ var app = {
                 Vue.config.lang = lang
             }
         )
-    },
-
-    /**
-     * Test if a variable is a valid callback (a function)
-     * @param  {*} callback Anything
-     * @return {Boolean} true if callback is a function
-     */
-    isCallback: function(callback)
-    {
-        return typeof callback === 'function'
     }
 }
 
