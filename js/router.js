@@ -27,7 +27,7 @@ var router = {
             path: route,
             component: function(resolve, reject)
             {
-                app.get('/views' + path + path + '.html', function(template)
+                app.get('views' + path + path + '.html', function(template)
                 {
                     resolve({
                         template: template,

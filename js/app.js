@@ -124,7 +124,7 @@ var app = {
                 if (_.isEmptyObject(app.locales[lang]))
                 {
                     app.get(
-                        '/locales/' + lang + '.json',
+                        'locales/' + lang + '.json',
                         function(locale)
                         {
                             app.locales[lang] = (typeof locale === 'object') ? locale : {}
@@ -157,7 +157,7 @@ var app = {
     resolveTemplate: function(name, component)
     {
         var fullName = (name.indexOf('/') !== -1) ? name : name + '/' + name
-        var path = '/components/' + fullName + '.html'
+        var path = 'components/' + fullName + '.html'
 
         if (!component)
         {
