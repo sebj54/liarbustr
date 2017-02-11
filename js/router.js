@@ -48,4 +48,5 @@ var router = {
 }
 .add('', '/home') // Default route
 .add('lies')
+.add('lie/:id', '/lie')
 .add('lie-form')

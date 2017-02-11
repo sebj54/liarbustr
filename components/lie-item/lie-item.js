@@ -3,8 +3,19 @@
  * @type {VueComponent}
  */
 Vue.component('lie-item', app.resolveTemplate('lie-item', {
+    data: function()
+    {
+        return {
+            /**
+             * Lie
+             * @type {object}
+             */
+            lie: (this.lieObject) ? this.lieObject : this.fromId(this.lieId)
+        }
+    },
     props: [
-        'lie'
+        'lie-id',
+        'lie-object'
     ],
     computed: {
         /**
@@ -25,6 +36,26 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         }
     },
     methods: {
+        /**
+         * Retrieve a lie from its id
+         * @param  {integer|string} id Lie IF
+         * @return {object} Lie
+         */
+        fromId: function(id)
+        {
+            var lie = {}
+
+            for (var i = 0; i < fakeDatas.lies.length; i++)
+            {
+                if (fakeDatas.lies[i].id === parseInt(id))
+                {
+                    lie = fakeDatas.lies[i]
+                    break
+                }
+            }
+
+            return lie
+        },
         /**
          * Add a vote for a given type of vote
          * @param  {string} type Type of vote (liar or notLiar)
