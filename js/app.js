@@ -52,7 +52,7 @@ var app = {
     {
         var wrappedErrorCallback = function()
         {
-            if (app.isCallback(errorCallback))
+            if (_.isCallback(errorCallback))
             {
                 errorCallback(xhr)
             }
@@ -76,7 +76,7 @@ var app = {
                     data = xhr.responseText
                 }
 
-                if (app.isCallback(successCallback))
+                if (_.isCallback(successCallback))
                 {
                     successCallback(data, xhr)
                 }
