@@ -33,3 +33,5 @@ var router = {
     }
 }
 .add('', '/home')
+.add('lies')
+.add('lie-form')
