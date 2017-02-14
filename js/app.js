@@ -4,6 +4,11 @@
  */
 var app = {
     /**
+     * Firebase database
+     * @type {firebase.database.Database}
+     */
+    db: null,
+    /**
      * Firebase config parameters
      * @type {Object}
      */
@@ -39,6 +44,7 @@ var app = {
     init: function()
     {
         firebase.initializeApp(app.firebaseConfig)
+        app.db = firebase.database()
 
         // Set locales - load only 2 first languages for performance reasons and because vue-i18n requires at least two languages
         var availableLangs = Object.keys(app.locales)
