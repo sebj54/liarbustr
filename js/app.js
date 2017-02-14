@@ -57,13 +57,7 @@ var app = {
             })
         })
 
-        firebase.auth().onAuthStateChanged(function(firebaseUser)
-        {
-            if (firebaseUser)
-            {
-                user.fetchUser(firebaseUser)
-            }
-        })
+        user.init()
     },
 
     /**

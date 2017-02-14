@@ -1,8 +1,7 @@
-<header>
-    <span class="header-profile-name">
-        {{user.name}}
-    </span>
-    <div class="header-profile-picture" :style="{ backgroundImage: (user.profilePicture ? 'url(' + user.profilePicture + ')' : 'none') }">
+<header class="header">
+    <div class="header-profile">
+        <p class="header-profile-name">{{ user.name }}</p>
 
+        <div class="header-profile-picture" :style="{ backgroundImage: (user.profilePicture ? 'url(' + user.profilePicture + ')' : 'none') }"></div>
     </div>
 </header

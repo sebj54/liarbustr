@@ -1,65 +1,119 @@
+/**
+ * User object
+ * @type {Object}
+ */
 var user = {
-
+    /**
+     * User email
+     * @type {string}
+     */
+    email: null,
+    /**
+     * User full name
+     * @type {string}
+     */
     name: null,
+    /**
+     * User profile picture (path)
+     * @type {string}
+     */
     profilePicture: null,
+    /**
+     * User login source
+     * @type {string}
+     */
+    source: null,
+    /**
+     * User UUID
+     * @type {string}
+     */
+    uid: null,
 
-
-    provider: null,
-
-    fetchUser: function(user)
+    /**
+     * Init function
+     */
+    init: function()
     {
-        userData = user.providerData[0]
-
-        this.uid = userData.uid
-        this.name = userData.displayName
-        this.profilePicture = userData.photoURL
-        this.email = userData.email
-
-        this.provider = userData.providerId
-
-    },
-
-    loginFacebook: function()
-    {
-        this.provider = new firebase.auth.FacebookAuthProvider()
-        this.providerLogin()
-    },
-
-    loginTwitter: function()
-    {
-        this.provider = new firebase.auth.TwitterAuthProvider()
-        this.providerLogin()
-    },
-
-    loginGoogle: function()
-    {
-
-        this.provider = new firebase.auth.GoogleAuthProvider()
-        this.providerLogin()
-    },
-
-    providerLogin: function()
-    {
-
-        firebase.auth().signInWithPopup(this.provider).then(function(result)
+        firebase.auth().onAuthStateChanged(function(fiirebaseUser)
         {
+            if (fiirebaseUser)
+            {
+                user.fetch(fiirebaseUser)
+            }
+        })
+    },
 
-            var token = result.credential.accessToken
-            var user = result.user
+    /**
+     * Get property value from an object or null if property doesn't exist
+     * @param  {object|null} userData User datas - if null or empty object, user will be emptied
+     */
+    fetch: function(userData)
+    {
+        userData = (typeof userData === 'object' && userData !== null) ? userData.providerData[0] : {}
 
-            console.log(result)
+        user.uid = _.getPropValue(userData, 'uid')
+        user.name = _.getPropValue(userData, 'displayName')
+        user.profilePicture = _.getPropValue(userData, 'photoURL')
+        user.email = _.getPropValue(userData, 'email')
 
-        }).catch(function(error)
+        user.source = _.getPropValue(userData, 'providerId')
+    },
+
+    isLoggedIn: function()
+    {
+        return user.uid !== null
+    },
+
+    /**
+     * Login with Facebook
+     */
+    loginWithFacebook: function()
+    {
+        user.loginWith(new firebase.auth.FacebookAuthProvider())
+    },
+
+    /**
+     * Login with Twitter
+     */
+    loginWithTwitter: function()
+    {
+        user.loginWith(new firebase.auth.TwitterAuthProvider())
+    },
+
+    /**
+     * Login with Google
+     */
+    loginWithGoogle: function()
+    {
+        user.loginWith(new firebase.auth.GoogleAuthProvider())
+    },
+
+    /**
+     * Login with an external service
+     * @param  {FacebookAuthProvider|TwitterAuthProvider|GoogleAuthProvider} provider Firebase provider
+     */
+    loginWith: function(provider)
+    {
+        firebase.auth().signInWithPopup(provider)
+        .then(function(result)
         {
+        })
+        .catch(function(error)
+        {
+            console.error(error)
+        })
+    },
 
-            var errorCode = error.code
-            var errorMessage = error.message
-
-            var email = error.email
-
-            var credential = error.credential
-
-            console.warn(error)
+    logout: function()
+    {
+        firebase.auth().signOut()
+        .then(function()
+        {
+            user.fetch()
+        })
+        .catch(function(error)
+        {
+            console.error(error)
         })
     }
 }

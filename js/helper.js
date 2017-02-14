@@ -4,6 +4,17 @@
  */
 var _ = {
     /**
+     * Get property value from an object or null if property doesn't exist
+     * @param  {object} object Object which contains the property
+     * @param  {string} prop Property name
+     * @return {*} Property value if set or null
+     */
+    getPropValue: function(object, prop)
+    {
+        return (object.hasOwnProperty(prop) && object[prop]) ? object[prop] : null
+    },
+
+    /**
      * Test if a variable is a valid callback (a function)
      * @param  {*} callback Anything
      * @return {Boolean} true if callback is a function, false otherwise

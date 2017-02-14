@@ -1,5 +1,7 @@
 <div class="authenticate">
-    <button type="button" @click="loginFacebook">Login with Facebook</button>
-    <button type="button" @click="loginTwitter">Login with Twitter</button>
-    <button type="button" @click="loginGoogle">Login with Google</button>
+    <button type="button" class="authenticate-logout -facebook" @click="loginWithFacebook" v-if="!isLoggedIn">Login with Facebook</button>
+    <button type="button" class="authenticate-logout -twitter" @click="loginWithTwitter" v-if="!isLoggedIn">Login with Twitter</button>
+    <button type="button" class="authenticate-logout -google" @click="loginWithGoogle" v-if="!isLoggedIn">Login with Google</button>
+
+    <button type="button" class="authenticate-logout" @click="logout" v-if="isLoggedIn">Log out</button>
 </div>

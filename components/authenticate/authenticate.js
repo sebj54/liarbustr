@@ -1,26 +1,44 @@
+/**
+ * Lie item component
+ * @type {VueComponent}
+ */
 Vue.component('authenticate', app.resolveTemplate('authenticate', {
-
-    data: function() {
-
+    data: function()
+    {
         return {
-            provider: null,
         }
     },
-
+    computed: {
+        isLoggedIn: user.isLoggedIn
+    },
     methods: {
-        loginFacebook: function()
+        /**
+         * Login with Facebook
+         */
+        loginWithFacebook: function()
         {
-            user.loginFacebook()
+            user.loginWithFacebook()
         },
-
-        loginTwitter: function()
+        /**
+         * Login with Twitter
+         */
+        loginWithTwitter: function()
         {
-            user.loginTwitter()
+            user.loginWithTwitter()
         },
-
-        loginGoogle: function()
+        /**
+         * Login with Google
+         */
+        loginWithGoogle: function()
         {
-            user.loginGoogle()
+            user.loginWithGoogle()
         },
+        /**
+         * Logout
+         */
+        logout: function()
+        {
+            user.logout()
+        }
     }
 }))
