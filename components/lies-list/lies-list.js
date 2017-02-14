@@ -3,9 +3,12 @@
  * @type {VueComponent}
  */
 Vue.component('lies-list', app.resolveTemplate('lies-list', {
-    props: [
-        'lies'
-    ],
+    firebase: function()
+    {
+        return {
+            lies: app.db.ref('/lies')
+        }
+    },
     computed: {
         /**
          * Get lies count
