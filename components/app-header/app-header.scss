@@ -9,12 +9,17 @@ header {
     background-color: $color-primary-normal;
 }
 
+.header-profile {
+    display: flex;
+    margin-left: auto;
+}
 
 .header-profile-name {
     margin: auto 0 auto auto;
 
     color: white;
 }
+
 .header-profile-picture {
     height: 38px;
     width: 38px;
