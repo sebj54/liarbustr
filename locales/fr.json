@@ -1,5 +1,6 @@
 {
     "msc": {
+        "authenticate": "Connexion",
         "lie-form": "J'accuse",
         "lies-list": "Mensonges"
     },
