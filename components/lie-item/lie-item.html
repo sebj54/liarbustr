@@ -4,7 +4,7 @@
     <p class="lie-item-liar">{{ lie.liar }}</p>
 
     <figure class="lie-item-figure">
-        <img :src="lie.pictures.main" :alt="$t('lie.picture', { liar: lie.liar })" class="lie-item-picture -main">
+        <img :src="liePicture('main')" :alt="$t('lie.picture', { liar: lie.liar })" class="lie-item-picture -main">
     </figure>
 
     <div class="lie-item-text">
@@ -14,28 +14,28 @@
     <div class="lie-item-votes">
         <div class="lie-item-vote -liar">
             <span class="lie-item-vote-title">{{ $t('lie.votes.liar') }}</span>
-            <span class="lie-item-vote-count">{{ lie.votes.liar }}</span>
+            <span class="lie-item-vote-count">{{ lieVotesCount('liar') }}</span>
             <button type="button" class="lie-item-vote-btn" @click="voteLiar">+1</button>
         </div>
         <div class="lie-item-vote -not-liar">
             <span class="lie-item-vote-title">{{ $t('lie.votes.notLiar') }}</span>
-            <span class="lie-item-vote-count">{{ lie.votes.notLiar }}</span>
+            <span class="lie-item-vote-count">{{ lieVotesCount('notLiar') }}</span>
             <button type="button" class="lie-item-vote-btn" @click="voteNotLiar">+1</button>
         </div>
     </div>
 
     <div class="lie-item-sources-wrapper">
-        <ul class="lie-item-sources -statements" v-for="source in lie.sources.statements">
+        <ul class="lie-item-sources -statements" v-for="source in lieSources('statements')">
             <li class="lie-item-source">
                 <a :href="source" class="lie-item-source-link -statement">{{ source }}</a>
             </li>
         </ul>
-        <ul class="lie-item-sources -refutations" v-for="source in lie.sources.refutations">
+        <ul class="lie-item-sources -refutations" v-for="source in lieSources('refutations')">
             <li class="lie-item-source">
                 <a :href="source" class="lie-item-source-link -refutation">{{ source }}</a>
             </li>
         </ul>
-        <ul class="lie-item-sources -confirmations" v-for="source in lie.sources.confirmations">
+        <ul class="lie-item-sources -confirmations" v-for="source in lieSources('confirmations')">
             <li class="lie-item-source">
                 <a :href="source" class="lie-item-source-link -confirmation">{{ source }}</a>
             </li>
