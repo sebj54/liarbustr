@@ -8,6 +8,9 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
     data: function()
     {
         return {
+            signup: {
+
+            }
         }
     },
     computed: {
@@ -34,6 +37,11 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
         loginWithGoogle: function()
         {
             user.loginWithGoogle()
+        },
+        signupEmail: function()
+        {
+            user.signupWithEmail(this.signup.email, this.signup.password)
+            user.editDisplayName(this.signup.name)
         },
         /**
          * Logout
