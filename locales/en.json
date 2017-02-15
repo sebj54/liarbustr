@@ -13,16 +13,21 @@
     },
     "lieForm": {
         "liar": "Who told that lie?",
+        "liarPlaceholder" : "e.g. Donald J. Trump",
         "pictures": {
-            "main": "Display that liar, add a picture"
+            "main": "Display that liar, add a picture",
+            "mainPlaceholder": "e.g. http://website.com/files/picture.jpg"
         },
         "sources": {
             "add": "Add another source",
+            "addPlaceholder": "e.g. http://emailsanta.com/Santa-Claus-FAQ/is-santa-real.asp",
             "legend": "Prove that lie has been said, add a source!",
             "number": "Source #{number}"
         },
         "submit": "Reveal that lie!",
         "text": "Tell us a bit more about that lie",
-        "title": "What's the lie exactly?"
+        "textPlaceholder": "e.g. context, when, where, why?",
+        "title": "What's the lie exactly?",
+        "titlePlaceholder": "e.g. Santa Claus exists"
     }
 }

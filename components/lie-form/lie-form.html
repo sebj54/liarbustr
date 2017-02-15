@@ -1,25 +1,25 @@
 <form action="" class="lie-form" @submit.prevent="saveLie">
     <div class="lie-form-group -title">
         <label :for="fieldId('title')" class="lie-form-label -title">{{ $t('lieForm.title') }}</label>
-        <input type="text" name="title" :id="fieldId('title')" class="lie-form-field -title" placeholder="e.g. Santa Claus exists" v-model="lie.title">
+        <input type="text" name="title" :id="fieldId('title')" class="lie-form-field -title" :placeholder="$t('lieForm.titlePlaceholder')" v-model="lie.title">
     </div>
     <div class="lie-form-group -liar">
         <label :for="fieldId('liar')" class="lie-form-label -liar">{{ $t('lieForm.liar') }}</label>
-        <input type="text" name="liar" :id="fieldId('liar')" class="lie-form-field -liar" placeholder="e.g. Donald J. Trump" v-model="lie.liar">
+        <input type="text" name="liar" :id="fieldId('liar')" class="lie-form-field -liar" :placeholder="$t('lieForm.liarPlaceholder')" v-model="lie.liar">
     </div>
     <div class="lie-form-group -text">
         <label :for="fieldId('text')" class="lie-form-label -text">{{ $t('lieForm.text') }}</label>
-        <textarea name="text" :id="fieldId('text')" class="lie-form-field -text" placeholder="e.g. context, when, where, why?" v-model="lie.text"></textarea>
+        <textarea name="text" :id="fieldId('text')" class="lie-form-field -text" :placeholder="$t('lieForm.textPlaceholder')" v-model="lie.text"></textarea>
     </div>
     <div class="lie-form-group -picture">
         <label :for="fieldId('picture-main')" class="lie-form-label -picture -main">{{ $t('lieForm.pictures.main') }}</label>
-        <input type="url" name="picture[main]" :id="fieldId('picture-main')" class="lie-form-field -picture -main" placeholder="e.g. http://website.com/files/picture.jpg" v-model="lie.pictures.main">
+        <input type="url" name="picture[main]" :id="fieldId('picture-main')" class="lie-form-field -picture -main" :placeholder="$t('lieForm.pictures.mainPlaceholder')" v-model="lie.pictures.main">
     </div>
     <fieldset class="lie-form-sources-wrapper">
         <legend class="lie-form-sources-legend">{{ $t('lieForm.sources.legend') }}</legend>
         <div class="lie-form-group -source -statement"  v-for="(statement, index) in lie.sources.statements">
             <label :for="fieldId('source')" class="lie-form-label -source -statement">{{ $t('lieForm.sources.number', { number: index + 1 }) }}</label>
-            <input type="url" :name="'sources[statements][]'" :id="fieldId('source')" class="lie-form-field -source -statement" placeholder="e.g. http://emailsanta.com/Santa-Claus-FAQ/is-santa-real.asp" v-model="lie.sources.statements[index]">
+            <input type="url" :name="'sources[statements][]'" :id="fieldId('source')" class="lie-form-field -source -statement" :placeholder="$t('lieForm.sources.addPlaceholder')" v-model="lie.sources.statements[index]">
         </div>
 
         <button type="button" class="lie-form-add-source" @click="addStatement">{{ $t('lieForm.sources.add') }}</button>
