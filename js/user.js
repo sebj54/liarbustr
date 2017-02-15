@@ -34,11 +34,11 @@ var user = {
      */
     init: function()
     {
-        firebase.auth().onAuthStateChanged(function(fiirebaseUser)
+        firebase.auth().onAuthStateChanged(function(firebaseUser)
         {
-            if (fiirebaseUser)
+            if (firebaseUser)
             {
-                user.fetch(fiirebaseUser)
+                user.fetch(firebaseUser)
             }
         })
     },
