@@ -16,17 +16,14 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
     },
     firebase: function()
     {
-        var firebaseDatas = {}
+        var key = (this.lieId) ? (parseInt(this.lieId, 10) - 1) : this.lie['.key']
 
-        if (!this.lieObject && this.lieId)
-        {
-            firebaseDatas.lie = {
-                source: app.db.ref('/lies/' + (parseInt(this.lieId, 10) - 1)),
+        return {
+            lie: {
+                source: app.db.ref('/lies/' + key),
                 asObject: true
             }
         }
-
-        return firebaseDatas
     },
     props: [
         'lie-id',
@@ -132,7 +129,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
          */
         vote: function(type)
         {
-            this.lie.votes[type]++
+            this.$firebaseRefs.lie.ref.child('votes').child(type).set(this.lie.votes[type] + 1)
         },
         /**
          * Add vote for "liar"
