@@ -36,6 +36,7 @@ const user = {
      */
     signup: {},
 
+    userObject: {},
     /**
      * Init function
      */
@@ -118,7 +119,7 @@ const user = {
 
     isLoggedIn: function()
     {
-        return user.uid !== null
+        return user.userObject.uid !== null && user.userObject.uid !== undefined
     },
 
     /**
@@ -145,6 +146,17 @@ const user = {
         user.loginWith(new firebase.auth.GoogleAuthProvider())
     },
 
+    signupWithEmail: function(signupEmail, signupPassword)
+    {
+        firebase.auth().createUserWithEmailAndPassword(signupEmail, signupPassword).then(function(response) {
+
+        }).catch(function(error)
+        {
+            console.log(error)
+              var errorCode = error.code;
+              var errorMessage = error.message;
+        });
+    },
     /**
      * Sign up with an e-mail address
      */
