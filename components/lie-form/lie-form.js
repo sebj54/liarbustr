@@ -13,6 +13,12 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
             lie: fakeDatas.lieEmptyStructure()
         }
     },
+    firebase: function()
+    {
+        return {
+            lies: app.db.ref('/lies')
+        }
+    },
     methods: {
         /**
          * Add a source
@@ -39,13 +45,37 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
             return name + '-' + this._uid
         },
         /**
+         * Get empty structure of a lie
+         * @return {object} Lie
+         */
+        lieEmptyStructure: function()
+        {
+            return {
+                title: '',
+                liar: '',
+                text: '',
+                votes: {
+                    liar: 1,
+                    notLiar: 0
+                },
+                sources: {
+                    statements: [],
+                    refutations: [],
+                    confirmations: []
+                },
+                pictures: {
+                    main: null
+                }
+            }
+        },
+        /**
          * Save a lie
          */
         saveLie: function()
         {
-            fakeDatas.lies.push(this.lie)
+            this.$firebaseRefs.lies.push(this.lie)
 
-            this.lie = fakeDatas.lieEmptyStructure()
+            this.lie = this.lieEmptyStructure()
             setTimeout(this.addStatement) // setTimeout is mandatory for rendering to avoid not cleared source input
         }
     },
