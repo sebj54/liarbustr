@@ -4,4 +4,26 @@
     <button type="button" class="authenticate-logout -google" @click="loginWithGoogle" v-if="!isLoggedIn">Login with Google</button>
 
     <button type="button" class="authenticate-logout" @click="logout" v-if="isLoggedIn">Log out</button>
+
+    <form class="signup-form" @submit.prevent="signupEmail">
+        <h1>Signup</h1>
+
+        <div class="signup-name-wrapper">
+            <label for="name">Name</label>
+            <input class="signup-name-input" v-model="signup.name" type="name" name="name" placeholder="John Doe" required></input>
+        </div>
+        <div class="signup-email-wrapper">
+            <label for="email">Email address</label>
+            <input class="signup-email-input" v-model="signup.email" type="email" name="email" placeholder="johndoe@email.com" required></input>
+        </div>
+
+        <div class="signup-password-wrapper">
+            <label for="password">Password</label>
+            <input class="signup-password-input" v-model="signup.password" type="password" name="password" placeholder="Password" required></input>
+        </div>
+
+        <button type="submit" name="signup-form-submit">Signup</button>
+
+        {{signup}}
+    </form>
 </div>
