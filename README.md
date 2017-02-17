@@ -6,4 +6,4 @@
 
 ## Demo
 
-[https://sebj54.github.io/liarbustr/](https://sebj54.github.io/liarbustr/)
+[https://liarbustr.firebaseapp.com/](https://liarbustr.firebaseapp.com/)
