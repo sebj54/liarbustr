@@ -51,6 +51,7 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
         lieEmptyStructure: function()
         {
             return {
+                accuser: user.uid,
                 title: '',
                 liar: '',
                 text: '',
