@@ -30,13 +30,7 @@ var router = {
                 app.get('views' + path + path + '.html', function(template)
                 {
                     resolve({
-                        template: template,
-                        data: function()
-                        {
-                            return {
-                                fakeDatas: fakeDatas
-                            }
-                        }
+                        template: template
                     })
                 })
             }

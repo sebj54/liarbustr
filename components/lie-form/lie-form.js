@@ -10,7 +10,7 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
              * Lie
              * @type {object}
              */
-            lie: fakeDatas.lieEmptyStructure()
+            lie: this.lieEmptyStructure()
         }
     },
     firebase: function()
