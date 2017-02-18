@@ -15,7 +15,7 @@
         "liar": "Who told that lie?",
         "liarPlaceholder" : "e.g. Donald J. Trump",
         "pictures": {
-            "main": "Display that liar, add a picture",
+            "main": "Display that liar, add a picture from a link",
             "mainPlaceholder": "e.g. http://website.com/files/picture.jpg"
         },
         "sources": {
@@ -28,6 +28,11 @@
         "text": "Tell us a bit more about that lie",
         "textPlaceholder": "e.g. context, when, where, why?",
         "title": "What's the lie exactly?",
-        "titlePlaceholder": "e.g. Santa Claus exists"
+        "titlePlaceholder": "e.g. Santa Claus exists",
+        "upload": {
+            "pictures": {
+                "main": "Or upload a picture"
+            }
+        }
     }
 }

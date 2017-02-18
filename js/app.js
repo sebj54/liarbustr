@@ -123,6 +123,15 @@ var app = {
     },
 
     /**
+     * Get images folder's reference
+     * @return {firebase.storage.Reference} Folder's reference
+     */
+    getImagesRef: function()
+    {
+        return app.storage.ref().child('images')
+    },
+
+    /**
      * Get locale
      * @param  {string} lang Lang locale
      * @return {function} Promise-like function

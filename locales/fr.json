@@ -15,7 +15,7 @@
         "liar": "Qui a dit ce mensonge ?",
         "liarPlaceholder" : "ex. : François Fillon",
         "pictures": {
-            "main": "Affichez ce menteur, ajoutez une photo",
+            "main": "Affichez ce menteur, ajoutez une photo à partir d'un lien",
             "mainPlaceholder": "ex. : http://site.com/fichiers/image.jpg"
         },
         "sources": {
@@ -28,6 +28,11 @@
         "text": "Dites-nous en plus à propos de ce mensonge",
         "textPlaceholder": "ex. : contexte, quand, où, pourquoi ?",
         "title": "Quel est le mensonge exactement ?",
-        "titlePlaceholder": "ex. : Le Père Noël existe"
+        "titlePlaceholder": "ex. : Le Père Noël existe",
+        "upload": {
+            "pictures": {
+                "main": "Ou à partir d'un fichier"
+            }
+        }
     }
 }

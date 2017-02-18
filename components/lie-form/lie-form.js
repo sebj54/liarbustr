@@ -77,6 +77,24 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
 
             this.lie = this.lieEmptyStructure()
             setTimeout(this.addStatement) // setTimeout is mandatory for rendering to avoid not cleared source input
+        },
+        /**
+         * Upload main picture and store it. Function must be a callback triggered on change on a file input
+         * @param  {event} e Event
+         */
+        uploadMainPicture: function(e)
+        {
+            if (e.currentTarget.files.length)
+            {
+                var folderRef = app.getImagesRef().child('lies/')
+                var fileUploaded = function(url)
+                {
+                    this.lie.pictures.main = url
+                }.bind(this)
+
+                app.upload(folderRef, e.currentTarget.files[0])
+                .then(fileUploaded)
+            }
         }
     },
     created: function()

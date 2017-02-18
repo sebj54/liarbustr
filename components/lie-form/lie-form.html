@@ -15,6 +15,10 @@
         <label :for="fieldId('picture-main')" class="lie-form-label -picture -main">{{ $t('lieForm.pictures.main') }}</label>
         <input type="url" name="picture[main]" :id="fieldId('picture-main')" class="lie-form-field -picture -main" :placeholder="$t('lieForm.pictures.mainPlaceholder')" v-model="lie.pictures.main">
     </div>
+    <div class="lie-form-group -upload-picture">
+        <label :for="fieldId('upload-picture-main')" class="lie-form-label -upload-picture -main">{{ $t('lieForm.upload.pictures.main') }}</label>
+        <input type="file" name="upload[pictures][main]" :id="fieldId('upload-picture-main')" class="lie-form-field -upload-picture -main" @change="uploadMainPicture">
+    </div>
     <fieldset class="lie-form-sources-wrapper">
         <legend class="lie-form-sources-legend">{{ $t('lieForm.sources.legend') }}</legend>
         <div class="lie-form-group -source -statement"  v-for="(statement, index) in lie.sources.statements">
