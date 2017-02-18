@@ -33,6 +33,11 @@ var app = {
         fr: {}
     },
     /**
+     * Firebase storage
+     * @type {firebase.storage.Storage}
+     */
+    storage: null,
+    /**
      * Vue instance
      * @type {Vue}
      */
@@ -45,6 +50,7 @@ var app = {
     {
         firebase.initializeApp(app.firebaseConfig)
         app.db = firebase.database()
+        app.storage = firebase.storage()
 
         // Set locales - load only 2 first languages for performance reasons and because vue-i18n requires at least two languages
         var availableLangs = Object.keys(app.locales)
@@ -180,6 +186,38 @@ var app = {
                 resolve(component)
             })
         }
+    },
+
+    /**
+     * Upload a file to a destination folder with Firebase
+     * @param  {firebase.storage.reference} folderRef Folder reference
+     * @param  {File} file File to upload
+     * @return {Promise<string>} A promise to the download URL
+     */
+    upload: function(folderRef, file)
+    {
+        return new Promise(function(resolve, reject)
+        {
+            var fileRef = folderRef.child(_.generateUUID() + _.fileExtension(file.name))
+            var uploadTask = fileRef.put(file)
+
+            uploadTask.on(
+                firebase.storage.TaskEvent.STATE_CHANGED,
+                function(snapshot)
+                {
+                    var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    console.log('Upload is ' + progress + '% done (state: ' + snapshot.state + ')')
+                },
+                function(error)
+                {
+                    reject(error)
+                },
+                function()
+                {
+                    resolve(uploadTask.snapshot.downloadURL)
+                }
+            )
+        })
     },
 
     /**
