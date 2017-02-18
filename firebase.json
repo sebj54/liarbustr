@@ -1,0 +1,25 @@
+{
+    "database": {
+        "rules": "database.rules.json"
+    },
+    "hosting": {
+        "public": "./",
+        "rewrites": [
+            {
+                "source": "**",
+                "destination": "/index.html"
+            }
+        ],
+        "ignore": [
+            ".*",
+            "node_modules/**",
+            "!node_modules/vue/dist/vue.js",
+            "!node_modules/vue-router/dist/vue-router.js",
+            "!node_modules/vue-i18n/dist/vue-i18n.js",
+            "!node_modules/firebase/firebase.js",
+            "!node_modules/vuefire/dist/vuefire.js",
+            "*.json",
+            "!locales/*.json"
+        ]
+    }
+}
