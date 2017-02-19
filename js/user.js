@@ -39,6 +39,16 @@ var user = {
             if (firebaseUser)
             {
                 user.fetch(firebaseUser)
+                .then(function(fetchedUser)
+                {
+                    app.db.ref('users/' + fetchedUser.uid).set({
+                        uid: fetchedUser.uid,
+                        name: fetchedUser.name,
+                        profilePicture: fetchedUser.profilePicture,
+                        email: fetchedUser.email,
+                        lastLogin: Date.now()
+                    })
+                })
             }
         })
     },
@@ -46,17 +56,23 @@ var user = {
     /**
      * Get property value from an object or null if property doesn't exist
      * @param  {object|null} userData User datas - if null or empty object, user will be emptied
+     * @return {Promise<object>} A promise to the fetched user
      */
-    fetch: function(userData)
+    fetch: function(userData, callback)
     {
-        userData = (typeof userData === 'object' && userData !== null) ? userData.providerData[0] : {}
+        return new Promise(function(resolve, reject)
+        {
+            userData = (typeof userData === 'object' && userData !== null) ? userData.providerData[0] : {}
 
-        user.uid = _.getPropValue(userData, 'uid')
-        user.name = _.getPropValue(userData, 'displayName')
-        user.profilePicture = _.getPropValue(userData, 'photoURL')
-        user.email = _.getPropValue(userData, 'email')
+            user.uid = _.getPropValue(userData, 'uid')
+            user.name = _.getPropValue(userData, 'displayName')
+            user.profilePicture = _.getPropValue(userData, 'photoURL')
+            user.email = _.getPropValue(userData, 'email')
 
-        user.source = _.getPropValue(userData, 'providerId')
+            user.source = _.getPropValue(userData, 'providerId')
+
+            resolve(user)
+        })
     },
 
     isLoggedIn: function()
