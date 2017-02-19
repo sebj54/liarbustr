@@ -56,7 +56,7 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
                 liar: '',
                 text: '',
                 votes: {
-                    liar: 1,
+                    liar: 0,
                     notLiar: 0
                 },
                 sources: {
