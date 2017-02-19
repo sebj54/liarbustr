@@ -12,12 +12,12 @@
     </div>
 
     <div class="lie-item-votes">
-        <div class="lie-item-vote -liar">
+        <div class="lie-item-vote -liar" :class="{ '-is-actual-vote': actualVoteValue === 'liar' }">
             <span class="lie-item-vote-title">{{ $t('lie.votes.liar') }}</span>
             <span class="lie-item-vote-count">{{ lieVotesCount('liar') }}</span>
             <button type="button" class="lie-item-vote-btn" @click="voteLiar">+1</button>
         </div>
-        <div class="lie-item-vote -not-liar">
+        <div class="lie-item-vote -not-liar" :class="{ '-is-actual-vote': actualVoteValue === 'notLiar' }">
             <span class="lie-item-vote-title">{{ $t('lie.votes.notLiar') }}</span>
             <span class="lie-item-vote-count">{{ lieVotesCount('notLiar') }}</span>
             <button type="button" class="lie-item-vote-btn" @click="voteNotLiar">+1</button>
