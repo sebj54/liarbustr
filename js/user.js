@@ -44,7 +44,7 @@ var user = {
                     var updates = {}
                     updates['/users/' + fetchedUser.uid + '/lastLogin'] = Date.now()
 
-                    app.db.ref('users/' + fetchedUser.uid).once('value').then(function(snapshot)
+                    app.db.ref('/users/' + fetchedUser.uid).once('value').then(function(snapshot)
                     {
                         var keys = [
                             'email',
