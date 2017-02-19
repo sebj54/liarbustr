@@ -22,6 +22,10 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
             lie: {
                 source: app.db.ref('/lies/' + key),
                 asObject: true
+            },
+            actualVote: {
+                source: app.db.ref('/users/' + user.uid + '/votes/' + key),
+                asObject: true
             }
         }
     },
@@ -30,6 +34,14 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         'lie-object'
     ],
     computed: {
+        /**
+         * Get actual vote
+         * @return {string|null} Actual vote ('liar', 'notLiar' or null)
+         */
+        actualVoteValue: function()
+        {
+            return this.actualVote['.value']
+        },
         /**
          * Test if current lie is a lie or not, based on votes
          * @return {Boolean} true if lie a lie, false otherwise
@@ -129,42 +141,37 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
          */
         vote: function(type)
         {
-            var voteRef = app.db.ref('/users/' + user.uid + '/votes/' + this.lie.uid)
-
-            voteRef.once('value').then(function(snapshot)
+            // If user has already voted on this lie
+            if (this.actualVoteValue !== null)
             {
-                // If user has already voted on this lie
-                if (snapshot.exists())
+                // If user has already voted with this type of vote
+                if (this.actualVoteValue === type)
                 {
-                    // If user has already voted with this type of vote
-                    if (snapshot.val() === type)
-                    {
-                        // Cancel previous user's vote
-                        this.$firebaseRefs.lie.ref.child('votes/' + type).set(this.lie.votes[type] - 1)
-                        voteRef.set(null)
-                    }
-                    else
-                    {
-                        // Cancel previous vote
-                        var otherType = (type === 'liar') ? 'notLiar' : 'liar';
-                        this.$firebaseRefs.lie.ref.child('votes/' + otherType).set(this.lie.votes[otherType] - 1)
-
-                        // Store new vote count
-                        this.$firebaseRefs.lie.ref.child('votes/' + type).set(this.lie.votes[type] + 1)
-
-                        // Store user's vote
-                        voteRef.set(type)
-                    }
+                    // Cancel previous user's vote
+                    this.$firebaseRefs.lie.ref.child('votes/' + type).set(this.lie.votes[type] - 1)
+                    this.$firebaseRefs.actualVote.ref.set(null)
                 }
                 else
                 {
-                    // Store new votes count
+                    // Cancel previous vote
+                    var otherType = (type === 'liar') ? 'notLiar' : 'liar';
+                    this.$firebaseRefs.lie.ref.child('votes/' + otherType).set(this.lie.votes[otherType] - 1)
+
+                    // Store new vote count
                     this.$firebaseRefs.lie.ref.child('votes/' + type).set(this.lie.votes[type] + 1)
 
                     // Store user's vote
-                    voteRef.set(type)
+                    this.$firebaseRefs.actualVote.ref.set(type)
                 }
-            }.bind(this))
+            }
+            else
+            {
+                // Store new votes count
+                this.$firebaseRefs.lie.ref.child('votes/' + type).set(this.lie.votes[type] + 1)
+
+                // Store user's vote
+                this.$firebaseRefs.actualVote.ref.set(type)
+            }
         },
         /**
          * Add vote for "liar"
