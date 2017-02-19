@@ -129,7 +129,42 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
          */
         vote: function(type)
         {
-            this.$firebaseRefs.lie.ref.child('votes').child(type).set(this.lie.votes[type] + 1)
+            var voteRef = app.db.ref('/users/' + user.uid + '/votes/' + this.lie.uid)
+
+            voteRef.once('value').then(function(snapshot)
+            {
+                // If user has already voted on this lie
+                if (snapshot.exists())
+                {
+                    // If user has already voted with this type of vote
+                    if (snapshot.val() === type)
+                    {
+                        // Cancel previous user's vote
+                        this.$firebaseRefs.lie.ref.child('votes/' + type).set(this.lie.votes[type] - 1)
+                        voteRef.set(null)
+                    }
+                    else
+                    {
+                        // Cancel previous vote
+                        var otherType = (type === 'liar') ? 'notLiar' : 'liar';
+                        this.$firebaseRefs.lie.ref.child('votes/' + otherType).set(this.lie.votes[otherType] - 1)
+
+                        // Store new vote count
+                        this.$firebaseRefs.lie.ref.child('votes/' + type).set(this.lie.votes[type] + 1)
+
+                        // Store user's vote
+                        voteRef.set(type)
+                    }
+                }
+                else
+                {
+                    // Store new votes count
+                    this.$firebaseRefs.lie.ref.child('votes/' + type).set(this.lie.votes[type] + 1)
+
+                    // Store user's vote
+                    voteRef.set(type)
+                }
+            }.bind(this))
         },
         /**
          * Add vote for "liar"
