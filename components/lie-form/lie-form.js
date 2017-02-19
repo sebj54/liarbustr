@@ -51,6 +51,7 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
         lieEmptyStructure: function()
         {
             return {
+                uid: _.generateUUID(),
                 accuser: user.uid,
                 title: '',
                 liar: '',
@@ -74,7 +75,7 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
          */
         saveLie: function()
         {
-            this.$firebaseRefs.lies.push(this.lie)
+            this.$firebaseRefs.lies.child(this.lie.uid).set(this.lie)
 
             this.lie = this.lieEmptyStructure()
             setTimeout(this.addStatement) // setTimeout is mandatory for rendering to avoid not cleared source input

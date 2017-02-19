@@ -16,7 +16,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
     },
     firebase: function()
     {
-        var key = (this.lieId) ? (parseInt(this.lieId, 10) - 1) : this.lie['.key']
+        var key = (this.lieUid) ? this.lieUid : this.lie.uid
 
         return {
             lie: {
@@ -26,7 +26,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         }
     },
     props: [
-        'lie-id',
+        'lie-uid',
         'lie-object'
     ],
     computed: {

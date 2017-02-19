@@ -43,5 +43,5 @@ var router = {
 .add('', '/home') // Default route
 .add('authenticate')
 .add('lies')
-.add('lie/:id', '/lie')
+.add('lie/:uid', '/lie')
 .add('lie-form')
