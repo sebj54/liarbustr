@@ -41,13 +41,28 @@ var user = {
                 user.fetch(firebaseUser)
                 .then(function(fetchedUser)
                 {
-                    app.db.ref('users/' + fetchedUser.uid).set({
-                        uid: fetchedUser.uid,
-                        name: fetchedUser.name,
-                        profilePicture: fetchedUser.profilePicture,
-                        email: fetchedUser.email,
-                        lastLogin: Date.now()
+                    var updates = {}
+                    updates['/users/' + fetchedUser.uid + '/lastLogin'] = Date.now()
+
+                    app.db.ref('users/' + fetchedUser.uid).once('value').then(function(snapshot)
+                    {
+                        var keys = [
+                            'email',
+                            'name',
+                            'profilePicture',
+                            'uid'
+                        ]
+
+                        keys.forEach(function(key)
+                        {
+                            if (!snapshot.hasOwnProperty(key) || snapshot[key] !== fetchedUser[key])
+                            {
+                                updates['/users/' + fetchedUser.uid + '/' + key] = fetchedUser[key]
+                            }
+                        })
                     })
+
+                    app.db.ref().update(updates)
                 })
             }
         })
