@@ -1,7 +1,7 @@
 header {
     display: flex;
     flex-direction: row;
-    height: 50px;
+    height: $header-height;
 
     box-sizing: border-box;
     padding: 0 20px;

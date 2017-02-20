@@ -1,0 +1,48 @@
+.authenticate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    padding: 30px 50px;
+
+    box-shadow: 0px 10px 20px -5px rgba(194,194,194,1);
+    border-radius: 5px;
+    background-color: white;
+}
+
+.authenticate-title {
+    position: relative;
+    padding: 6px 10px 10px;
+
+    &:after {
+        content: "";
+        display: block;
+        margin: 9px auto 0 auto;
+        height: 2px;
+        width: 80%;
+
+        background-color: $color-primary-normal;
+    }
+}
+
+.authenticate-button {
+    width: 280px;
+    margin-bottom: 20px;
+    padding: 8px 22px;
+
+    color: white;
+    border-radius: 3px;
+
+    &.-facebook {
+        background-color: $facebook-color;
+    }
+
+    &.-twitter {
+        background-color: $twitter-color;
+    }
+
+    &.-google {
+        background-color: $google-color;
+    }
+}

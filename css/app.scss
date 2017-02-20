@@ -1,15 +1,22 @@
 @import "normalize.css/normalize.css";
+@import "tags";
+@import "vars";
 @import "colors";
 
-@import "app-header/app-header";
+@import "views";
+@import "components";
 
 html {
     height: 100%;
 }
 
+body, #app {
+    height: 1px;
+    min-height: 100%;
+}
+
 body {
-    display: flex;
-    flex-direction: column;
+    color: $font-color;
 }
 
 .svg-master {
