@@ -5,6 +5,15 @@
  * @type {Object}
  */
 const _ = {
+
+    cleanObject: function(object)
+    {
+        if(!this.isEmptyObject(object))
+            Object.keys(object).forEach(function(key) {
+                delete object[key]
+            })
+    },
+
     /**
      * Get file extension from filename
      * @param  {string} filename Filename
