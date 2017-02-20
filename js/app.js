@@ -43,8 +43,6 @@ var app = {
      */
     vue: null,
 
-    svgTemplates: null,
-
     /**
      * Init function
      */
