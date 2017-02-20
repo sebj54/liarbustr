@@ -41,11 +41,20 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
         signupEmail: function()
         {
             user.signupWithEmail(this.signup.email, this.signup.password)
-            user.editDisplayName(this.signup.name)
+            // user.editDisplayName(this.signup.name)
         },
         /**
          * Logout
          */
+        editDisplayName: function(name)
+        {
+            console.log('coucou')
+            user.userObject.updateProfile({
+                displayName: name,
+            })
+            user.userObject.displayName = name
+        },
+
         logout: function()
         {
             user.logout()
