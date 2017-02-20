@@ -31,7 +31,8 @@ const user = {
      */
     uid: null,
 
-    userObject: {},
+    signup: {},
+
     /**
      * Init function
      */
@@ -82,12 +83,30 @@ const user = {
         {
             const providerData = (typeof userData === 'object' && userData !== null) ? userData.providerData[0] : {}
 
-            user.uid = _.getPropValue(providerData, 'uid')
-            user.name = _.getPropValue(providerData, 'displayName')
-            user.profilePicture = _.getPropValue(providerData, 'photoURL')
-            user.email = _.getPropValue(providerData, 'email')
-
             user.source = _.getPropValue(providerData, 'providerId')
+
+            if(user.source === 'password' )
+            {
+                user.uid = _.getPropValue(userData, 'uid')
+                user.name = _.getPropValue(providerData, 'displayName') || user.signup.name
+                user.profilePicture = ''
+                user.email = _.getPropValue(providerData, 'email')
+
+                if(user.signup.name)
+                {
+                    userData.updateProfile({
+                        displayName: user.signup.name
+                    })
+                }
+                _.cleanObject(user.signup)
+            }
+
+            else {
+                user.uid = _.getPropValue(providerData, 'uid')
+                user.name = _.getPropValue(providerData, 'displayName')
+                user.profilePicture = _.getPropValue(providerData, 'photoURL')
+                user.email = _.getPropValue(providerData, 'email')
+            }
 
             resolve(user)
         })
@@ -95,7 +114,7 @@ const user = {
 
     isLoggedIn: function()
     {
-        return user.userObject.uid !== null && user.userObject.uid !== undefined
+        return user.uid !== null && user.uid !== undefined
     },
 
     /**
@@ -122,15 +141,13 @@ const user = {
         user.loginWith(new firebase.auth.GoogleAuthProvider())
     },
 
-    signupWithEmail: function(signupEmail, signupPassword)
+    signupWithEmail: function()
     {
-        firebase.auth().createUserWithEmailAndPassword(signupEmail, signupPassword).then(function(response) {
+        firebase.auth().createUserWithEmailAndPassword(user.signup.email, user.signup.password).then(function(response) {
 
         }).catch(function(error)
         {
             console.log(error)
-              var errorCode = error.code;
-              var errorMessage = error.message;
         });
     },
     /**

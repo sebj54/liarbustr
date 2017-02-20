@@ -8,9 +8,7 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
     data: function()
     {
         return {
-            signup: {
-
-            }
+            signup: user.signup
         }
     },
     computed: {
@@ -40,7 +38,7 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
         },
         signupEmail: function()
         {
-            user.signupWithEmail(this.signup.email, this.signup.password)
+            user.signupWithEmail()
             // user.editDisplayName(this.signup.name)
         },
         /**
