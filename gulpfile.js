@@ -9,18 +9,17 @@ var svgSymbolsConfig = {
     templates: ['default-svg']
 }
 
-gulp.task('default', ['compile-svg'])
-
-gulp.task('compile-svg', function()
+function compileSvg()
 {
     return gulp.src(['svg/*.svg', '!svg/svg-master.svg'])
     .pipe(svgmin())
     .pipe(svgSymbols(svgSymbolsConfig))
     .pipe(rename('svg-master.svg'))
     .pipe(gulp.dest('svg'))
-})
+}
 
-gulp.task('server', function()
+
+function server()
 {
     browserSync.init({
         host: 'liarbustr.com',
@@ -30,12 +29,21 @@ gulp.task('server', function()
     })
 
     gulp.watch([
+        'svg/**',
+        '!svg/svg-master.svg'
+    ]).on('change', compileSvg)
+
+    gulp.watch([
         'components/**',
         'css/**',
         'js/**',
         'locales/**',
-        'svg/**',
         'views/**',
+        'svg/svg-master.svg',
         'index.html'
     ]).on('change', browserSync.reload)
-})
+}
+
+gulp.task('default', ['server'])
+gulp.task('compile-svg', compileSvg)
+gulp.task('server', ['compile-svg'], server)
