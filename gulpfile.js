@@ -2,11 +2,24 @@ var gulp = require('gulp')
 var rename = require('gulp-rename')
 var svgmin = require('gulp-svgmin')
 var svgSymbols = require('gulp-svg-symbols')
+var pleeease = require('gulp-pleeease')
+var sourcemaps = require('gulp-sourcemaps')
 var browserSync = require('browser-sync').create()
 
 var svgSymbolsConfig = {
     svgClassname: 'svg-master',
     templates: ['default-svg']
+}
+
+var pleeeaseConfig = {
+    sass: {
+        includePaths: [
+            'components',
+            'css',
+            'node_modules',
+            'views'
+        ]
+    }
 }
 
 function compileSvg()
@@ -18,6 +31,15 @@ function compileSvg()
     .pipe(gulp.dest('svg'))
 }
 
+function compileCss()
+{
+    gulp.src('css/app.scss', { base: '.' })
+    .pipe(sourcemaps.init())
+    .pipe(pleeease(pleeeaseConfig))
+    .pipe(rename('app.min.css'))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('css'))
+}
 
 function server()
 {
@@ -34,16 +56,25 @@ function server()
     ]).on('change', compileSvg)
 
     gulp.watch([
-        'components/**',
-        'css/**',
+        'css/*.scss',
+        'components/*/*.scss',
+        'views/*/*.scss',
+    ]).on('change', compileCss)
+
+    gulp.watch([
+        'components/*/*.html',
+        'components/*/*.js',
+        'css/app.min.css',
         'js/**',
         'locales/**',
-        'views/**',
         'svg/svg-master.svg',
+        'views/*/*.html',
+        'views/*/*.js',
         'index.html'
     ]).on('change', browserSync.reload)
 }
 
 gulp.task('default', ['server'])
 gulp.task('compile-svg', compileSvg)
-gulp.task('server', ['compile-svg'], server)
+gulp.task('compile-css', compileCss)
+gulp.task('server', ['compile-css', 'compile-svg'], server)
