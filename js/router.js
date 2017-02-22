@@ -1,8 +1,10 @@
+/* global app */
+
 /**
  * Router - Contain routes and routes-related properties and methods
  * @type {Object}
  */
-var router = {
+const router = {
     /**
      * Available routes
      * @type {Array}
@@ -13,34 +15,32 @@ var router = {
      * Add a route with lazy loading
      * @param {string} route Route URL (e.g. 'home')
      * @param {string|null} path View filename (optional, default: /{route})
+     * @return {object} router, for chaining purpose
      */
     add: function(route, path)
     {
-        route = '/' + route
-
-        if (!path)
-        {
-            path = route
-        }
+        const absoluteRoute = '/' + route
+        const absolutePath = (!path) ? absoluteRoute : path
 
         this.routes.push({
-            path: route,
+            path: absoluteRoute,
             component: function(resolve, reject)
             {
-                app.get('views' + path + path + '.html', function(template)
+                app.get('views' + absolutePath + absolutePath + '.html', function(template)
                 {
                     resolve({
-                        template: template
+                        template: template,
                     })
                 })
-            }
+            },
         })
 
         // Return this for chaining
         return this
-    }
+    },
 }
-.add('', '/home') // Default route
+
+router.add('', '/home') // Default route
 .add('authenticate')
 .add('lies')
 .add('lie/:uid', '/lie')

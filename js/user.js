@@ -1,8 +1,10 @@
+/* global firebase app _ */
+
 /**
  * User object
  * @type {Object}
  */
-var user = {
+const user = {
     /**
      * User email
      * @type {string}
@@ -41,21 +43,21 @@ var user = {
                 user.fetch(firebaseUser)
                 .then(function(fetchedUser)
                 {
-                    var updates = {}
+                    const updates = {}
                     updates['/users/' + fetchedUser.uid + '/lastLogin'] = Date.now()
 
                     app.db.ref('/users/' + fetchedUser.uid).once('value').then(function(snapshot)
                     {
-                        var keys = [
+                        const keys = [
                             'email',
                             'name',
                             'profilePicture',
-                            'uid'
+                            'uid',
                         ]
 
                         keys.forEach(function(key)
                         {
-                            if (!snapshot.hasOwnProperty(key) || snapshot[key] !== fetchedUser[key])
+                            if (!_.hasProp(snapshot, key) || snapshot[key] !== fetchedUser[key])
                             {
                                 updates['/users/' + fetchedUser.uid + '/' + key] = fetchedUser[key]
                             }
@@ -77,14 +79,14 @@ var user = {
     {
         return new Promise(function(resolve, reject)
         {
-            userData = (typeof userData === 'object' && userData !== null) ? userData.providerData[0] : {}
+            const providerData = (typeof userData === 'object' && userData !== null) ? userData.providerData[0] : {}
 
-            user.uid = _.getPropValue(userData, 'uid')
-            user.name = _.getPropValue(userData, 'displayName')
-            user.profilePicture = _.getPropValue(userData, 'photoURL')
-            user.email = _.getPropValue(userData, 'email')
+            user.uid = _.getPropValue(providerData, 'uid')
+            user.name = _.getPropValue(providerData, 'displayName')
+            user.profilePicture = _.getPropValue(providerData, 'photoURL')
+            user.email = _.getPropValue(providerData, 'email')
 
-            user.source = _.getPropValue(userData, 'providerId')
+            user.source = _.getPropValue(providerData, 'providerId')
 
             resolve(user)
         })
@@ -146,5 +148,5 @@ var user = {
         {
             console.error(error)
         })
-    }
+    },
 }

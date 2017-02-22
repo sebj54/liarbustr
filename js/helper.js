@@ -1,8 +1,10 @@
+/* eslint no-bitwise: "off", no-mixed-operators: "off" */
+
 /**
  * Helper - Provide useful methods
  * @type {Object}
  */
-var _ = {
+const _ = {
     /**
      * Get file extension from filename
      * @param  {string} filename Filename
@@ -21,23 +23,33 @@ var _ = {
      */
     generateUUID: function()
     {
-        var uuid = null
-        var lut = []
+        const lut = []
 
-        for (var i = 0; i < 256; i++)
+        for (let i = 0; i < 256; i++)
         {
             lut[i] = (i < 16 ? '0' : '') + (i).toString(16)
         }
 
-        var d0 = Math.random() * 0xffffffff | 0
-        var d1 = Math.random() * 0xffffffff | 0
-        var d2 = Math.random() * 0xffffffff | 0
-        var d3 = Math.random() * 0xffffffff | 0
+        const d0 = Math.random() * 0xffffffff | 0
+        const d1 = Math.random() * 0xffffffff | 0
+        const d2 = Math.random() * 0xffffffff | 0
+        const d3 = Math.random() * 0xffffffff | 0
 
         return lut[d0 & 0xff] + lut[d0 >> 8 & 0xff] + lut[d0 >> 16 & 0xff] + lut[d0 >> 24 & 0xff] + '-' +
-        lut[d1 & 0xff] + lut[d1 >> 8 & 0xff] + '-' + lut[d1 >> 16 & 0x0f|0x40] + lut[d1 >> 24 & 0xff] + '-' +
-        lut[d2 & 0x3f|0x80] + lut[d2 >> 8 & 0xff] + '-' + lut[d2 >> 16 & 0xff] + lut[d2 >> 24 & 0xff] +
+        lut[d1 & 0xff] + lut[d1 >> 8 & 0xff] + '-' + lut[d1 >> 16 & 0x0f | 0x40] + lut[d1 >> 24 & 0xff] + '-' +
+        lut[d2 & 0x3f | 0x80] + lut[d2 >> 8 & 0xff] + '-' + lut[d2 >> 16 & 0xff] + lut[d2 >> 24 & 0xff] +
         lut[d3 & 0xff] + lut[d3 >> 8 & 0xff] + lut[d3 >> 16 & 0xff] + lut[d3 >> 24 & 0xff]
+    },
+
+    /**
+     * Test if an object has a property
+     * @param  {object} object Object which should contain the property
+     * @param  {string} prop Property name
+     * @return {boolean} true if object has property
+     */
+    hasProp: function(object, prop)
+    {
+        return Object.prototype.hasOwnProperty.call(object, prop)
     },
 
     /**
@@ -48,7 +60,7 @@ var _ = {
      */
     getPropValue: function(object, prop)
     {
-        return (object.hasOwnProperty(prop) && object[prop]) ? object[prop] : null
+        return (_.hasProp(object, prop) && object[prop]) ? object[prop] : null
     },
 
     /**
@@ -68,20 +80,6 @@ var _ = {
      */
     isEmptyObject: function(obj)
     {
-        var isEmpty = true
-
-        if (obj)
-        {
-            for (var prop in obj)
-            {
-                if (obj.hasOwnProperty(prop))
-                {
-                    isEmpty = false
-                    break
-                }
-            }
-        }
-
-        return isEmpty
-    }
+        return Object.getOwnPropertyNames(obj).length === 0
+    },
 }

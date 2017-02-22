@@ -1,3 +1,5 @@
+/* global Vue app _ user */
+
 /**
  * Lie form component
  * @type {VueComponent}
@@ -10,13 +12,13 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
              * Lie
              * @type {object}
              */
-            lie: this.lieEmptyStructure()
+            lie: this.lieEmptyStructure(),
         }
     },
     firebase: function()
     {
         return {
-            lies: app.db.ref('/lies')
+            lies: app.db.ref('/lies'),
         }
     },
     methods: {
@@ -58,16 +60,16 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
                 text: '',
                 votes: {
                     liar: 0,
-                    notLiar: 0
+                    notLiar: 0,
                 },
                 sources: {
                     statements: [],
                     refutations: [],
-                    confirmations: []
+                    confirmations: [],
                 },
                 pictures: {
-                    main: null
-                }
+                    main: null,
+                },
             }
         },
         /**
@@ -88,8 +90,8 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
         {
             if (e.currentTarget.files.length)
             {
-                var folderRef = app.getImagesRef().child('lies/')
-                var fileUploaded = function(url)
+                const folderRef = app.getImagesRef().child('lies/')
+                const fileUploaded = function(url)
                 {
                     this.lie.pictures.main = url
                 }.bind(this)
@@ -97,10 +99,10 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
                 app.upload(folderRef, e.currentTarget.files[0])
                 .then(fileUploaded)
             }
-        }
+        },
     },
     created: function()
     {
         this.addStatement()
-    }
+    },
 }))

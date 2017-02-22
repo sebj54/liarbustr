@@ -1,3 +1,5 @@
+/* global Vue app user */
+
 /**
  * Lie item component
  * @type {VueComponent}
@@ -9,7 +11,7 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
         }
     },
     computed: {
-        isLoggedIn: user.isLoggedIn
+        isLoggedIn: user.isLoggedIn,
     },
     methods: {
         /**
@@ -39,6 +41,6 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
         logout: function()
         {
             user.logout()
-        }
-    }
+        },
+    },
 }))
