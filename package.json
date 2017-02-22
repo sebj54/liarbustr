@@ -26,6 +26,9 @@
   },
   "devDependencies": {
     "browser-sync": "^2.18.8",
+    "eslint": "^3.16.0",
+    "eslint-config-airbnb-base": "^11.1.0",
+    "eslint-plugin-import": "^2.2.0",
     "gulp": "^3.9.1",
     "gulp-pleeease": "^2.0.2",
     "gulp-rename": "^1.2.2",
