@@ -1,3 +1,5 @@
+/* global Vue app */
+
 /**
  * Lies list component
  * @type {VueComponent}
@@ -6,7 +8,7 @@ Vue.component('lies-list', app.resolveTemplate('lies-list', {
     firebase: function()
     {
         return {
-            lies: app.db.ref('/lies')
+            lies: app.db.ref('/lies'),
         }
     },
     computed: {
@@ -17,6 +19,6 @@ Vue.component('lies-list', app.resolveTemplate('lies-list', {
         count: function()
         {
             return (this.lies) ? this.lies.length : 0
-        }
-    }
+        },
+    },
 }))

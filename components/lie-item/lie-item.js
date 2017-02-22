@@ -1,3 +1,5 @@
+/* global Vue app _ user */
+
 /**
  * Lie item component
  * @type {VueComponent}
@@ -5,7 +7,7 @@
 Vue.component('lie-item', app.resolveTemplate('lie-item', {
     data: function()
     {
-        var data = {}
+        const data = {}
 
         if (this.lieObject)
         {
@@ -16,22 +18,22 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
     },
     firebase: function()
     {
-        var key = (this.lieUid) ? this.lieUid : this.lie.uid
+        const key = (this.lieUid) ? this.lieUid : this.lie.uid
 
         return {
             lie: {
                 source: app.db.ref('/lies/' + key),
-                asObject: true
+                asObject: true,
             },
             actualVote: {
                 source: app.db.ref('/users/' + user.uid + '/votes/' + key),
-                asObject: true
-            }
+                asObject: true,
+            },
         }
     },
     props: [
         'lie-uid',
-        'lie-object'
+        'lie-object',
     ],
     computed: {
         /**
@@ -105,7 +107,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         lieVotesCountNotLiar: function()
         {
             return this.lieVotesCount('notLiar')
-        }
+        },
     },
     methods: {
         /**
@@ -115,7 +117,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
          */
         liePicture: function(type)
         {
-            return (this.lie.pictures && this.lie.pictures.hasOwnProperty(type)) ? this.lie.pictures[type] : ''
+            return (this.lie.pictures && _.hasProp(this.lie.pictures, type)) ? this.lie.pictures[type] : ''
         },
         /**
          * Get lie sources for a given type
@@ -124,7 +126,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
          */
         lieSources: function(type)
         {
-            return (this.lie.sources && this.lie.sources.hasOwnProperty(type)) ? this.lie.sources[type] : ''
+            return (this.lie.sources && _.hasProp(this.lie.sources, type)) ? this.lie.sources[type] : ''
         },
         /**
          * Get votes count for a given type of vote
@@ -133,7 +135,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
          */
         lieVotesCount: function(type)
         {
-            return (this.lie.votes && this.lie.votes.hasOwnProperty(type)) ? this.lie.votes[type] : 0
+            return (this.lie.votes && _.hasProp(this.lie.votes, type)) ? this.lie.votes[type] : 0
         },
         /**
          * Add a vote for a given type of vote
@@ -154,7 +156,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
                 else
                 {
                     // Cancel previous vote
-                    var otherType = (type === 'liar') ? 'notLiar' : 'liar';
+                    const otherType = (type === 'liar') ? 'notLiar' : 'liar'
                     this.$firebaseRefs.lie.ref.child('votes/' + otherType).set(this.lie.votes[otherType] - 1)
 
                     // Store new vote count
@@ -186,6 +188,6 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         voteNotLiar: function()
         {
             this.vote('notLiar')
-        }
-    }
+        },
+    },
 }))

@@ -1,8 +1,10 @@
+/* global firebase Vue VueRouter XMLHttpRequest _ router user document */
+
 /**
  * App - Provide useful methods across components
  * @type {Object}
  */
-var app = {
+const app = {
     /**
      * Firebase database
      * @type {firebase.database.Database}
@@ -13,11 +15,11 @@ var app = {
      * @type {Object}
      */
     firebaseConfig: {
-        apiKey: "AIzaSyC2HAMgUYDOJdp_69RQbp4N-uyxeGqr_WI",
-        authDomain: "liarbustr.firebaseapp.com",
-        databaseURL: "https://liarbustr.firebaseio.com",
-        storageBucket: "liarbustr.appspot.com",
-        messagingSenderId: "405782866530"
+        apiKey: 'AIzaSyC2HAMgUYDOJdp_69RQbp4N-uyxeGqr_WI',
+        authDomain: 'liarbustr.firebaseapp.com',
+        databaseURL: 'https://liarbustr.firebaseio.com',
+        storageBucket: 'liarbustr.appspot.com',
+        messagingSenderId: '405782866530',
     },
     /**
      * Current language
@@ -30,7 +32,7 @@ var app = {
      */
     locales: {
         en: {},
-        fr: {}
+        fr: {},
     },
     /**
      * Firebase storage
@@ -53,11 +55,11 @@ var app = {
         app.storage = firebase.storage()
 
         // Set locales - load only 2 first languages for performance reasons and because vue-i18n requires at least two languages
-        var availableLangs = Object.keys(app.locales)
+        const availableLangs = Object.keys(app.locales)
         app.changeLocale(availableLangs[1])
         app.changeLocale(availableLangs[0], true) // fallback lang
 
-        Vue.config.missingHandler = function (lang, key, vm)
+        Vue.config.missingHandler = function(lang, key, vm)
         {
             console.warn('Translation error: (lang: "' + lang + '" for key: "' + key + '")')
         }
@@ -65,8 +67,8 @@ var app = {
         app.vue = new Vue({
             el: '#app',
             router: new VueRouter({
-                routes: router.routes
-            })
+                routes: router.routes,
+            }),
         })
 
         user.init()
@@ -80,7 +82,9 @@ var app = {
      */
     get: function(url, successCallback, errorCallback)
     {
-        var wrappedErrorCallback = function()
+        const xhr = new XMLHttpRequest()
+
+        const wrappedErrorCallback = function()
         {
             if (_.isCallback(errorCallback))
             {
@@ -88,14 +92,13 @@ var app = {
             }
         }
 
-        var xhr = new XMLHttpRequest()
         xhr.open('GET', url, true)
 
         xhr.onload = function()
         {
             if (xhr.status >= 200 && xhr.status < 400)
             {
-                var data
+                let data
 
                 try
                 {
@@ -140,9 +143,9 @@ var app = {
     {
         return function(resolve, reject)
         {
-            var result = null
+            let result = null
 
-            if (app.locales.hasOwnProperty(lang))
+            if (_.hasProp(app.locales, lang))
             {
                 if (_.isEmptyObject(app.locales[lang]))
                 {
@@ -156,7 +159,7 @@ var app = {
                         function()
                         {
                             result = reject()
-                        }
+                        },
                     )
                 }
                 else
@@ -177,15 +180,10 @@ var app = {
      * Get a template from a name
      * @param  {string} name Template name (filename without .html or path related to components directory)
      */
-    resolveTemplate: function(name, component)
+    resolveTemplate: function(name, component = {})
     {
-        var fullName = (name.indexOf('/') !== -1) ? name : name + '/' + name
-        var path = 'components/' + fullName + '.html'
-
-        if (!component)
-        {
-            component = {}
-        }
+        const fullName = (name.indexOf('/') !== -1) ? name : name + '/' + name
+        const path = 'components/' + fullName + '.html'
 
         return function(resolve, reject)
         {
@@ -207,14 +205,14 @@ var app = {
     {
         return new Promise(function(resolve, reject)
         {
-            var fileRef = folderRef.child(_.generateUUID() + _.fileExtension(file.name))
-            var uploadTask = fileRef.put(file)
+            const fileRef = folderRef.child(_.generateUUID() + _.fileExtension(file.name))
+            const uploadTask = fileRef.put(file)
 
             uploadTask.on(
                 firebase.storage.TaskEvent.STATE_CHANGED,
                 function(snapshot)
                 {
-                    var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
                     console.log('Upload is ' + progress + '% done (state: ' + snapshot.state + ')')
                 },
                 function(error)
@@ -224,7 +222,7 @@ var app = {
                 function()
                 {
                     resolve(uploadTask.snapshot.downloadURL)
-                }
+                },
             )
         })
     },
@@ -250,9 +248,9 @@ var app = {
                 }
 
                 Vue.config.lang = lang
-            }
+            },
         )
-    }
+    },
 }
 
 document.addEventListener('DOMContentLoaded', app.init)
