@@ -1,0 +1,59 @@
+{
+    "extends": "airbnb-base",
+    "plugins": [
+        "import"
+    ],
+    "rules": {
+        "brace-style": [
+            "error",
+            "allman"
+        ],
+        "func-names": "off",
+        "indent": [
+            "error",
+            4
+        ],
+        "max-len": "off",
+        "no-param-reassign": [
+            "error",
+            {
+                "props": false
+            }
+        ],
+        "no-plusplus": [
+            "error",
+            {
+                "allowForLoopAfterthoughts": true
+            }
+        ],
+        "no-underscore-dangle": [
+            "error",
+            {
+                "allow": [
+                    "_uid"
+                ]
+            }
+        ],
+        "no-unused-vars": [
+            "error",
+            {
+                "args": "none",
+                "vars": "local"
+            }
+        ],
+        "object-shorthand": [
+            "error",
+            "never"
+        ],
+        "prefer-arrow-callback": "off",
+        "prefer-template": "off",
+        "semi": [
+            "error",
+            "never"
+        ],
+        "space-before-function-paren": [
+            "error",
+            "never"
+        ]
+    }
+}
