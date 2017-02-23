@@ -1,13 +1,16 @@
 <div class="authenticate">
     <h1 class="authenticate-title">Come as you are</h1>
-    <button type="button" class="authenticate-logout -facebook" @click="loginWithFacebook" v-if="!isLoggedIn">{{ $t('authenticate.loginWithFacebook') }}</button>
-    <button type="button" class="authenticate-logout -twitter" @click="loginWithTwitter" v-if="!isLoggedIn">{{ $t('authenticate.loginWithTwitter') }}</button>
-    <button type="button" class="authenticate-logout -google" @click="loginWithGoogle" v-if="!isLoggedIn">{{ $t('authenticate.loginWithGoogle') }}</button>
+    <div class="authenticate-buttons-wrapper">
+        <button type="button" class="authenticate-button -facebook" @click="loginWithFacebook" v-if="!isLoggedIn">{{ $t('authenticate.loginWithFacebook') }}</button>
+        <button type="button" class="authenticate-button -twitter" @click="loginWithTwitter" v-if="!isLoggedIn">{{ $t('authenticate.loginWithTwitter') }}</button>
+        <button type="button" class="authenticate-button -google" @click="loginWithGoogle" v-if="!isLoggedIn">{{ $t('authenticate.loginWithGoogle') }}</button>
+    </div>
 
     <button type="button" class="authenticate-logout" @click="logout" v-if="isLoggedIn">{{ $t('authenticate.logout') }}</button>
 
-    <form class="signup-form" @submit.prevent="signupEmail" v-if="!isLoggedIn">
-        <h3 class="signup-title">or signup with email</h3>
+    <h4 class="signup-title" v-if="!showSignupWithEmail" v-if="!isLoggedIn" @click="showSignupForm">or signup with email</h4>
+
+    <form class="signup-form" v-if="showSignupWithEmail" @submit.prevent="signupEmail">
 
         <div class="signup-group -name">
             <label for="name" class="signup-label -name">{{ $t('authenticate.name') }}</label>
@@ -26,4 +29,8 @@
 
         <button type="submit" class="signup-form-submit">{{ $t('authenticate.submit') }}</button>
     </form>
+
+    <div class="authenticate-got-account">
+        I already have an account
+    </div>
 </div>
