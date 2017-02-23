@@ -9,6 +9,7 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
     {
         return {
             signup: user.signup,
+            showSignupWithEmail: false,
         }
     },
     computed: {
@@ -59,6 +60,11 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
         logout: function()
         {
             user.logout()
+        },
+
+        showSignupForm: function()
+        {
+            this.showSignupWithEmail = true
         },
     },
 }))
