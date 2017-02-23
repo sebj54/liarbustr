@@ -159,7 +159,7 @@ const app = {
                         function()
                         {
                             result = reject()
-                        },
+                        }
                     )
                 }
                 else
@@ -222,7 +222,7 @@ const app = {
                 function()
                 {
                     resolve(uploadTask.snapshot.downloadURL)
-                },
+                }
             )
         })
     },
@@ -248,7 +248,7 @@ const app = {
                 }
 
                 Vue.config.lang = lang
-            },
+            }
         )
     },
 }
