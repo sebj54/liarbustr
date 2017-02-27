@@ -6,9 +6,16 @@ button:focus {
 }
 
 button {
-    border: 0;
+    border-width: 0;
+    border-radius: 3px;
+    font-family: inherit;
 
-    &:hover {
+    transition-property: color, background-color;
+    transition-duration: .2s;
+    transition-timing-function: ease-out;
+
+    &:hover,
+    &:focus {
         cursor: pointer;
     }
 }

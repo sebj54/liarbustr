@@ -7,4 +7,10 @@ Vue.component('app-header', app.resolveTemplate('app-header', {
             user: user,
         }
     },
+    computed: {
+        isLoggedIn: user.isLoggedIn,
+    },
+    methods: {
+        logout: user.logout,
+    },
 }))
