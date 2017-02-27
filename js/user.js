@@ -159,6 +159,22 @@ const user = {
         })
     },
 
+    signinWithEmail: function(data)
+    {
+        var email = data.email
+        var password = data.password
+
+        console.log(data)
+
+        firebase.auth().signInWithEmailAndPassword(email, password)
+        .catch(function(error)
+        {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+        });
+    },
+
+
     /**
      * Login with an external service
      * @param  {FacebookAuthProvider|TwitterAuthProvider|GoogleAuthProvider} provider Firebase provider

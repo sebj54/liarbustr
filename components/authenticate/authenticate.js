@@ -9,6 +9,10 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
     {
         return {
             signup: user.signup,
+            signin: {
+                email: null,
+                password: null,
+            },
             showSignupWithEmail: false,
             showSigninWithEmail: false,
         }
@@ -46,8 +50,13 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
             user.signupWithEmail()
         },
         /**
-         * Logout
+         * Signin with email form
          */
+        signinEmail: function()
+        {
+            user.signinWithEmail(this.signin)
+        },
+
         editDisplayName: function(name)
         {
             user.userObject.updateProfile({
@@ -65,11 +74,13 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
 
         showSignupForm: function()
         {
+            this.showSigninWithEmail = false
             this.showSignupWithEmail = true
         },
 
         showSigninForm: function()
         {
+            this.showSignupWithEmail = false
             this.showSigninWithEmail = true
         },
     },
