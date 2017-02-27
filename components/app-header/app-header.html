@@ -1,8 +1,26 @@
 <header class="header">
-    <div class="header-profile">
-        <p class="header-profile-name">{{ user.name }}</p>
+    <router-link to="/" class="header-brand">
+        LiarBustr
+    </router-link>
+
+    <nav class="header-nav">
+        <router-link to="/lies" class="header-nav-link">{{ $t('msc.lies-list') }}</router-link>
+        <router-link to="/lie-form" class="header-nav-link">{{ $t('msc.lie-form') }}</router-link>
+    </nav>
+
+    <div class="header-profile" v-if="!isLoggedIn">
+        <router-link to="/authenticate" class="header-nav-link">{{ $t('msc.authenticate') }}</router-link>
+    </div>
+
+    <div class="header-profile" v-if="isLoggedIn">
+        <div class="header-profile-infos">
+            <p class="header-profile-name">{{ user.name }}</p>
+            <button type="button" class="header-profile-logout" @click="logout">
+                <svg-icon name="logout" class="header-profile-logout-icon"></svg-icon>
+                <span class="header-profile-logout-text">{{ $t('authenticate.logout') }}</span>
+            </button>
+        </div>
 
         <div class="header-profile-picture" :style="{ backgroundImage: (user.profilePicture ? 'url(' + user.profilePicture + ')' : 'none') }"></div>
-        <svg-icon name="settings"></svg-icon>
     </div>
 </header>

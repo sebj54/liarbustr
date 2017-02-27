@@ -1,32 +1,118 @@
 header {
     display: flex;
     flex-direction: row;
+    align-items: center;
     height: $header-height;
 
-    box-sizing: border-box;
-    padding: 0 20px;
+    padding-left: 24px;
+    padding-right: 24px;
 
+    box-shadow: $shadow-depth-2;
     background-color: $color-primary-normal;
+
+    font-size: 16px;
+    color: $header-font-color;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
+.header-brand {
+    padding-right: 24px;
+
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.header-nav {
+    &-link {
+        display: inline-block;
+        vertical-align: bottom;
+        height: $header-height;
+        padding-left: 12px;
+        padding-right: 12px;
+
+        border-bottom-width: 0;
+        border-bottom-style: solid;
+        border-bottom-color: rgba($header-font-color, 0);
+
+        line-height: $header-height;
+
+        transition-property: border-bottom-width, border-bottom-color;
+        transition-duration: .2s;
+        transition-timing-function: ease-out;
+
+        &.router-link-active,
+        &:hover,
+        &:focus {
+            border-bottom-width: 4px;
+        }
+
+        &:hover,
+        &:focus {
+            border-bottom-color: rgba($header-font-color, .6);
+        }
+
+        &.router-link-active {
+            border-bottom-color: rgba($header-font-color, .8);
+        }
+    }
 }
 
 .header-profile {
     display: flex;
+    align-items: center;
     margin-left: auto;
-}
+    padding-left: 24px;
 
-.header-profile-name {
-    margin: auto 0 auto auto;
+    &-infos {
+        text-align: center;
+        font-size: 14px;
+    }
 
-    color: white;
-}
+    &-name {
+        margin-top: 0;
+        margin-bottom: .3em;
+    }
 
-.header-profile-picture {
-    height: 38px;
-    width: 38px;
+    &-logout {
+        border-width: 1px;
+        border-style: solid;
+        background-color: rgba($header-font-color, 0);
+        color: inherit;
 
-    margin: auto 0 auto 20px;
+        &:hover,
+        &:focus {
+            background-color: rgba($header-font-color, .3);
+        }
 
-    border-radius: 50%;
-    background-size: cover;
-    background-position: 50%;
+        &-icon,
+        &-text {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        &-icon {
+            width: 18px;
+            height: 18px;
+            margin-right: .2em;
+        }
+
+        &-text {
+        }
+    }
+
+    &-picture {
+        flex-shrink: 0;
+        height: 38px;
+        width: 38px;
+
+        margin-left: 12px;
+
+        border-radius: 50%;
+        background-size: cover;
+        background-position: 50%;
+    }
 }
