@@ -8,6 +8,14 @@
             "error",
             "allman"
         ],
+        "comma-dangle": [
+            "error",
+            {
+                "arrays": "always-multiline",
+                "objects": "always-multiline",
+                "functions": "never"
+            }
+        ],
         "func-names": "off",
         "indent": [
             "error",
