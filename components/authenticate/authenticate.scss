@@ -49,6 +49,12 @@
     }
 }
 
+.signup-form-container {
+    &.-hide-signup-form {
+        background: red;
+    }
+}
+
 .signup-title {
     text-align: center;
     font-weight: normal;

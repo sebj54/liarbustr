@@ -145,15 +145,6 @@ const user = {
         user.loginWith(new firebase.auth.GoogleAuthProvider())
     },
 
-    signupWithEmail: function()
-    {
-        firebase.auth().createUserWithEmailAndPassword(user.signup.email, user.signup.password).then(function(response) {
-
-        }).catch(function(error)
-        {
-            console.log(error)
-        });
-    },
     /**
      * Sign up with an e-mail address
      */
