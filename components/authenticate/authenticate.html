@@ -10,27 +10,47 @@
 
     <h4 class="signup-title" v-if="!showSignupWithEmail" v-if="!isLoggedIn" @click="showSignupForm">or signup with email</h4>
 
-    <form class="signup-form" v-if="showSignupWithEmail" @submit.prevent="signupEmail">
-
-        <div class="signup-group -name">
-            <label for="name" class="signup-label -name">{{ $t('authenticate.name') }}</label>
-            <input class="signup-input -name" v-model="signup.name" type="name" name="name" :placeholder="$t('authenticate.namePlaceholder')" required>
+    <div class="signup-form-container" :class="{ '-hide-signup-form' : showSigninWithEmail }">
+        <div class="authenticate-got-account" @click="showSigninForm">
+            I already have an account
         </div>
 
-        <div class="signup-group -email">
-            <label for="email" class="signup-label -email">{{ $t('authenticate.email') }}</label>
-            <input class="signup-input -email" v-model="signup.email" type="email" name="email" :placeholder="$t('authenticate.emailPlaceholder')" required>
-        </div>
+        <form class="signup-form" v-if="showSignupWithEmail" @submit.prevent="signupEmail">
 
-        <div class="signup-group -password">
-            <label for="password" class="signup-label -password">{{ $t('authenticate.password') }}</label>
-            <input class="signup-input -password" v-model="signup.password" type="password" name="password" :placeholder="$t('authenticate.passwordPlaceholder')" required>
-        </div>
+            <div class="signup-name-wrapper">
+                <label class="signup-input-label" for="name">Name</label>
+                <input class="signup-input" v-model="signup.name" type="name" name="name" placeholder="John Doe" required></input>
+            </div>
+            <div class="signup-email-wrapper">
+                <label class="signup-input-label" for="email">Email address</label>
+                <input class="signup-input" v-model="signup.email" type="email" name="email" placeholder="johndoe@email.com" required></input>
+            </div>
 
-        <button type="submit" class="signup-form-submit">{{ $t('authenticate.submit') }}</button>
-    </form>
+            <div class="signup-password-wrapper">
+                <label class="signup-input-label" for="password">Password</label>
+                <input class="signup-input" v-model="signup.password" type="password" name="password" placeholder="Password" required></input>
+            </div>
 
-    <div class="authenticate-got-account">
-        I already have an account
+            <div class="signup-group -name">
+                <label for="name" class="signup-label -name">{{ $t('authenticate.name') }}</label>
+                <input class="signup-input -name" v-model="signup.name" type="name" name="name" :placeholder="$t('authenticate.namePlaceholder')" required>
+            </div>
+
+            <div class="signup-group -email">
+                <label for="email" class="signup-label -email">{{ $t('authenticate.email') }}</label>
+                <input class="signup-input -email" v-model="signup.email" type="email" name="email" :placeholder="$t('authenticate.emailPlaceholder')" required>
+            </div>
+
+            <div class="signup-group -password">
+                <label for="password" class="signup-label -password">{{ $t('authenticate.password') }}</label>
+                <input class="signup-input -password" v-model="signup.password" type="password" name="password" :placeholder="$t('authenticate.passwordPlaceholder')" required>
+            </div>
+
+            <button type="submit" class="signup-form-submit">{{ $t('authenticate.submit') }}</button>
+        </form>
+    </div>
+
+    <div class="signin-form-container" v-if="showSigninWithEmail">
+        Signin
     </div>
 </div>
