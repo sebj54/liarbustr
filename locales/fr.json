@@ -4,6 +4,20 @@
         "lie-form": "J'accuse",
         "lies-list": "Mensonges"
     },
+    "authenticate": {
+        "email": "Adresse e-mail",
+        "namePlaceholder": "ex : Pierre Dupont",
+        "loginWithFacebook": "Se connecter avec Facebook",
+        "loginWithTwitter": "Se connecter avec Twitter",
+        "loginWithGoogle": "Se connecter avec Google",
+        "logout": "Se déconnecter",
+        "name": "Nom",
+        "emailPlaceholder": "ex : pierre.dupont@email.com",
+        "password": "Mot de passe",
+        "passwordPlaceholder": "Choisissez un mot de passe, tapez-le et mémorisez-le !",
+        "submit": "S'inscrire",
+        "title": "S'inscrire avec une adresse e-mail"
+    },
     "lie": {
         "picture": "Photographie de {liar}",
         "votes": {

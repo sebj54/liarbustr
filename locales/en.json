@@ -4,6 +4,20 @@
         "lie-form": "I accuse",
         "lies-list": "Lies"
     },
+    "authenticate": {
+        "email": "Email address",
+        "namePlaceholder": "e.g. John Doe",
+        "loginWithFacebook": "Login with Facebook",
+        "loginWithTwitter": "Login with Twitter",
+        "loginWithGoogle": "Login with Google",
+        "logout": "Log out",
+        "name": "Name",
+        "emailPlaceholder": "e.g. johndoe@email.com",
+        "password": "Password",
+        "passwordPlaceholder": "Choose a password, type it and memorize it!",
+        "submit": "Signup",
+        "title": "Signup"
+    },
     "lie": {
         "picture": "{liar}'s picture",
         "votes": {
