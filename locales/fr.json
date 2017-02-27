@@ -6,7 +6,7 @@
     },
     "authenticate": {
         "email": "Adresse e-mail",
-        "gotAnAccountTitle": "J'ai déjà un compte",
+        "gotAnAccountTitle": "Se connecter avec une adresse email",
         "namePlaceholder": "ex : Pierre Dupont",
         "loginWithFacebook": "Se connecter avec Facebook",
         "loginWithTwitter": "Se connecter avec Twitter",
@@ -17,8 +17,9 @@
         "password": "Mot de passe",
         "passwordPlaceholder": "Choisissez un mot de passe, tapez-le et mémorisez-le !",
         "signInTitle": "Se connecter",
-        "signUpTitle": "ou inscrivez-vous avec votre adresse e-mail",
-        "submit": "S'inscrire",
+        "signUpTitle": "ou s'inscrire avec une adresse e-mail",
+        "signupSubmitButton": "S'inscrire",
+        "signinSubmitButton": "Se connecter",
         "title": "Venez comme vous êtes"
     },
     "lie": {

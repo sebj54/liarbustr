@@ -6,7 +6,7 @@
     },
     "authenticate": {
         "email": "Email address",
-        "gotAnAccountTitle": "I already have an account",
+        "gotAnAccountTitle": "User email to login",
         "namePlaceholder": "e.g. John Doe",
         "loginWithFacebook": "Login with Facebook",
         "loginWithTwitter": "Login with Twitter",
@@ -18,7 +18,8 @@
         "passwordPlaceholder": "Choose a password, type it and memorize it!",
         "signInTitle": "Signin",
         "signUpTitle": "or signup with email",
-        "submit": "Signup",
+        "signupSubmitButton": "Signup",
+        "signinSubmitButton": "Signin",
         "title": "Come as you are"
     },
     "lie": {
