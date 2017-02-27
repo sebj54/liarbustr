@@ -5,13 +5,19 @@
  * @type {Object}
  */
 const _ = {
-
+    /**
+     * Remove all properties of a given object without removing reference
+     * @param  {object} object Object to clean
+     */
     cleanObject: function(object)
     {
-        if(!this.isEmptyObject(object))
-            Object.keys(object).forEach(function(key) {
+        if (!this.isEmptyObject(object))
+        {
+            Object.keys(object).forEach(function(key)
+            {
                 delete object[key]
             })
+        }
     },
 
     /**
