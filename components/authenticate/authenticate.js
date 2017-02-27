@@ -8,7 +8,7 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
     data: function()
     {
         return {
-            signup: user.signup
+            signup: user.signup,
         }
     },
     computed: {
@@ -36,23 +36,26 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
         {
             user.loginWithGoogle()
         },
+        /**
+         * Sign up with an e-mail address
+         */
         signupEmail: function()
         {
             user.signupWithEmail()
-            // user.editDisplayName(this.signup.name)
         },
         /**
          * Logout
          */
         editDisplayName: function(name)
         {
-            console.log('coucou')
             user.userObject.updateProfile({
                 displayName: name,
             })
             user.userObject.displayName = name
         },
-
+        /**
+         * Log out
+         */
         logout: function()
         {
             user.logout()
