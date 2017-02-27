@@ -118,7 +118,7 @@ const user = {
 
     isLoggedIn: function()
     {
-        return user.uid !== null && user.uid !== undefined
+        return user.uid !== null
     },
 
     /**
@@ -183,6 +183,7 @@ const user = {
         firebase.auth().signOut()
         .then(function()
         {
+            user.fetch(null)
         })
         .catch(function(error)
         {
