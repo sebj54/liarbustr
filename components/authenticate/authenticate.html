@@ -1,28 +1,28 @@
 <div class="authenticate">
-    <button type="button" class="authenticate-logout -facebook" @click="loginWithFacebook" v-if="!isLoggedIn">Login with Facebook</button>
-    <button type="button" class="authenticate-logout -twitter" @click="loginWithTwitter" v-if="!isLoggedIn">Login with Twitter</button>
-    <button type="button" class="authenticate-logout -google" @click="loginWithGoogle" v-if="!isLoggedIn">Login with Google</button>
+    <button type="button" class="authenticate-logout -facebook" @click="loginWithFacebook" v-if="!isLoggedIn">{{ $t('authenticate.loginWithFacebook') }}</button>
+    <button type="button" class="authenticate-logout -twitter" @click="loginWithTwitter" v-if="!isLoggedIn">{{ $t('authenticate.loginWithTwitter') }}</button>
+    <button type="button" class="authenticate-logout -google" @click="loginWithGoogle" v-if="!isLoggedIn">{{ $t('authenticate.loginWithGoogle') }}</button>
 
-    <button type="button" class="authenticate-logout" @click="logout" v-if="isLoggedIn">Log out</button>
+    <button type="button" class="authenticate-logout" @click="logout" v-if="isLoggedIn">{{ $t('authenticate.logout') }}</button>
 
-    <form class="signup-form" @submit.prevent="signupEmail">
-        <h1>Signup</h1>
+    <form class="signup-form" @submit.prevent="signupEmail" v-if="!isLoggedIn">
+        <h1 class="signup-form-title">{{ $t('authenticate.title') }}</h1>
 
-        <div class="signup-name-wrapper">
-            <label for="name">Name</label>
-            <input class="signup-name-input" v-model="signup.name" type="name" name="name" placeholder="John Doe" required></input>
-        </div>
-        <div class="signup-email-wrapper">
-            <label for="email">Email address</label>
-            <input class="signup-email-input" v-model="signup.email" type="email" name="email" placeholder="johndoe@email.com" required></input>
+        <div class="signup-group -name">
+            <label for="name" class="signup-label -name">{{ $t('authenticate.name') }}</label>
+            <input class="signup-input -name" v-model="signup.name" type="name" name="name" :placeholder="$t('authenticate.namePlaceholder')" required>
         </div>
 
-        <div class="signup-password-wrapper">
-            <label for="password">Password</label>
-            <input class="signup-password-input" v-model="signup.password" type="password" name="password" placeholder="Password" required></input>
+        <div class="signup-group -email">
+            <label for="email" class="signup-label -email">{{ $t('authenticate.email') }}</label>
+            <input class="signup-input -email" v-model="signup.email" type="email" name="email" :placeholder="$t('authenticate.emailPlaceholder')" required>
         </div>
 
-        <button type="submit" name="signup-form-submit">Signup</button>
-        
+        <div class="signup-group -password">
+            <label for="password" class="signup-label -password">{{ $t('authenticate.password') }}</label>
+            <input class="signup-input -password" v-model="signup.password" type="password" name="password" :placeholder="$t('authenticate.passwordPlaceholder')" required>
+        </div>
+
+        <button type="submit" class="signup-form-submit">{{ $t('authenticate.submit') }}</button>
     </form>
 </div>
