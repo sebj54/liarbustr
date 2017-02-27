@@ -1,7 +1,7 @@
 <header class="header">
     <div class="header-profile">
-        <p class="header-profile-name"></p>
-        {{user.name}}
+        <p class="header-profile-name">{{ user.name }}</p>
+
         <div class="header-profile-picture" :style="{ backgroundImage: (user.profilePicture ? 'url(' + user.profilePicture + ')' : 'none') }"></div>
         <svg-icon name="settings"></svg-icon>
     </div>

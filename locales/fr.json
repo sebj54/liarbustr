@@ -6,6 +6,7 @@
     },
     "authenticate": {
         "email": "Adresse e-mail",
+        "gotAnAccountTitle": "J'ai déjà un compte",
         "namePlaceholder": "ex : Pierre Dupont",
         "loginWithFacebook": "Se connecter avec Facebook",
         "loginWithTwitter": "Se connecter avec Twitter",
@@ -15,8 +16,10 @@
         "emailPlaceholder": "ex : pierre.dupont@email.com",
         "password": "Mot de passe",
         "passwordPlaceholder": "Choisissez un mot de passe, tapez-le et mémorisez-le !",
+        "signInTitle": "Se connecter",
+        "signUpTitle": "ou inscrivez-vous avec votre adresse e-mail",
         "submit": "S'inscrire",
-        "title": "S'inscrire avec une adresse e-mail"
+        "title": "Venez comme vous êtes"
     },
     "lie": {
         "picture": "Photographie de {liar}",

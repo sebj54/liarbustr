@@ -1,5 +1,6 @@
 <div class="authenticate">
-    <h1 class="authenticate-title">Come as you are</h1>
+    <h1 class="authenticate-title">{{ $t('authenticate.title') }}</h1>
+
     <div class="authenticate-buttons-wrapper">
         <button type="button" class="authenticate-button -facebook" @click="loginWithFacebook" v-if="!isLoggedIn">{{ $t('authenticate.loginWithFacebook') }}</button>
         <button type="button" class="authenticate-button -twitter" @click="loginWithTwitter" v-if="!isLoggedIn">{{ $t('authenticate.loginWithTwitter') }}</button>
@@ -8,28 +9,12 @@
 
     <button type="button" class="authenticate-logout" @click="logout" v-if="isLoggedIn">{{ $t('authenticate.logout') }}</button>
 
-    <h4 class="signup-title" v-if="!showSignupWithEmail" v-if="!isLoggedIn" @click="showSignupForm">or signup with email</h4>
+    <h4 class="signup-title" v-if="!showSignupWithEmail && !isLoggedIn" @click="showSignupForm">{{ $t('authenticate.signUpTitle') }}</h4>
 
     <div class="signup-form-container" :class="{ '-hide-signup-form' : showSigninWithEmail }">
-        <div class="authenticate-got-account" @click="showSigninForm">
-            I already have an account
-        </div>
+        <div class="authenticate-got-account" @click="showSigninForm">{{ $t('authenticate.gotAnAccountTitle') }}</div>
 
         <form class="signup-form" v-if="showSignupWithEmail" @submit.prevent="signupEmail">
-
-            <div class="signup-name-wrapper">
-                <label class="signup-input-label" for="name">Name</label>
-                <input class="signup-input" v-model="signup.name" type="name" name="name" placeholder="John Doe" required></input>
-            </div>
-            <div class="signup-email-wrapper">
-                <label class="signup-input-label" for="email">Email address</label>
-                <input class="signup-input" v-model="signup.email" type="email" name="email" placeholder="johndoe@email.com" required></input>
-            </div>
-
-            <div class="signup-password-wrapper">
-                <label class="signup-input-label" for="password">Password</label>
-                <input class="signup-input" v-model="signup.password" type="password" name="password" placeholder="Password" required></input>
-            </div>
 
             <div class="signup-group -name">
                 <label for="name" class="signup-label -name">{{ $t('authenticate.name') }}</label>
@@ -51,6 +36,6 @@
     </div>
 
     <div class="signin-form-container" v-if="showSigninWithEmail">
-        Signin
+        {{ $t('authenticate.signInTitle') }}
     </div>
 </div>
