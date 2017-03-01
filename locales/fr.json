@@ -24,6 +24,11 @@
     },
     "lie": {
         "picture": "Photographie de {liar}",
+        "sources": {
+            "confirmationsTitle": "Confirmation : | Confirmations :",
+            "refutationsTitle": "Réfutation : | Réfutations :",
+            "statementsTitle": "Source de la déclaration : | Sources de la déclaration :"
+        },
         "votes": {
             "liar": "Menteur",
             "notLiar": "Pas menteur"

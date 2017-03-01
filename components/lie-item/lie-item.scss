@@ -1,0 +1,173 @@
+.lie-item {
+    position: relative;
+    width: 40rem;
+    max-width: 100%;
+    box-shadow: 0 10px 20px rgba($color-grey-dark, .19), 0 6px 6px rgba($color-grey-dark, .23);
+
+    &-header {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        min-height: 30rem;
+        padding: 1.2rem;
+    }
+
+    &-content {
+        padding: 2rem;
+        background-color: $color-whitey;
+        overflow: hidden;
+        transition-property: height;
+        transition-timing-function: ease-out;
+    }
+
+    &-figure {
+        margin: 0;
+
+        &,
+        &::before {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        &::before {
+            content: "";
+            top: 100%;
+            background-image: linear-gradient(to top, rgba(#2d2a32, .8) 0%, rgba(#2d2a32, .6) 50%, rgba(#2d2a32, 0) 100%);
+            opacity: 0;
+            transition-property: top, opacity;
+            transition-duration: $appear-duration * 1s;
+            transition-delay: 0, $appear-duration * .5s;
+            transition-timing-function: ease-out;
+        }
+    }
+
+    &-picture {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    &-liar,
+    &-title {
+        position: relative;
+        color: rgba($color-whitey, .9);
+        opacity: 0;
+        transform: translateY(-100%);
+        transition-property: opacity, transform;
+        transition-duration: $appear-duration * 1s;
+        transition-timing-function: ease-out;
+    }
+
+    &-liar {
+        position: relative;
+        align-self: flex-end;
+        margin: 0;
+        padding: .2em .4em;
+        font-size: 1.6em;
+    }
+
+    &-title {
+        margin-bottom: 2rem;
+        margin-left: 1.2em;
+        margin-right: 1.2em;
+        text-align: center;
+        line-height: 1.1;
+        font-family: Lora, sans-serif;
+
+        &::before,
+        &::after {
+            position: absolute;
+            font-size: 2em;
+        }
+
+        &::before {
+            content: "“ ";
+            top: 0;
+            left: -.6em;
+        }
+
+        &::after {
+            content: " ”";
+            bottom: -.5em;
+            right: -.6em;
+        }
+    }
+
+    &-text {
+        &-chunk {
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+    }
+
+    &-votes {
+    }
+
+    &-sources {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-left: 0;
+        list-style-type: none;
+
+        &-title {
+            margin-bottom: .4em;
+        }
+    }
+
+    &-source {
+        &-link {
+            position: relative;
+            display: block;
+            padding-left: 2em;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
+            &::before {
+                content: "🌐";
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: inline-block;
+                width: 2em;
+                text-align: center;
+                transition-property: transform;
+                transition-duration: $appear-duration * 1s;
+                transition-timing-function: inherit;
+            }
+        }
+    }
+
+    &.-is-ready & {
+        &-content {
+            transition-duration: $appear-duration * 1s;
+        }
+
+        &-figure {
+            &::before {
+                top: 0;
+                opacity: 1;
+            }
+        }
+
+        &-title,
+        &-liar {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        &-title {
+            transition-delay: $appear-duration * 1s;
+        }
+
+        &-liar {
+            transition-delay: $appear-duration * 1.5s;
+        }
+    }
+}
