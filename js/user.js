@@ -68,9 +68,9 @@ const user = {
                                 updates['/users/' + fetchedUser.uid + '/' + key] = fetchedUser[key]
                             }
                         })
-                    })
 
-                    app.db.ref().update(updates)
+                        app.db.ref().update(updates)
+                    })
                 })
             }
         })
