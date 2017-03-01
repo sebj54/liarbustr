@@ -110,6 +110,22 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         {
             return this.lieVotesCount('notLiar')
         },
+        /**
+         * Get liar votes percentage
+         * @return {integer} Votes percentage
+         */
+        lieVotesPercentageLiar: function()
+        {
+            return this.lieVotesPercentage('liar')
+        },
+        /**
+         * Get not liar votes percentage
+         * @return {integer} Votes percentage
+         */
+        lieVotesPercentageNotLiar: function()
+        {
+            return this.lieVotesPercentage('notLiar')
+        },
     },
     methods: {
         /**
@@ -140,6 +156,26 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
             return (this.lie.votes && _.hasProp(this.lie.votes, type)) ? this.lie.votes[type] : 0
         },
         /**
+         * Get votes percentage for a given type of vote
+         * @param  {string} type Type of vote (liar or notLiar)
+         * @return {integer} Votes percentage
+         */
+        lieVotesPercentage: function(type)
+        {
+            const votesCountOfType = this.lieVotesCount(type)
+            const ratio = votesCountOfType / (votesCountOfType + this.lieVotesCount(this.otherType(type)))
+            return ratio * 100
+        },
+        /**
+         * Get other type of vote
+         * @param  {string} type Type of vote (liar or notLiar)
+         * @return {string} Other type of vote (liar or notLiar)
+         */
+        otherType: function(type)
+        {
+            return (type === 'liar') ? 'notLiar' : 'liar'
+        },
+        /**
          * Add a vote for a given type of vote
          * @param  {string} type Type of vote (liar or notLiar)
          */
@@ -158,7 +194,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
                 else
                 {
                     // Cancel previous vote
-                    const otherType = (type === 'liar') ? 'notLiar' : 'liar'
+                    const otherType = this.otherType(type)
                     this.$firebaseRefs.lie.ref.child('votes/' + otherType).set(this.lie.votes[otherType] - 1)
 
                     // Store new vote count
