@@ -55,6 +55,7 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
         signinEmail: function()
         {
             user.signinWithEmail(this.signin)
+            this.signin = {}
         },
 
         editDisplayName: function(name)

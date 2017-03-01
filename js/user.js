@@ -161,17 +161,18 @@ const user = {
 
     signinWithEmail: function(data)
     {
-        var email = data.email
-        var password = data.password
+        const email = data.email
+        const password = data.password
 
-        console.log(data)
 
         firebase.auth().signInWithEmailAndPassword(email, password)
         .catch(function(error)
         {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-        });
+            const errorCode = error.code
+            const errorMessage = error.message
+
+            console.error(errorCode, errorMessage)
+        })
     },
 
 
