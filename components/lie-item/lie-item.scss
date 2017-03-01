@@ -107,6 +107,103 @@
     }
 
     &-votes {
+        margin-bottom: 1em;
+    }
+
+    &-vote {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+
+        &-bar {
+            display: flex;
+            height: 3.6rem;
+
+            &.-liar {
+                order: 2;
+                background-image: linear-gradient(to left, #dc2430, #ff512f, #f09819);
+            }
+
+            &.-not-liar {
+                background-image: linear-gradient(to right, #24c6dc, #514a9d);
+            }
+
+            &-part {
+                transition-property: width;
+                transition-duration: .2s;
+                transition-timing-function: ease-out;
+
+                &:last-child {
+                    flex-grow: 1;
+                    background-color: $color-whitey;
+                }
+            }
+        }
+
+        &-count {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            padding-left: 12px;
+            padding-right: 12px;
+            border-radius: 3px;
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 1px 1px 4px $color-grey-dark;
+            transform: translateY(-50%);
+        }
+
+        &-button {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            padding-left: 8px;
+            padding-right: 8px;
+            font-size: 1.1em;
+            color: #fff;
+            transform: translateY(-50%);
+            transition-property: color, background-color, box-shadow, transform;
+
+            &:hover,
+            &:focus {
+                transform: translateY(-50%) translateY(1.5px);
+            }
+
+            &:active {
+                transform: translateY(-50%) translateY(3px);
+            }
+
+            &.-liar {
+                background-color: #f09819;
+                box-shadow: 0 3px darken(#f09819, 10%);
+
+                &:hover,
+                &:focus {
+                    box-shadow: 0 1.5px darken(#f09819, 10%);
+                }
+
+                &:active {
+                    box-shadow: 0 0 darken(#f09819, 10%);
+                }
+            }
+
+            &.-not-liar {
+                background-color: #24c6dc;
+                box-shadow: 0 3px darken(#24c6dc, 10%);
+
+                &:hover,
+                &:focus {
+                    box-shadow: 0 1.5px darken(#24c6dc, 10%);
+                }
+
+                &:active {
+                    box-shadow: 0 0 darken(#24c6dc, 10%);
+                }
+            }
+        }
     }
 
     &-sources {

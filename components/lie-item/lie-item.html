@@ -10,21 +10,27 @@
     </div>
 
     <div class="lie-item-content">
-        <div class="lie-item-text">
-            <p class="lie-item-text-chunk" v-for="textChunk in lieTextChunks">{{ textChunk }}</p>
-        </div>
-
         <div class="lie-item-votes">
             <div class="lie-item-vote -liar" :class="{ '-is-actual-vote': actualVoteValue === 'liar' }">
-                <span class="lie-item-vote-title">{{ $t('lie.votes.liar') }}</span>
-                <span class="lie-item-vote-count">{{ lieVotesCount('liar') }}</span>
-                <button type="button" class="lie-item-vote-btn" @click="voteLiar">+1</button>
+                <div class="lie-item-vote-bar -liar">
+                    <div class="lie-item-vote-bar-part" :style="{ width: lieVotesPercentageLiar + '%' }"></div>
+                    <div class="lie-item-vote-bar-part"></div>
+                </div>
+                <div class="lie-item-vote-count -liar">{{ lieVotesCountLiar }}</div>
+                <button type="button" class="lie-item-vote-button -liar" @click="voteLiar">{{ $t('lie.votes.liar') }}</button>
             </div>
             <div class="lie-item-vote -not-liar" :class="{ '-is-actual-vote': actualVoteValue === 'notLiar' }">
-                <span class="lie-item-vote-title">{{ $t('lie.votes.notLiar') }}</span>
-                <span class="lie-item-vote-count">{{ lieVotesCount('notLiar') }}</span>
-                <button type="button" class="lie-item-vote-btn" @click="voteNotLiar">+1</button>
+                <div class="lie-item-vote-bar -not-liar">
+                    <div class="lie-item-vote-bar-part" :style="{ width: lieVotesPercentageNotLiar + '%' }"></div>
+                    <div class="lie-item-vote-bar-part"></div>
+                </div>
+                <div class="lie-item-vote-count -not-liar">{{ lieVotesCountNotLiar }}</div>
+                <button type="button" class="lie-item-vote-button -not-liar" @click="voteNotLiar">{{ $t('lie.votes.notLiar') }}</button>
             </div>
+        </div>
+
+        <div class="lie-item-text">
+            <p class="lie-item-text-chunk" v-for="textChunk in lieTextChunks">{{ textChunk }}</p>
         </div>
 
         <div class="lie-item-sources-wrapper">
