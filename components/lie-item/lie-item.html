@@ -1,45 +1,54 @@
-<article class="lie-item" :class="{ '-is-a-lie': isALie, '-is-not-a-lie': !isALie }">
-    <h2 class="lie-item-title">{{ lie.title }}</h2>
+<article class="lie-item" :class="{ '-is-a-lie': isALie, '-is-not-a-lie': !isALie, '-is-ready': isReady }">
+    <div class="lie-item-header">
+        <figure class="lie-item-figure">
+            <img :src="liePicture('main')" :alt="$t('lie.picture', { liar: lie.liar })" class="lie-item-picture -main">
+        </figure>
 
-    <p class="lie-item-liar">{{ lie.liar }}</p>
+        <h2 class="lie-item-title">{{ lie.title }}</h2>
 
-    <figure class="lie-item-figure">
-        <img :src="liePicture('main')" :alt="$t('lie.picture', { liar: lie.liar })" class="lie-item-picture -main">
-    </figure>
-
-    <div class="lie-item-text">
-        <p class="lie-item-text-chunk" v-for="textChunk in lieTextChunks">{{ textChunk }}</p>
+        <p class="lie-item-liar">{{ lie.liar }}</p>
     </div>
 
-    <div class="lie-item-votes">
-        <div class="lie-item-vote -liar" :class="{ '-is-actual-vote': actualVoteValue === 'liar' }">
-            <span class="lie-item-vote-title">{{ $t('lie.votes.liar') }}</span>
-            <span class="lie-item-vote-count">{{ lieVotesCount('liar') }}</span>
-            <button type="button" class="lie-item-vote-btn" @click="voteLiar">+1</button>
+    <div class="lie-item-content">
+        <div class="lie-item-text">
+            <p class="lie-item-text-chunk" v-for="textChunk in lieTextChunks">{{ textChunk }}</p>
         </div>
-        <div class="lie-item-vote -not-liar" :class="{ '-is-actual-vote': actualVoteValue === 'notLiar' }">
-            <span class="lie-item-vote-title">{{ $t('lie.votes.notLiar') }}</span>
-            <span class="lie-item-vote-count">{{ lieVotesCount('notLiar') }}</span>
-            <button type="button" class="lie-item-vote-btn" @click="voteNotLiar">+1</button>
-        </div>
-    </div>
 
-    <div class="lie-item-sources-wrapper">
-        <ul class="lie-item-sources -statements" v-for="source in lieSources('statements')">
-            <li class="lie-item-source">
-                <a :href="source" class="lie-item-source-link -statement">{{ source }}</a>
-            </li>
-        </ul>
-        <ul class="lie-item-sources -refutations" v-for="source in lieSources('refutations')">
-            <li class="lie-item-source">
-                <a :href="source" class="lie-item-source-link -refutation">{{ source }}</a>
-            </li>
-        </ul>
-        <ul class="lie-item-sources -confirmations" v-for="source in lieSources('confirmations')">
-            <li class="lie-item-source">
-                <a :href="source" class="lie-item-source-link -confirmation">{{ source }}</a>
-            </li>
-        </ul>
+        <div class="lie-item-votes">
+            <div class="lie-item-vote -liar" :class="{ '-is-actual-vote': actualVoteValue === 'liar' }">
+                <span class="lie-item-vote-title">{{ $t('lie.votes.liar') }}</span>
+                <span class="lie-item-vote-count">{{ lieVotesCount('liar') }}</span>
+                <button type="button" class="lie-item-vote-btn" @click="voteLiar">+1</button>
+            </div>
+            <div class="lie-item-vote -not-liar" :class="{ '-is-actual-vote': actualVoteValue === 'notLiar' }">
+                <span class="lie-item-vote-title">{{ $t('lie.votes.notLiar') }}</span>
+                <span class="lie-item-vote-count">{{ lieVotesCount('notLiar') }}</span>
+                <button type="button" class="lie-item-vote-btn" @click="voteNotLiar">+1</button>
+            </div>
+        </div>
+
+        <div class="lie-item-sources-wrapper">
+            <h3 class="lie-item-sources-title -statements">{{ $tc('lie.sources.statementsTitle', lieSources('statements').length) }}</h3>
+            <ul class="lie-item-sources -statements" v-for="source in lieSources('statements')">
+                <li class="lie-item-source">
+                    <a :href="source" class="lie-item-source-link -statement">{{ source }}</a>
+                </li>
+            </ul>
+
+            <h3 class="lie-item-sources-title -refutations" v-if="lieSources('refutations')">{{ $tc('lie.sources.refutationsTitle', lieSources('refutations').length) }}</h3>
+            <ul class="lie-item-sources -refutations" v-for="source in lieSources('refutations')">
+                <li class="lie-item-source">
+                    <a :href="source" class="lie-item-source-link -refutation">{{ source }}</a>
+                </li>
+            </ul>
+
+            <h3 class="lie-item-sources-title -confirmations" v-if="lieSources('confirmations')">{{ $tc('lie.sources.confirmationsTitle', lieSources('confirmations').length) }}</h3>
+            <ul class="lie-item-sources -confirmations" v-for="source in lieSources('confirmations')">
+                <li class="lie-item-source">
+                    <a :href="source" class="lie-item-source-link -confirmation">{{ source }}</a>
+                </li>
+            </ul>
+        </div>
     </div>
 
 </article>

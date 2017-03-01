@@ -1,0 +1,17 @@
+.lies-list {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+
+    &-item {
+        max-width: 100%;
+    }
+
+    .lie-item {
+        margin-top: 36px;
+        margin-bottom: 36px;
+    }
+}

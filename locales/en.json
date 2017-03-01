@@ -24,6 +24,11 @@
     },
     "lie": {
         "picture": "{liar}'s picture",
+        "sources": {
+            "confirmationsTitle": "Confirmation: | Confirmations:",
+            "refutationsTitle": "Refutation: | Refutations:",
+            "statementsTitle": "Statement source: | Statement sources:"
+        },
         "votes": {
             "liar": "Liar",
             "notLiar": "Not liar"

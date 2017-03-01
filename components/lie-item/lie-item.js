@@ -7,7 +7,9 @@
 Vue.component('lie-item', app.resolveTemplate('lie-item', {
     data: function()
     {
-        const data = {}
+        const data = {
+            isReady: true,
+        }
 
         if (this.lieObject)
         {
