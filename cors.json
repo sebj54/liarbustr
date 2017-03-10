@@ -1,0 +1,7 @@
+[
+    {
+        "origin": ["http://liarbustr.com:3000"],
+        "method": ["GET"],
+        "maxAgeSeconds": 3600
+    }
+]
