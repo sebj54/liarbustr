@@ -1,4 +1,4 @@
-/* global Vue app _ user */
+/* global Vue app _ user Vibrant */
 
 /**
  * Lie item component
@@ -9,6 +9,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
     {
         const data = {
             isReady: true,
+            liePictureMainColor: null,
         }
 
         return data
@@ -129,6 +130,14 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         {
             return (this.lie.pictures && _.hasProp(this.lie.pictures, type)) ? this.lie.pictures[type] : ''
         },
+        liePictureColor: function(type)
+        {
+            const vibrant = new Vibrant(this.liePicture(type))
+            vibrant.getPalette(function(err, palette)
+            {
+                this['liePicture' + _.capitalize(type) + 'Color'] = palette.Vibrant.getHex()
+            }.bind(this))
+        },
         /**
          * Get lie sources for a given type
          * @param  {string} type Sources type
@@ -219,5 +228,9 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         {
             this.vote('notLiar')
         },
+    },
+    created: function()
+    {
+        this.liePictureColor('main')
     },
 }))

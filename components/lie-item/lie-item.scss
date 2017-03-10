@@ -24,6 +24,7 @@
 
     &-figure {
         margin: 0;
+        color: #2d2a32;
 
         &,
         &::before {
@@ -37,7 +38,10 @@
         &::before {
             content: "";
             top: 100%;
-            background-image: linear-gradient(to top, rgba(#2d2a32, .8) 0%, rgba(#2d2a32, .6) 50%, rgba(#2d2a32, 0) 100%);
+            // TODO: Find a way to add this linear-gradient with currentColor (maybe in JS with variable directly?)
+            // background-image: linear-gradient(to top, rgba(currentColor, .8) 0%, rgba(currentColor, .6) 50%, rgba(currentColor, 0) 100%);
+            background-image: linear-gradient(to top, currentColor 0%, transparent 100%);
+            background-size: 100% 120%; // TODO: background-size: initial;
             opacity: 0;
             transition-property: top, opacity;
             transition-duration: $appear-duration * 1s;
