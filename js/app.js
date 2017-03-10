@@ -205,7 +205,7 @@ const app = {
     {
         return new Promise(function(resolve, reject)
         {
-            const fileRef = folderRef.child(_.generateUUID() + _.fileExtension(file.name))
+            const fileRef = folderRef.child(_.generateUUID() + '.' + _.fileExtension(file.name))
             const uploadTask = fileRef.put(file)
 
             uploadTask.on(
