@@ -11,31 +11,23 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
             isReady: true,
         }
 
-        if (this.lieObject)
-        {
-            data.lie = this.lieObject
-        }
-
         return data
     },
     firebase: function()
     {
-        const key = (this.lieUid) ? this.lieUid : this.lie.uid
-
         return {
             lie: {
-                source: app.db.ref('/lies/' + key),
+                source: app.db.ref('/lies/' + this.lieUid),
                 asObject: true,
             },
             actualVote: {
-                source: app.db.ref('/users/' + user.uid + '/votes/' + key),
+                source: app.db.ref('/users/' + user.uid + '/votes/' + this.lieUid),
                 asObject: true,
             },
         }
     },
     props: [
         'lie-uid',
-        'lie-object',
     ],
     computed: {
         /**
