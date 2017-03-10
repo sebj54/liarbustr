@@ -6,6 +6,16 @@
  */
 const _ = {
     /**
+     * Make the first character of a string uppercase
+     * @param  {string} str String to capitalize
+     * @return {string} Capitalized string
+     */
+    capitalize: function(str)
+    {
+        return str.charAt(0).toUpperCase() + str.slice(1)
+    },
+
+    /**
      * Remove all properties of a given object without removing reference
      * @param  {object} object Object to clean
      */
