@@ -1,6 +1,9 @@
 [
     {
-        "origin": ["http://liarbustr.com:3000"],
+        "origin": [
+            "http://liarbustr.com:3000",
+            "https://liarbustr.firebaseapp.com"
+        ],
         "method": ["GET"],
         "maxAgeSeconds": 3600
     }
