@@ -1,4 +1,4 @@
-/* global Vue app _ user Vibrant */
+/* global Vue app _ user Vibrant window */
 
 /**
  * Lie item component
@@ -8,7 +8,9 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
     data: function()
     {
         const data = {
-            isReady: true,
+            $header: null,
+            $headerImg: null,
+            isReady: false,
             liePictureMainColor: null,
         }
 
@@ -121,6 +123,17 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         },
     },
     methods: {
+        checkIfReady: function()
+        {
+            if (!this.isReady)
+            {
+                const headerRect = this.$header.getBoundingClientRect()
+                const readyTop = headerRect.top > 0 && headerRect.top < window.innerHeight
+                const readyBottom = (this.$header.offsetHeight > window.innerHeight) || (headerRect.bottom > 0 && headerRect.bottom < window.innerHeight)
+
+                this.isReady = readyTop && readyBottom && this.$headerImg.complete
+            }
+        },
         /**
          * Get lie picture path for a given type
          * @param  {string} type Picture type
@@ -232,5 +245,17 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
     created: function()
     {
         this.liePictureColor('main')
+        window.addEventListener('scroll', this.checkIfReady)
+    },
+    destroyed: function()
+    {
+        window.removeEventListener('scroll', this.checkIfReady)
+    },
+    mounted: function()
+    {
+        this.$header = this.$el.querySelector('.lie-item-header')
+        this.$headerImg = this.$header.querySelector('.lie-item-picture.-main')
+
+        this.checkIfReady()
     },
 }))
