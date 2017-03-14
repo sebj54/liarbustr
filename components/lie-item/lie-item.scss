@@ -158,6 +158,20 @@
             transform: translateY(-50%);
         }
 
+        &-indicator {
+            display: inline-block;
+            vertical-align: middle;
+            width: .7em;
+            height: .7em;
+            margin-left: .3em;
+            fill: #fff;
+            filter: drop-shadow(1px 1px 2px $color-grey-dark);
+            opacity: 0;
+            transition-property: opacity;
+            transition-duration: .2s;
+            transition-timing-function: ease-out;
+        }
+
         &-button {
             position: absolute;
             top: 50%;
@@ -206,6 +220,12 @@
                 &:active {
                     box-shadow: 0 0 darken(#24c6dc, 10%);
                 }
+            }
+        }
+
+        &.-is-actual-vote & {
+            &-indicator {
+                opacity: 1;
             }
         }
     }
