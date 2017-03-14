@@ -16,7 +16,10 @@
                     <div class="lie-item-vote-bar-part" :style="{ width: lieVotesPercentageLiar + '%' }"></div>
                     <div class="lie-item-vote-bar-part"></div>
                 </div>
-                <div class="lie-item-vote-count -liar">{{ lieVotesCountLiar }}</div>
+                <div class="lie-item-vote-count -liar">
+                    {{ lieVotesCountLiar }}
+                    <svg-icon name="checked" class="lie-item-vote-indicator"></svg-icon>
+                </div>
                 <button type="button" class="lie-item-vote-button -liar" @click="voteLiar">{{ $t('lie.votes.liar') }}</button>
             </div>
             <div class="lie-item-vote -not-liar" :class="{ '-is-actual-vote': actualVoteValue === 'notLiar' }">
@@ -24,7 +27,10 @@
                     <div class="lie-item-vote-bar-part" :style="{ width: lieVotesPercentageNotLiar + '%' }"></div>
                     <div class="lie-item-vote-bar-part"></div>
                 </div>
-                <div class="lie-item-vote-count -not-liar">{{ lieVotesCountNotLiar }}</div>
+                <div class="lie-item-vote-count -not-liar">
+                    {{ lieVotesCountNotLiar }}
+                    <svg-icon name="checked" class="lie-item-vote-indicator"></svg-icon>
+                </div>
                 <button type="button" class="lie-item-vote-button -not-liar" @click="voteNotLiar">{{ $t('lie.votes.notLiar') }}</button>
             </div>
         </div>
