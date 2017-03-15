@@ -44,7 +44,7 @@ function compileCss()
 function server()
 {
     browserSync.init({
-        host: 'liarbustr.com',
+        host: 'local.liarbustr.org',
         open: 'external',
         notify: false,
         server: './'
