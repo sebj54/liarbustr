@@ -24,6 +24,8 @@
     },
     "lie": {
         "picture": "Photographie de {liar}",
+        "readLess": "Réduire",
+        "readMore": "Voir plus",
         "sources": {
             "confirmationsTitle": "Confirmation : | Confirmations :",
             "refutationsTitle": "Réfutation : | Réfutations :",
