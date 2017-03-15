@@ -41,3 +41,7 @@ body {
 .svg-master {
     display: none;
 }
+
+.u-no-transition {
+    transition-duration: 0 !important;
+}

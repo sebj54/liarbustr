@@ -71,6 +71,32 @@ const app = {
             }),
         })
 
+        Vue.directive('expand', {
+            update: function(el, binding)
+            {
+                if (el.style.height)
+                {
+                    if (binding.value)
+                    {
+                        el.classList.add('-is-expanded')
+                        el.classList.remove('-is-not-expanded')
+                    }
+                    else
+                    {
+                        el.classList.remove('-is-expanded')
+                        el.classList.add('-is-not-expanded')
+                    }
+                }
+                else
+                {
+                    el.classList.add('u-no-transition')
+                    el.style.height = el.clientHeight + 'px'
+                    el.classList.add(binding.value ? '-is-expanded' : '-is-not-expanded')
+                    el.classList.remove('u-no-transition')
+                }
+            },
+        })
+
         user.init()
     },
 
