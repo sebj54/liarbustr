@@ -1,25 +1,25 @@
-var gulp = require('gulp')
-var rename = require('gulp-rename')
-var svgmin = require('gulp-svgmin')
-var svgSymbols = require('gulp-svg-symbols')
-var pleeease = require('gulp-pleeease')
-var sourcemaps = require('gulp-sourcemaps')
-var browserSync = require('browser-sync').create()
+const gulp = require('gulp')
+const rename = require('gulp-rename')
+const svgmin = require('gulp-svgmin')
+const svgSymbols = require('gulp-svg-symbols')
+const pleeease = require('gulp-pleeease')
+const sourcemaps = require('gulp-sourcemaps')
+const browserSync = require('browser-sync').create()
 
-var svgSymbolsConfig = {
+const svgSymbolsConfig = {
     svgClassname: 'svg-master',
-    templates: ['default-svg']
+    templates: ['default-svg'],
 }
 
-var pleeeaseConfig = {
+const pleeeaseConfig = {
     sass: {
         includePaths: [
             'components',
             'css',
             'node_modules',
-            'views'
-        ]
-    }
+            'views',
+        ],
+    },
 }
 
 function compileSvg()
@@ -47,12 +47,12 @@ function server()
         host: 'local.liarbustr.org',
         open: 'external',
         notify: false,
-        server: './'
+        server: './',
     })
 
     gulp.watch([
         'svg/**',
-        '!svg/svg-master.svg'
+        '!svg/svg-master.svg',
     ]).on('change', compileSvg)
 
     gulp.watch([
@@ -70,7 +70,7 @@ function server()
         'svg/svg-master.svg',
         'views/*/*.html',
         'views/*/*.js',
-        'index.html'
+        'index.html',
     ]).on('change', browserSync.reload)
 }
 
