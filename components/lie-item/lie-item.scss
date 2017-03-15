@@ -2,6 +2,7 @@
     position: relative;
     width: 40rem;
     max-width: 100%;
+    background-color: $color-whitey;
     box-shadow: 0 10px 20px rgba($color-grey-dark, .19), 0 6px 6px rgba($color-grey-dark, .23);
 
     &-header {
@@ -16,7 +17,6 @@
 
     &-content {
         padding: 2rem;
-        background-color: $color-whitey;
         overflow: hidden;
         transition-property: height;
         transition-timing-function: ease-out;
@@ -226,6 +226,46 @@
         &.-is-actual-vote & {
             &-indicator {
                 opacity: 1;
+            }
+        }
+    }
+
+    &-more {
+        position: relative;
+        text-align: center;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 12px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: currentColor;
+        }
+
+        &-button {
+            position: relative;
+            padding-top: 0;
+            padding-bottom: 0;
+            padding-left: 12px;
+            padding-right: 12px;
+            background-color: $color-whitey;
+            line-height: 25px;
+        }
+
+        &-content {
+            margin-top: 12px;
+            overflow: hidden;
+            text-align: left;
+            transition-property: height, margin-top;
+            transition-duration: .4s;
+            transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+            &.-is-not-expanded {
+                height: 0 !important;
+                margin-top: 0;
+                transition-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045);
             }
         }
     }

@@ -10,6 +10,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         const data = {
             $header: null,
             $headerImg: null,
+            isExpanded: false,
             isReady: false,
             liePictureMainColor: null,
         }
@@ -123,6 +124,9 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         },
     },
     methods: {
+        /**
+         * Check if lie-item is ready: if item is visible in viewport and header image is loaded
+         */
         checkIfReady: function()
         {
             if (!this.isReady)
@@ -132,6 +136,11 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
                 const readyBottom = (this.$header.offsetHeight > window.innerHeight) || (headerRect.bottom > 0 && headerRect.bottom < window.innerHeight)
 
                 this.isReady = readyTop && readyBottom && this.$headerImg.complete
+
+                if (this.isReady)
+                {
+                    this.liePictureColor('main')
+                }
             }
         },
         /**
@@ -143,6 +152,10 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         {
             return (this.lie.pictures && _.hasProp(this.lie.pictures, type)) ? this.lie.pictures[type] : ''
         },
+        /**
+         * Get picture's main color for a given image type
+         * @param  {string} type Image type
+         */
         liePictureColor: function(type)
         {
             const vibrant = new Vibrant(this.liePicture(type))
@@ -179,6 +192,10 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
             const votesCountOfType = this.lieVotesCount(type)
             const ratio = votesCountOfType / (votesCountOfType + this.lieVotesCount(this.otherType(type)))
             return ratio * 100
+        },
+        toggleContent: function()
+        {
+            this.isExpanded = !this.isExpanded
         },
         /**
          * Get other type of vote
@@ -244,7 +261,6 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
     },
     created: function()
     {
-        this.liePictureColor('main')
         window.addEventListener('scroll', this.checkIfReady)
     },
     destroyed: function()

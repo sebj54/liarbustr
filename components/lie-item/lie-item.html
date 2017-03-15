@@ -35,32 +35,39 @@
             </div>
         </div>
 
-        <div class="lie-item-text">
-            <p class="lie-item-text-chunk" v-for="textChunk in lieTextChunks">{{ textChunk }}</p>
+        <div class="lie-item-more">
+            <button type="button" class="lie-item-more-button" @click="toggleContent">{{ $t(isExpanded ? 'lie.readLess' : 'lie.readMore') }}</button>
+
+            <div class="lie-item-more-content" v-if="lieTextChunks.length" v-expand="isExpanded">
+                <div class="lie-item-text">
+                    <p class="lie-item-text-chunk" v-for="textChunk in lieTextChunks">{{ textChunk }}</p>
+                </div>
+
+                <div class="lie-item-sources-wrapper">
+                    <h3 class="lie-item-sources-title -statements">{{ $tc('lie.sources.statementsTitle', lieSources('statements').length) }}</h3>
+                    <ul class="lie-item-sources -statements" v-for="source in lieSources('statements')">
+                        <li class="lie-item-source">
+                            <a :href="source" target="_blank" class="lie-item-source-link -statement">{{ source }}</a>
+                        </li>
+                    </ul>
+
+                    <h3 class="lie-item-sources-title -refutations" v-if="lieSources('refutations')">{{ $tc('lie.sources.refutationsTitle', lieSources('refutations').length) }}</h3>
+                    <ul class="lie-item-sources -refutations" v-for="source in lieSources('refutations')">
+                        <li class="lie-item-source">
+                            <a :href="source" target="_blank" class="lie-item-source-link -refutation">{{ source }}</a>
+                        </li>
+                    </ul>
+
+                    <h3 class="lie-item-sources-title -confirmations" v-if="lieSources('confirmations')">{{ $tc('lie.sources.confirmationsTitle', lieSources('confirmations').length) }}</h3>
+                    <ul class="lie-item-sources -confirmations" v-for="source in lieSources('confirmations')">
+                        <li class="lie-item-source">
+                            <a :href="source" target="_blank" class="lie-item-source-link -confirmation">{{ source }}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
-        <div class="lie-item-sources-wrapper">
-            <h3 class="lie-item-sources-title -statements">{{ $tc('lie.sources.statementsTitle', lieSources('statements').length) }}</h3>
-            <ul class="lie-item-sources -statements" v-for="source in lieSources('statements')">
-                <li class="lie-item-source">
-                    <a :href="source" target="_blank" class="lie-item-source-link -statement">{{ source }}</a>
-                </li>
-            </ul>
-
-            <h3 class="lie-item-sources-title -refutations" v-if="lieSources('refutations')">{{ $tc('lie.sources.refutationsTitle', lieSources('refutations').length) }}</h3>
-            <ul class="lie-item-sources -refutations" v-for="source in lieSources('refutations')">
-                <li class="lie-item-source">
-                    <a :href="source" target="_blank" class="lie-item-source-link -refutation">{{ source }}</a>
-                </li>
-            </ul>
-
-            <h3 class="lie-item-sources-title -confirmations" v-if="lieSources('confirmations')">{{ $tc('lie.sources.confirmationsTitle', lieSources('confirmations').length) }}</h3>
-            <ul class="lie-item-sources -confirmations" v-for="source in lieSources('confirmations')">
-                <li class="lie-item-source">
-                    <a :href="source" target="_blank" class="lie-item-source-link -confirmation">{{ source }}</a>
-                </li>
-            </ul>
-        </div>
     </div>
 
 </article>

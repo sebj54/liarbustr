@@ -24,6 +24,8 @@
     },
     "lie": {
         "picture": "{liar}'s picture",
+        "readLess": "Read less",
+        "readMore": "Read more",
         "sources": {
             "confirmationsTitle": "Confirmation: | Confirmations:",
             "refutationsTitle": "Refutation: | Refutations:",
