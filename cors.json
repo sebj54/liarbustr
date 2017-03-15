@@ -1,7 +1,8 @@
 [
     {
         "origin": [
-            "http://liarbustr.com:3000",
+            "http://liarbustr.org",
+            "http://local.liarbustr.org:3000",
             "https://liarbustr.firebaseapp.com"
         ],
         "method": ["GET"],
