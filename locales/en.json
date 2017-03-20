@@ -39,10 +39,6 @@
     "lieForm": {
         "liar": "Who told that lie?",
         "liarPlaceholder" : "e.g. Donald J. Trump",
-        "pictures": {
-            "main": "Display that liar, add a picture from a link",
-            "mainPlaceholder": "e.g. http://website.com/files/picture.jpg"
-        },
         "sources": {
             "add": "Add another source",
             "addPlaceholder": "e.g. http://emailsanta.com/Santa-Claus-FAQ/is-santa-real.asp",
@@ -56,7 +52,7 @@
         "titlePlaceholder": "e.g. Santa Claus exists",
         "upload": {
             "pictures": {
-                "main": "Or upload a picture"
+                "main": "Display that liar, upload a picture"
             }
         }
     }
