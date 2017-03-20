@@ -36,8 +36,6 @@
         </div>
 
         <div class="lie-item-more">
-            <button type="button" class="lie-item-more-button" @click="toggleContent">{{ $t(isExpanded ? 'lie.readLess' : 'lie.readMore') }}</button>
-
             <div class="lie-item-more-content" v-if="lieTextChunks.length" v-expand="isExpanded">
                 <div class="lie-item-text">
                     <p class="lie-item-text-chunk" v-for="textChunk in lieTextChunks">{{ textChunk }}</p>
@@ -66,6 +64,8 @@
                     </ul>
                 </div>
             </div>
+
+            <button type="button" class="lie-item-more-button" @click="toggleContent">{{ $t(isExpanded ? 'lie.readLess' : 'lie.readMore') }}</button>
         </div>
 
     </div>
