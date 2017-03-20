@@ -28,7 +28,10 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
          */
         addSource: function(type)
         {
-            this.lie.sources[type].push('')
+            this.lie.sources[type].push({
+                title: '',
+                url: '',
+            })
         },
         /**
          * Add a source for the statement
