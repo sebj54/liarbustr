@@ -135,11 +135,13 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
                 const readyTop = headerRect.top > 0 && headerRect.top < window.innerHeight
                 const readyBottom = (this.$header.offsetHeight > window.innerHeight) || (headerRect.bottom > 0 && headerRect.bottom < window.innerHeight)
 
-                this.isReady = readyTop && readyBottom && this.$headerImg.complete
-
-                if (this.isReady)
+                if (readyTop && readyBottom && this.$headerImg.complete)
                 {
                     this.liePictureColor('main')
+                    .then(function()
+                    {
+                        this.isReady = true
+                    }.bind(this))
                 }
             }
         },
@@ -155,13 +157,19 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         /**
          * Get picture's main color for a given image type
          * @param  {string} type Image type
+         * @return {Promise<object>} A promise to the color
          */
         liePictureColor: function(type)
         {
-            const vibrant = new Vibrant(this.liePicture(type))
-            vibrant.getPalette(function(err, palette)
+            return new Promise(function(resolve, reject)
             {
-                this['liePicture' + _.capitalize(type) + 'Color'] = palette.Vibrant.getHex()
+                const vibrant = new Vibrant(this.liePicture(type))
+                vibrant.getPalette(function(err, palette)
+                {
+                    const color = palette.Vibrant.getHex()
+                    this['liePicture' + _.capitalize(type) + 'Color'] = color
+                    resolve(color)
+                }.bind(this))
             }.bind(this))
         },
         /**
