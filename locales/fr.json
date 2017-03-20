@@ -39,10 +39,6 @@
     "lieForm": {
         "liar": "Qui a dit ce mensonge ?",
         "liarPlaceholder" : "ex. : François Fillon",
-        "pictures": {
-            "main": "Affichez ce menteur, ajoutez une photo à partir d'un lien",
-            "mainPlaceholder": "ex. : http://site.com/fichiers/image.jpg"
-        },
         "sources": {
             "add": "Ajouter une source",
             "addPlaceholder": "ex. : http://emailsanta.com/Santa-Claus-FAQ/is-santa-real.asp",
@@ -56,7 +52,7 @@
         "titlePlaceholder": "ex. : Le Père Noël existe",
         "upload": {
             "pictures": {
-                "main": "Ou à partir d'un fichier"
+                "main": "Affichez ce menteur, ajoutez une photo à partir d'un fichier"
             }
         }
     }

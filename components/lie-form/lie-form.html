@@ -11,10 +11,6 @@
         <label :for="fieldId('text')" class="lie-form-label -text">{{ $t('lieForm.text') }}</label>
         <textarea name="text" :id="fieldId('text')" class="lie-form-field -text" :placeholder="$t('lieForm.textPlaceholder')" v-model="lie.text"></textarea>
     </div>
-    <div class="lie-form-group -picture">
-        <label :for="fieldId('picture-main')" class="lie-form-label -picture -main">{{ $t('lieForm.pictures.main') }}</label>
-        <input type="url" name="picture[main]" :id="fieldId('picture-main')" class="lie-form-field -picture -main" :placeholder="$t('lieForm.pictures.mainPlaceholder')" v-model="lie.pictures.main">
-    </div>
     <div class="lie-form-group -upload-picture">
         <label :for="fieldId('upload-picture-main')" class="lie-form-label -upload-picture -main">{{ $t('lieForm.upload.pictures.main') }}</label>
         <input type="file" name="upload[pictures][main]" :id="fieldId('upload-picture-main')" class="lie-form-field -upload-picture -main" @change="uploadMainPicture">
