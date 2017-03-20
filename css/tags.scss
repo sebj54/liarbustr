@@ -32,11 +32,12 @@ button {
     background-image: linear-gradient(-20deg, #{$color-stop} 0%, #{$color-start} 100%);
     color: #{$text-color};
 
-    &:hover {
+    &:hover,
+    &:focus {
         box-shadow: 0 0 6px #{$color-start};
     }
 
-    &:focus {
+    &:active {
         outline: none;
         box-shadow: 0 0 20px #{$color-start};
     }
