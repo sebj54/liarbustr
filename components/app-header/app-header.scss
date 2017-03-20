@@ -78,10 +78,15 @@ header {
     }
 
     &-logout {
+        padding-top: 2px;
+        padding-bottom: 2px;
+        padding-left: 6px;
+        padding-right: 6px;
         border-width: 1px;
         border-style: solid;
         background-color: rgba($header-font-color, 0);
         color: inherit;
+        transition-property: color, background-color, box-shadow;
 
         &:hover,
         &:focus {
