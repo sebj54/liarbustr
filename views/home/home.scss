@@ -188,6 +188,7 @@
 }
 
 .explanation-liar-profile-text {
+    text-align: center;
     padding-bottom: 30px;
     color: white;
     font-size: 1.4em;
@@ -269,14 +270,35 @@
     width: 300px;
 }
 
-@media all and (orientation: landscape) and (max-width: 1000px) {
+@media all and (max-width: 700px) {
+    .home-first-content {
+        margin: auto;
+    }
+
+    .home-first-title {
+        min-width: 0;
+        font-size: 2.2em;
+    }
+}
+
+@media all and (max-width: 1000px) {
+
     .who-explanations, .home-explanation-wrapper {
         flex-direction: column;
+    }
+    .who-list-item {
+        margin-left: 0;
+        text-align: center;
+
+        .svg-icon.big {
+            display: block;
+            margin: auto auto 20px auto;;
+        }
     }
 }
 
 
-@media all and (orientation: landscape) and (max-width: 1600px) {
+@media all and (max-width: 1600px) {
     .who-right {
         font-size: 1.5em;
     }
