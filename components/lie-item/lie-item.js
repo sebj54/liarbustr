@@ -201,6 +201,9 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
             const ratio = votesCountOfType / (votesCountOfType + this.lieVotesCount(this.otherType(type)))
             return ratio * 100
         },
+        /**
+         * Toggle content's visibility
+         */
         toggleContent: function()
         {
             this.isExpanded = !this.isExpanded
