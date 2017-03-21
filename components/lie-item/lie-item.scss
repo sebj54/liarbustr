@@ -228,33 +228,51 @@
         margin-bottom: 0;
         padding-left: 0;
         list-style-type: none;
+        line-height: 1.4;
 
         &-title {
+            position: relative;
             margin-bottom: .4em;
+
+            & > * {
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            &-icon {
+                width: 2em;
+                height: 2em;
+                padding-left: .2em;
+                padding-right: .2em;
+                fill: $color-grey-dark;
+            }
         }
     }
 
     &-source {
-        &-link {
-            position: relative;
+        position: relative;
+        padding-left: 1.2em;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: .4em;
             display: block;
-            padding-left: 2em;
+            width: .4em;
+            height: .4em;
+            margin-top: -.2em;
+            border-width: 1px;
+            border-style: solid;
+            border-radius: 50%;
+        }
+
+        &-link {
+            display: block;
+            margin-bottom: .4em;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
-
-            &::before {
-                content: "🌐";
-                position: absolute;
-                top: 0;
-                left: 0;
-                display: inline-block;
-                width: 2em;
-                text-align: center;
-                transition-property: transform;
-                transition-duration: $appear-duration * 1s;
-                transition-timing-function: inherit;
-            }
         }
     }
 
