@@ -49,6 +49,24 @@ input {
     white-space: nowrap;
 }
 
+a {
+    display: inline-block;
+    vertical-align: baseline;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-color: #bcbcbc;
+    text-decoration: none;
+    color: $color-grey-dark;
+    transition-property: color, border-color;
+    transition-duration: .2s;
+    transition-timing-function: ease-out;
+
+    &:hover,
+    &:focus {
+        border-color: #ff9a44;
+    }
+}
+
 img {
     max-width: 100%;
 }
