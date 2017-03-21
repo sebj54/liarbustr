@@ -31,6 +31,41 @@ const _ = {
     },
 
     /**
+     * Call a function only if it has not been called since a given time
+     * Useful for waiting to user to stop typing or defer heavy tasks
+     * @see    https://davidwalsh.name/javascript-debounce-function
+     * @param  {function} func Function to call
+     * @param  {integer} wait Time (in ms) to wait before calling the function
+     * @param  {boolean} immediate If set to true, function will be called immediately
+     * @return {function} Original function wrapped in a new context
+     */
+    debounce: function(func, wait, immediate)
+    {
+        let timeout
+        return function(...args)
+        {
+            const context = this
+            const later = function()
+            {
+                timeout = null
+                if (!immediate)
+                {
+                    func.apply(context, args)
+                }
+            }
+
+            const callNow = immediate && !timeout
+            clearTimeout(timeout)
+            timeout = setTimeout(later, wait)
+
+            if (callNow)
+            {
+                func.apply(context, args)
+            }
+        }
+    },
+
+    /**
      * Get file extension from filename
      * @param  {string} filename Filename
      * @return {string} File extension or empty string if filename has no extension
