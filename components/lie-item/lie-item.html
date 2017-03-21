@@ -42,24 +42,33 @@
                 </div>
 
                 <div class="lie-item-sources-wrapper">
-                    <h3 class="lie-item-sources-title -statements">{{ $tc('lie.sources.statementsTitle', lieSources('statements').length) }}</h3>
-                    <ul class="lie-item-sources -statements" v-for="source in lieSources('statements')">
-                        <li class="lie-item-source">
-                            <a :href="source" target="_blank" class="lie-item-source-link -statement">{{ source }}</a>
+                    <h3 class="lie-item-sources-title -statements">
+                        <svg-icon name="speech" class="lie-item-sources-title-icon -statement"></svg-icon>
+                        <span>{{ $tc('lie.sources.statementsTitle', lieSources('statements').length) }}</span>
+                    </h3>
+                    <ul class="lie-item-sources -statements">
+                        <li class="lie-item-source" v-for="source in lieSources('statements')">
+                            <a :href="source.url" target="_blank" class="lie-item-source-link -statement">{{ source.url }}</a>
                         </li>
                     </ul>
 
-                    <h3 class="lie-item-sources-title -refutations" v-if="lieSources('refutations')">{{ $tc('lie.sources.refutationsTitle', lieSources('refutations').length) }}</h3>
-                    <ul class="lie-item-sources -refutations" v-for="source in lieSources('refutations')">
-                        <li class="lie-item-source">
-                            <a :href="source" target="_blank" class="lie-item-source-link -refutation">{{ source }}</a>
+                    <h3 class="lie-item-sources-title -refutations" v-if="lieSources('refutations')">
+                        <svg-icon name="megaphone" class="lie-item-sources-title-icon -refutation"></svg-icon>
+                        <span>{{ $tc('lie.sources.refutationsTitle', lieSources('refutations').length) }}</span>
+                    </h3>
+                    <ul class="lie-item-sources -refutations">
+                        <li class="lie-item-source" v-for="source in lieSources('refutations')">
+                            <a :href="source.url" target="_blank" class="lie-item-source-link -refutation">{{ source.url }}</a>
                         </li>
                     </ul>
 
-                    <h3 class="lie-item-sources-title -confirmations" v-if="lieSources('confirmations')">{{ $tc('lie.sources.confirmationsTitle', lieSources('confirmations').length) }}</h3>
-                    <ul class="lie-item-sources -confirmations" v-for="source in lieSources('confirmations')">
-                        <li class="lie-item-source">
-                            <a :href="source" target="_blank" class="lie-item-source-link -confirmation">{{ source }}</a>
+                    <h3 class="lie-item-sources-title -confirmations" v-if="lieSources('confirmations')">
+                        <svg-icon name="handshake" class="lie-item-sources-title-icon -confirmation"></svg-icon>
+                        <span>{{ $tc('lie.sources.confirmationsTitle', lieSources('confirmations').length) }}</span>
+                    </h3>
+                    <ul class="lie-item-sources -confirmations">
+                        <li class="lie-item-source" v-for="source in lieSources('confirmations')">
+                            <a :href="source.url" target="_blank" class="lie-item-source-link -confirmation">{{ source.url }}</a>
                         </li>
                     </ul>
                 </div>
