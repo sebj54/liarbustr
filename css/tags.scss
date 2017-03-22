@@ -5,7 +5,10 @@ button:focus {
     outline: none;
 }
 
-button {
+button,
+.button {
+    display: inline-flex;
+    align-items: center;
     padding-top: 6px;
     padding-bottom: 6px;
     padding-left: 12px;
@@ -25,10 +28,23 @@ button {
     &:focus {
         cursor: pointer;
     }
+
+    & .svg-icon {
+        width: 1.8em;
+        height: 1.8em;
+        margin-right: 8px;
+        flex-shrink: 0;
+    }
 }
 
-@mixin button-color($color-start: #ff9a44, $color-stop: #fc6076, $text-color: #fff)
-{
+@mixin button-small() {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+@mixin button-color($color-start: #ff9a44, $color-stop: #fc6076, $text-color: #fff) {
     background-image: linear-gradient(-20deg, #{$color-stop} 0%, #{$color-start} 100%);
     color: #{$text-color};
 
@@ -43,10 +59,39 @@ button {
     }
 }
 
-input {
-    overflow: hidden;
+@mixin button-color-secondary() {
+    @include button-color(#43cec0, #99d8fc);
+}
+
+input,
+textarea {
     text-overflow: ellipsis;
-    white-space: nowrap;
+}
+
+input:not([type="button"]):not([type="checkbox"]):not([type="file"]):not([type="hidden"]):not([type="radio"]):not([type="reset"]):not([type="submit"]),
+textarea {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $color-grey;
+    border-radius: 3px;
+    font-family: inherit;
+    transition-property: border-color, box-shadow;
+    transition-duration: .2s;
+    transition-timing-function: ease-out;
+
+    &:focus {
+        box-shadow: inset 0 0 0 1px $color-primary-normal;
+        border-color: $color-primary-normal;
+    }
+}
+
+textarea {
+    max-width: 100%;
+    resize: vertical;
 }
 
 a {
@@ -54,7 +99,7 @@ a {
     vertical-align: baseline;
     border-bottom-style: solid;
     border-bottom-width: 1px;
-    border-color: #bcbcbc;
+    border-color: $color-grey;
     text-decoration: none;
     color: $color-grey-dark;
     transition-property: color, border-color;

@@ -43,7 +43,7 @@
             "add": "Ajouter une source",
             "addPlaceholder": "ex. : http://emailsanta.com/Santa-Claus-FAQ/is-santa-real.asp",
             "legend": "Prouvez que ce mensonge a été dit, ajoutez une source !",
-            "number": "Source #{number}"
+            "number": "#{number}"
         },
         "submit": "Révélez ce mensonge !",
         "text": "Dites-nous en plus à propos de ce mensonge",
@@ -52,7 +52,7 @@
         "titlePlaceholder": "ex. : Le Père Noël existe",
         "upload": {
             "pictures": {
-                "main": "Affichez ce menteur, ajoutez une photo à partir d'un fichier"
+                "main": "Ajoutez une photo"
             }
         }
     }

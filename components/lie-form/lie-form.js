@@ -1,4 +1,4 @@
-/* global Vue app _ user */
+/* global Vue app _ user window Vibrant */
 
 /**
  * Lie form component
@@ -9,10 +9,30 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
     {
         return {
             /**
+             * Lie-item header
+             * @type {DOMElement}
+             */
+            $header: null,
+            /**
+             * Lie item header image
+             * @type {DOMElement}
+             */
+            $headerImg: null,
+            /**
              * Lie
              * @type {object}
              */
             lie: this.lieEmptyStructure(),
+            /**
+             * Main lie's main picture color (hex)
+             * @type {string}
+             */
+            liePictureMainColor: null,
+            /**
+             * Indicates if lie-item is in viewport and loaded
+             * @type {Boolean}
+             */
+            isReady: false,
         }
     },
     firebase: function()
@@ -76,6 +96,57 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
             }
         },
         /**
+         * Check if lie-item is ready: if item is visible in viewport and header image is loaded
+         */
+        checkIfReady: function()
+        {
+            if (!this.isReady)
+            {
+                const headerRect = this.$header.getBoundingClientRect()
+                const readyTop = headerRect.top > 0 && headerRect.top < window.innerHeight
+                const readyBottom = (this.$header.offsetHeight > window.innerHeight) || (headerRect.bottom > 0 && headerRect.bottom < window.innerHeight)
+
+                if (readyTop && readyBottom && this.$headerImg.complete)
+                {
+                    this.liePictureColor('main')
+                    .then(function()
+                    {
+                        this.isReady = true
+                    }.bind(this))
+                }
+            }
+        },
+        /**
+         * Get lie picture path for a given type
+         * @param  {string} type Picture type
+         * @return {string} Picture path
+         */
+        liePicture: function(type)
+        {
+            return (this.lie.pictures && _.hasProp(this.lie.pictures, type)) ? this.lie.pictures[type] : ''
+        },
+        /**
+         * Get picture's main color for a given image type
+         * @param  {string} type Image type
+         * @return {Promise<object>} A promise to the color
+         */
+        liePictureColor: function(type)
+        {
+            return new Promise(function(resolve, reject)
+            {
+                const vibrant = new Vibrant(this.liePicture(type))
+                vibrant.getPalette(function(err, palette)
+                {
+                    if (palette)
+                    {
+                        const color = palette.Vibrant.getHex()
+                        this['liePicture' + _.capitalize(type) + 'Color'] = color
+                        resolve(color)
+                    }
+                }.bind(this))
+            }.bind(this))
+        },
+        /**
          * Save a lie
          */
         saveLie: function()
@@ -107,5 +178,17 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
     created: function()
     {
         this.addStatement()
+        window.addEventListener('scroll', this.checkIfReady)
+    },
+    destroyed: function()
+    {
+        window.removeEventListener('scroll', this.checkIfReady)
+    },
+    mounted: function()
+    {
+        this.$header = this.$el.querySelector('.lie-item-header')
+        this.$headerImg = this.$header.querySelector('.lie-item-picture.-main')
+
+        this.checkIfReady()
     },
 }))

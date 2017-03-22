@@ -43,7 +43,7 @@
             "add": "Add another source",
             "addPlaceholder": "e.g. http://emailsanta.com/Santa-Claus-FAQ/is-santa-real.asp",
             "legend": "Prove that lie has been said, add a source!",
-            "number": "Source #{number}"
+            "number": "#{number}"
         },
         "submit": "Reveal that lie!",
         "text": "Tell us a bit more about that lie",
@@ -52,7 +52,7 @@
         "titlePlaceholder": "e.g. Santa Claus exists",
         "upload": {
             "pictures": {
-                "main": "Display that liar, upload a picture"
+                "main": "Upload a picture"
             }
         }
     }
