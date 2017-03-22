@@ -13,13 +13,11 @@
         </div>
 
         <div class="lie-item-title">
-            <label :for="fieldId('title')" class="lie-item-form-label -title">{{ $t('lieForm.title') }}</label>
-            <textarea name="title" :id="fieldId('title')" class="lie-item-form-field -title" :placeholder="$t('lieForm.titlePlaceholder')" v-model="lie.title"></textarea>
+            <textarea name="title" :id="fieldId('title')" class="lie-item-form-field -title" :placeholder="$t('lieForm.title')" v-model="lie.title"></textarea>
         </div>
 
         <p class="lie-item-liar">
-            <label :for="fieldId('liar')" class="lie-item-form-label -liar">{{ $t('lieForm.liar') }}</label>
-            <input type="text" name="liar" :id="fieldId('liar')" class="lie-item-form-field -liar" :placeholder="$t('lieForm.liarPlaceholder')" v-model="lie.liar">
+            <input type="text" name="liar" :id="fieldId('liar')" class="lie-item-form-field -liar" :placeholder="$t('lieForm.liar')" v-model="lie.liar">
         </p>
     </div>
 
