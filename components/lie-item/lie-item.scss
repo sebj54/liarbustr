@@ -27,7 +27,7 @@
         color: #2d2a32;
 
         &,
-        &::before {
+        &::after {
             position: absolute;
             top: 0;
             bottom: 0;
@@ -35,7 +35,7 @@
             right: 0;
         }
 
-        &::before {
+        &::after {
             content: "";
             top: 100%;
             // TODO: Find a way to add this linear-gradient with currentColor (maybe in JS with variable directly?)
@@ -51,14 +51,26 @@
     }
 
     &-picture {
+        position: relative;
         height: 100%;
         width: 100%;
         object-fit: cover;
+        color: $color-whitey;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
     }
 
     &-liar,
     &-title {
         position: relative;
+        text-shadow: $shadow-depth-2;
         color: rgba($color-whitey, .9);
         opacity: 0;
         transform: translateY(-100%);
@@ -72,6 +84,7 @@
         align-self: flex-end;
         margin: 0;
         padding: .2em .4em;
+        text-align: right;
         font-size: 1.4em;
     }
 
@@ -177,10 +190,7 @@
             position: absolute;
             top: 50%;
             right: 12px;
-            padding-top: 3px;
-            padding-bottom: 3px;
-            padding-left: 8px;
-            padding-right: 8px;
+            @include button-small();
             transform: translateY(-50%);
 
             &.-liar {
@@ -230,6 +240,11 @@
         list-style-type: none;
         line-height: 1.4;
 
+        &-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
         &-title {
             position: relative;
             margin-bottom: .4em;
@@ -276,13 +291,115 @@
         }
     }
 
+    &-form {
+        .lie-item-title {
+            align-self: stretch;
+        }
+
+        .lie-item-more {
+            &-content {
+                overflow: visible;
+            }
+        }
+
+        &-footer {
+            text-align: center;
+        }
+
+        &-group {
+            display: flex;
+            align-items: center;
+
+            &.-upload-picture {
+                position: relative;
+                flex-grow: 1;
+                padding-top: 1em;
+                padding-bottom: 1em;
+            }
+
+            &.-source {
+                margin-bottom: 1rem;
+            }
+        }
+
+        &-group & {
+            &-label {
+                margin-right: 12px;
+            }
+
+            &-field {
+                flex-grow: 1;
+            }
+        }
+
+        &-label {
+            &.-upload-picture {
+                @include button-color-secondary();
+                @include button-small();
+                margin-left: auto;
+                margin-right: auto;
+
+                & :first-child {
+                    margin-left: auto;
+                }
+
+                & :last-child {
+                    margin-right: auto;
+                }
+            }
+
+            &.-title {
+                display: block;
+                line-height: 1.2;
+            }
+        }
+
+        &-field {
+            &.-upload-picture {
+                width: 0;
+                flex-grow: 0;
+                opacity: 0;
+            }
+
+            &.-title,
+            &.-liar {
+                background-color: rgba(255, 255, 255, .7);
+            }
+
+            &.-title {
+                width: 100%;
+                min-height: calc(3em * 1.2 + 2 * 4px);
+                text-align: center;
+            }
+
+            &.-liar {
+                text-align: right;
+            }
+
+            &.-text {
+                width: 100%;
+                min-height: 8em * 1.2;
+            }
+        }
+
+        &-add-source {
+            @include button-color-secondary();
+            @include button-small();
+            margin-left: auto;
+        }
+
+        &-submit {
+            @include button-color();
+        }
+    }
+
     &.-is-ready & {
         &-content {
             transition-duration: $appear-duration * 1s;
         }
 
         &-figure {
-            &::before {
+            &::after {
                 top: 0;
                 opacity: 1;
             }
