@@ -1,8 +1,10 @@
 //Only import components style
 //This file is imported from app.scss
 
+@import "../components/svg-icon/svg-icon";
+@import "../components/spinner/spinner";
+
 @import "../components/app-header/app-header";
 @import "../components/authenticate/authenticate";
 @import "../components/lie-item/lie-item";
 @import "../components/lies-list/lies-list";
-@import "../components/svg-icon/svg-icon";
