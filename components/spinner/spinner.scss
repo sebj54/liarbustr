@@ -1,0 +1,33 @@
+.spinner {
+    position: relative;
+    width: 40px;
+    height: 40px;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 50%;
+        background-color: currentColor;
+        opacity: .6;
+        animation: spinner-bounce 2s infinite ease-in-out;
+    }
+
+    &::after {
+        animation-delay: -1s;
+    }
+}
+
+@keyframes spinner-bounce {
+    0%,
+    100% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1);
+    }
+}
