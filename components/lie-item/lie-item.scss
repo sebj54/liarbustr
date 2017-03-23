@@ -24,6 +24,7 @@
 
     &-figure {
         margin: 0;
+        overflow: hidden;
         color: #2d2a32;
 
         &,
@@ -55,15 +56,28 @@
         height: 100%;
         width: 100%;
         object-fit: cover;
-        color: $color-whitey;
+
+        &:not([src]) {
+            height: calc(100% + 2px);
+            width: calc(100% + 2px);
+            max-width: calc(100% + 2px);
+            margin: -1px;
+        }
 
         &::before {
             content: "";
             position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            top: 1px;
+            bottom: 1px;
+            left: 1px;
+            right: 1px;
+            border-style: dashed;
+            border-width: 6px;
+            border-color: currentColor;
+            background-image: url(https://as1.ftcdn.net/jpg/00/50/30/98/500_F_50309826_AOFCleYgLuClCZ2WKssoSeC10ZhFyljz.jpg);
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
         }
     }
 
@@ -292,6 +306,10 @@
     }
 
     &-form {
+        .lie-item-figure {
+            color: #b58e4f;
+        }
+
         .lie-item-title {
             align-self: stretch;
         }
@@ -312,7 +330,7 @@
 
             &.-upload-picture {
                 position: relative;
-                flex-grow: 1;
+                margin-bottom: auto;
                 padding-top: 1em;
                 padding-bottom: 1em;
             }
@@ -366,7 +384,12 @@
                 border-style: dashed;
                 border-width: 3px;
                 background-color: transparent;
+                text-shadow: inherit;
                 color: inherit;
+
+                &:not(:focus) {
+                    border-color: currentColor;
+                }
 
                 &:hover,
                 &:focus {
@@ -375,10 +398,12 @@
 
                 &::placeholder {
                     color: inherit;
+                    font-style: italic;
                 }
             }
 
             &.-title {
+                display: block;
                 width: 100%;
                 min-height: calc(3em * 1.2 + 2 * 4px);
                 text-align: center;
