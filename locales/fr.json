@@ -54,6 +54,7 @@
             "pictures": {
                 "main": "Ajoutez une photo"
             }
-        }
+        },
+        "uploading": "Envoi en cours"
     }
 }

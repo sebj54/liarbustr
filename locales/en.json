@@ -54,6 +54,7 @@
             "pictures": {
                 "main": "Upload a picture"
             }
-        }
+        },
+        "uploading": "Uploading"
     }
 }
