@@ -33,6 +33,11 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
              * @type {Boolean}
              */
             isReady: false,
+            /**
+             * Indicates if a picture is being uploaded
+             * @type {Boolean}
+             */
+            isUploading: false,
         }
     },
     firebase: function()
@@ -165,10 +170,14 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
             if (e.currentTarget.files.length)
             {
                 const folderRef = app.getImagesRef().child('lies/')
+
                 const fileUploaded = function(url)
                 {
+                    this.isUploading = false
                     this.lie.pictures.main = url
                 }.bind(this)
+
+                this.isUploading = true
 
                 app.upload(folderRef, e.currentTarget.files[0])
                 .then(fileUploaded)

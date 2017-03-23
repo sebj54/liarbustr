@@ -6,8 +6,9 @@
 
         <div class="lie-item-form-group -upload-picture">
             <label :for="fieldId('upload-picture-main')" class="lie-item-form-label -upload-picture -main button">
-                <svg-icon name="upload"></svg-icon>
-                <span>{{ $t('lieForm.upload.pictures.main') }}</span>
+                <svg-icon name="upload" v-if="!isUploading"></svg-icon>
+                <spinner v-if="isUploading"></spinner>
+                <span>{{ isUploading ? $t('lieForm.uploading') : $t('lieForm.upload.pictures.main') }}</span>
             </label>
             <input type="file" name="upload[pictures][main]" :id="fieldId('upload-picture-main')" class="lie-item-form-field -upload-picture -main" @change="uploadMainPicture">
         </div>

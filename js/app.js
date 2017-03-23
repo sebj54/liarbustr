@@ -213,14 +213,16 @@ const app = {
                 function(snapshot)
                 {
                     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                    console.log('Upload is ' + progress + '% done (state: ' + snapshot.state + ')')
+                    app.vue.$emit('uploadprogress', progress, snapshot)
                 },
                 function(error)
                 {
+                    app.vue.$off('uploadprogress')
                     reject(error)
                 },
                 function()
                 {
+                    app.vue.$off('uploadprogress')
                     resolve(uploadTask.snapshot.downloadURL)
                 }
             )
