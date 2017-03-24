@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/sebj54/liarbustr#readme",
   "dependencies": {
+    "autosize": "^3.0.20",
     "firebase": "^3.6.9",
     "node-vibrant": "^3.0.0-alpha.2",
     "normalize.css": "^5.0.0",
