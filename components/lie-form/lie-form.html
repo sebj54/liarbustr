@@ -14,7 +14,7 @@
         </div>
 
         <div class="lie-item-title">
-            <textarea name="title" :id="fieldId('title')" class="lie-item-form-field -title" :placeholder="$t('lieForm.title')" autofocus v-model="lie.title"></textarea>
+            <textarea name="title" :id="fieldId('title')" class="lie-item-form-field -title" :placeholder="$t('lieForm.title')" rows="1" autofocus v-model="lie.title" v-autosize></textarea>
         </div>
 
         <p class="lie-item-liar">
