@@ -1,82 +1,104 @@
-<article class="lie-item" :class="{ '-is-a-lie': isALie, '-is-not-a-lie': !isALie, '-is-ready': isReady }">
-    <div class="lie-item-header">
-        <figure class="lie-item-figure" :style="{ color: liePictureMainColor }">
-            <img :src="liePicture('main')" :alt="$t('lie.picture', { liar: lie.liar })" class="lie-item-picture -main" @load="checkIfReady">
-        </figure>
+<article class="lie-item" :class="{ '-is-a-lie': isALie, '-is-not-a-lie': !isALie, '-is-ready': isReady, '-flipped' : flipped }">
+    <div class="lie-item-front">
+        <div class="lie-item-header">
+            <figure class="lie-item-figure" :style="{ color: liePictureMainColor }">
+                <img :src="liePicture('main')" :alt="$t('lie.picture', { liar: lie.liar })" class="lie-item-picture -main" @load="checkIfReady">
+            </figure>
+            <button @click="showCardBack" class="lie-item-share-button">
+                <span>{{$t('Share')}}</span>
+                <svg-icon name="share"></svg-icon>
+            </button>
+            <h2 class="lie-item-title">{{ lie.title }}</h2>
 
-        <h2 class="lie-item-title">{{ lie.title }}</h2>
+            <p class="lie-item-liar">{{ lie.liar }}</p>
+        </div>
 
-        <p class="lie-item-liar">{{ lie.liar }}</p>
+        <div class="lie-item-content">
+            <div class="lie-item-votes">
+                <div class="lie-item-vote -liar" :class="{ '-is-actual-vote': actualVoteValue === 'liar' }">
+                    <div class="lie-item-vote-bar -liar">
+                        <div class="lie-item-vote-bar-part" :style="{ width: lieVotesPercentageLiar + '%' }"></div>
+                        <div class="lie-item-vote-bar-part"></div>
+                    </div>
+                    <div class="lie-item-vote-count -liar">
+                        {{ lieVotesCountLiar }}
+                        <svg-icon name="checked" class="lie-item-vote-indicator"></svg-icon>
+                    </div>
+                    <button type="button" class="lie-item-vote-button -liar" @click="voteLiar">{{ $t('lie.votes.liar') }}</button>
+                </div>
+                <div class="lie-item-vote -not-liar" :class="{ '-is-actual-vote': actualVoteValue === 'notLiar' }">
+                    <div class="lie-item-vote-bar -not-liar">
+                        <div class="lie-item-vote-bar-part" :style="{ width: lieVotesPercentageNotLiar + '%' }"></div>
+                        <div class="lie-item-vote-bar-part"></div>
+                    </div>
+                    <div class="lie-item-vote-count -not-liar">
+                        {{ lieVotesCountNotLiar }}
+                        <svg-icon name="checked" class="lie-item-vote-indicator"></svg-icon>
+                    </div>
+                    <button type="button" class="lie-item-vote-button -not-liar" @click="voteNotLiar">{{ $t('lie.votes.notLiar') }}</button>
+                </div>
+            </div>
+
+            <div class="lie-item-more">
+                <div class="lie-item-more-content" v-if="lieTextChunks.length" v-expand="isExpanded">
+                    <div class="lie-item-text">
+                        <p class="lie-item-text-chunk" v-for="textChunk in lieTextChunks">{{ textChunk }}</p>
+                    </div>
+
+                    <div class="lie-item-sources-wrapper">
+                        <h3 class="lie-item-sources-title -statements">
+                            <svg-icon name="speech" class="lie-item-sources-title-icon -statement"></svg-icon>
+                            <span>{{ $tc('lie.sources.statementsTitle', lieSources('statements').length) }}</span>
+                        </h3>
+                        <ul class="lie-item-sources -statements">
+                            <li class="lie-item-source" v-for="source in lieSources('statements')">
+                                <a :href="source.url" target="_blank" class="lie-item-source-link -statement">{{ source.url }}</a>
+                            </li>
+                        </ul>
+
+                        <h3 class="lie-item-sources-title -refutations" v-if="lieSources('refutations')">
+                            <svg-icon name="megaphone" class="lie-item-sources-title-icon -refutation"></svg-icon>
+                            <span>{{ $tc('lie.sources.refutationsTitle', lieSources('refutations').length) }}</span>
+                        </h3>
+                        <ul class="lie-item-sources -refutations">
+                            <li class="lie-item-source" v-for="source in lieSources('refutations')">
+                                <a :href="source.url" target="_blank" class="lie-item-source-link -refutation">{{ source.url }}</a>
+                            </li>
+                        </ul>
+
+                        <h3 class="lie-item-sources-title -confirmations" v-if="lieSources('confirmations')">
+                            <svg-icon name="handshake" class="lie-item-sources-title-icon -confirmation"></svg-icon>
+                            <span>{{ $tc('lie.sources.confirmationsTitle', lieSources('confirmations').length) }}</span>
+                        </h3>
+                        <ul class="lie-item-sources -confirmations">
+                            <li class="lie-item-source" v-for="source in lieSources('confirmations')">
+                                <a :href="source.url" target="_blank" class="lie-item-source-link -confirmation">{{ source.url }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <button type="button" class="lie-item-more-button" @click="toggleContent">{{ $t(isExpanded ? 'lie.readLess' : 'lie.readMore') }}</button>
+            </div>
+        </div>
     </div>
 
-    <div class="lie-item-content">
-        <div class="lie-item-votes">
-            <div class="lie-item-vote -liar" :class="{ '-is-actual-vote': actualVoteValue === 'liar' }">
-                <div class="lie-item-vote-bar -liar">
-                    <div class="lie-item-vote-bar-part" :style="{ width: lieVotesPercentageLiar + '%' }"></div>
-                    <div class="lie-item-vote-bar-part"></div>
-                </div>
-                <div class="lie-item-vote-count -liar">
-                    {{ lieVotesCountLiar }}
-                    <svg-icon name="checked" class="lie-item-vote-indicator"></svg-icon>
-                </div>
-                <button type="button" class="lie-item-vote-button -liar" @click="voteLiar">{{ $t('lie.votes.liar') }}</button>
-            </div>
-            <div class="lie-item-vote -not-liar" :class="{ '-is-actual-vote': actualVoteValue === 'notLiar' }">
-                <div class="lie-item-vote-bar -not-liar">
-                    <div class="lie-item-vote-bar-part" :style="{ width: lieVotesPercentageNotLiar + '%' }"></div>
-                    <div class="lie-item-vote-bar-part"></div>
-                </div>
-                <div class="lie-item-vote-count -not-liar">
-                    {{ lieVotesCountNotLiar }}
-                    <svg-icon name="checked" class="lie-item-vote-indicator"></svg-icon>
-                </div>
-                <button type="button" class="lie-item-vote-button -not-liar" @click="voteNotLiar">{{ $t('lie.votes.notLiar') }}</button>
-            </div>
-        </div>
-
-        <div class="lie-item-more">
-            <div class="lie-item-more-content" v-if="lieTextChunks.length" v-expand="isExpanded">
-                <div class="lie-item-text">
-                    <p class="lie-item-text-chunk" v-for="textChunk in lieTextChunks">{{ textChunk }}</p>
-                </div>
-
-                <div class="lie-item-sources-wrapper">
-                    <h3 class="lie-item-sources-title -statements">
-                        <svg-icon name="speech" class="lie-item-sources-title-icon -statement"></svg-icon>
-                        <span>{{ $tc('lie.sources.statementsTitle', lieSources('statements').length) }}</span>
-                    </h3>
-                    <ul class="lie-item-sources -statements">
-                        <li class="lie-item-source" v-for="source in lieSources('statements')">
-                            <a :href="source.url" target="_blank" class="lie-item-source-link -statement">{{ source.url }}</a>
-                        </li>
-                    </ul>
-
-                    <h3 class="lie-item-sources-title -refutations" v-if="lieSources('refutations')">
-                        <svg-icon name="megaphone" class="lie-item-sources-title-icon -refutation"></svg-icon>
-                        <span>{{ $tc('lie.sources.refutationsTitle', lieSources('refutations').length) }}</span>
-                    </h3>
-                    <ul class="lie-item-sources -refutations">
-                        <li class="lie-item-source" v-for="source in lieSources('refutations')">
-                            <a :href="source.url" target="_blank" class="lie-item-source-link -refutation">{{ source.url }}</a>
-                        </li>
-                    </ul>
-
-                    <h3 class="lie-item-sources-title -confirmations" v-if="lieSources('confirmations')">
-                        <svg-icon name="handshake" class="lie-item-sources-title-icon -confirmation"></svg-icon>
-                        <span>{{ $tc('lie.sources.confirmationsTitle', lieSources('confirmations').length) }}</span>
-                    </h3>
-                    <ul class="lie-item-sources -confirmations">
-                        <li class="lie-item-source" v-for="source in lieSources('confirmations')">
-                            <a :href="source.url" target="_blank" class="lie-item-source-link -confirmation">{{ source.url }}</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <button type="button" class="lie-item-more-button" @click="toggleContent">{{ $t(isExpanded ? 'lie.readLess' : 'lie.readMore') }}</button>
-        </div>
-
+    <div class="lie-item-back">
+        <button class="lie-item-back-close"type="button" name="button" @click="hideCardBack">
+            <svg-icon name="close"></svg-icon>
+        </button>
+        <h2 class="lie-item-title -white">
+            {{lie.title}}
+        </h2>
+        <h3>{{$t('Share this lie on')}}</h3>
+        <ul class="lie-item-share-social-network-list">
+            <li class="lie-item-share-social-network-item -facebook">
+                <svg-icon name="facebook"></svg-icon>
+            </li>
+            <li class="lie-item-share-social-network-item -twitter">
+                <svg-icon name="twitter"></svg-icon>
+            </li>
+        </ul>
     </div>
 
 </article>

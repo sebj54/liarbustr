@@ -13,8 +13,8 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
             isExpanded: false,
             isReady: false,
             liePictureMainColor: null,
+            flipped: false,
         }
-
         return data
     },
     firebase: function()
@@ -268,6 +268,15 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         voteNotLiar: function()
         {
             this.vote('notLiar')
+        },
+        showCardBack: function()
+        {
+            this.flipped = true
+            this.isExpanded = false
+        },
+        hideCardBack: function()
+        {
+            this.flipped = false
         },
     },
     created: function()
