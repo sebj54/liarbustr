@@ -37,7 +37,7 @@
         }
     },
     "lieForm": {
-        "liar": "Who told that lie?",
+        "liar": "Who told that lie? ",
         "liarPlaceholder" : "e.g. Donald J. Trump",
         "sources": {
             "add": "Add another source",
