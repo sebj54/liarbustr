@@ -64,11 +64,6 @@ button,
     @include button-color(#43cec0, #99d8fc);
 }
 
-input,
-textarea {
-    text-overflow: ellipsis;
-}
-
 input[type="date"],
 input[type="datetime-local"],
 input[type="email"],
@@ -81,7 +76,8 @@ input[type="text"],
 input[type="time"],
 input[type="url"],
 input[type="week"],
-textarea {
+textarea,
+.-is-fake-input {
     padding-top: 4px;
     padding-bottom: 4px;
     padding-left: 8px;
@@ -91,6 +87,7 @@ textarea {
     border-color: $color-grey;
     border-radius: 3px;
     font-family: inherit;
+    text-overflow: ellipsis;
     transition-property: border-color, box-shadow;
     transition-duration: .2s;
     transition-timing-function: ease-out;
@@ -104,6 +101,12 @@ textarea {
 textarea {
     max-width: 100%;
     resize: vertical;
+}
+
+.-is-fake-input {
+    position: absolute;
+    visibility: hidden;
+    white-space: nowrap;
 }
 
 a {
