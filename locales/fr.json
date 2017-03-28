@@ -37,7 +37,7 @@
         }
     },
     "lieForm": {
-        "liar": "Qui a dit ce mensonge ?",
+        "liar": "Qui a dit ce mensonge ? ",
         "liarPlaceholder" : "ex. : François Fillon",
         "sources": {
             "add": "Ajouter une source",

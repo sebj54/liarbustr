@@ -314,6 +314,10 @@
             align-self: stretch;
         }
 
+        .lie-item-liar {
+            width: 100%;
+        }
+
         .lie-item-more {
             &-content {
                 overflow: visible;
@@ -409,6 +413,7 @@
             }
 
             &.-liar {
+                max-width: 100%;
                 text-align: right;
             }
 
