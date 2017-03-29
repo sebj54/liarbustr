@@ -57,5 +57,9 @@
             }
         },
         "uploading": "Uploading"
+    },
+    "share": {
+        "facebook": "Share on Facebook",
+        "twitter": "Share on Twitter"
     }
 }

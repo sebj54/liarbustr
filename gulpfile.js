@@ -48,6 +48,19 @@ function server()
         open: 'external',
         notify: false,
         server: './',
+        middleware: [
+            {
+                route: '',
+                handle: function(req, res, next)
+                {
+                    if (req.url.indexOf('.') === -1)
+                    {
+                        req.url = '/index.html'
+                    }
+                    return next()
+                },
+            },
+        ],
     })
 
     gulp.watch([

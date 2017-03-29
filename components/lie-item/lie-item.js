@@ -4,6 +4,8 @@
  * Lie item component
  * @type {VueComponent}
  */
+
+
 Vue.component('lie-item', app.resolveTemplate('lie-item', {
     data: function()
     {
@@ -121,6 +123,10 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         lieVotesPercentageNotLiar: function()
         {
             return this.lieVotesPercentage('notLiar')
+        },
+        shareUrl: function()
+        {
+            return window.location.protocol + '//' + window.location.hostname + '/lie/' + this.lie.uid
         },
     },
     methods: {
@@ -272,7 +278,6 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         showCardBack: function()
         {
             this.flipped = true
-            this.isExpanded = false
         },
         hideCardBack: function()
         {

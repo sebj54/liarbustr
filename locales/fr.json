@@ -57,5 +57,9 @@
             }
         },
         "uploading": "Envoi en cours"
+    },
+    "share": {
+        "facebook": "Partager sur Facebook",
+        "twitter": "Partager sur Twitter"
     }
 }
