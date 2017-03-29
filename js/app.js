@@ -1,4 +1,4 @@
-/* global firebase Vue VueRouter XMLHttpRequest _ router user document */
+/* global firebase Vue VueRouter XMLHttpRequest _ router user document SocialSharing */
 
 /**
  * App - Provide useful methods across components
@@ -69,13 +69,14 @@ const app = {
             console.warn('Translation error: (lang: "' + lang + '" for key: "' + key + '")')
         }
 
-        app.router = new VueRouter({
-            routes: router.routes,
-        })
+        Vue.use(SocialSharing)
 
         app.vue = new Vue({
             el: '#app',
-            router: app.router,
+            router: new VueRouter({
+                routes: router.routes,
+                mode: 'history',
+            }),
         })
 
         user.init()

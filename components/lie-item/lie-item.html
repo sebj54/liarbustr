@@ -1,4 +1,4 @@
-<article class="lie-item" :class="{ '-is-a-lie': isALie, '-is-not-a-lie': !isALie, '-is-ready': isReady, '-flipped' : flipped }">
+<article class="lie-item" :class="{ '-is-a-lie': isALie, '-is-not-a-lie': !isALie, '-is-ready': isReady, '-flipped' : flipped, '-is-expanded' : isExpanded }">
     <div class="lie-item-front">
         <div class="lie-item-header">
             <figure class="lie-item-figure" :style="{ color: liePictureMainColor }">
@@ -87,18 +87,31 @@
         <button class="lie-item-back-close"type="button" name="button" @click="hideCardBack">
             <svg-icon name="close"></svg-icon>
         </button>
-        <h2 class="lie-item-title -white">
-            {{lie.title}}
-        </h2>
-        <h3>{{$t('Share this lie on')}}</h3>
-        <ul class="lie-item-share-social-network-list">
-            <li class="lie-item-share-social-network-item -facebook">
-                <svg-icon name="facebook"></svg-icon>
-            </li>
-            <li class="lie-item-share-social-network-item -twitter">
-                <svg-icon name="twitter"></svg-icon>
-            </li>
-        </ul>
+        <div class="lie-item-back-head">
+            <h2 class="lie-item-title -white">
+                {{lie.title}}
+            </h2>
+        </div>
+        <social-sharing :url="shareUrl" title="" inline-template>
+            <ul class="lie-item-share-social-network-list">
+                <li class="lie-item-share-social-network-item -facebook">
+                    <network network="facebook" class="lie-item-share-action-button-wrapper">
+                        <button type="button" name="button" class="lie-item-share-action-button">
+                            <svg-icon name="facebook"></svg-icon>
+                            <span>{{$t('share.facebook')}}</span>
+                        </button>
+                    </network>
+                </li>
+                <li class="lie-item-share-social-network-item -twitter">
+                    <network network="twitter" class="lie-item-share-action-button-wrapper">
+                        <button type="button" name="button" class="lie-item-share-action-button">
+                                <svg-icon name="twitter"></svg-icon>
+                                <span>{{$t('share.facebook')}}</span>
+                        </button>
+                    </network>
+                </li>
+            </ul>
+        </social-sharing>
     </div>
 
 </article>

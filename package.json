@@ -37,6 +37,7 @@
     "gulp-sourcemaps": "^2.4.1",
     "gulp-svg-symbols": "^2.0.2",
     "gulp-svgmin": "^1.2.3",
-    "pleeease-cli": "^4.0.0"
+    "pleeease-cli": "^4.0.0",
+    "vue-social-sharing": "git+https://github.com/nicolasbeauvais/vue-social-sharing.git"
   }
 }
