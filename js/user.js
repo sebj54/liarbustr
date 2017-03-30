@@ -106,7 +106,7 @@ const user = {
             }
             else
             {
-                user.uid = _.getPropValue(providerData, 'uid')
+                user.uid = _.getPropValue(userData, 'uid')
                 user.name = _.getPropValue(providerData, 'displayName')
                 user.profilePicture = _.getPropValue(providerData, 'photoURL')
                 user.email = _.getPropValue(providerData, 'email')
