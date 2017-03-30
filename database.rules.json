@@ -1,6 +1,126 @@
 {
     "rules": {
-        ".read": true,
-        ".write": "auth != null"
+        "lies": {
+            ".read": true,
+            "$lieUid": {
+                ".write": "auth !== null",
+
+                "accuser": {
+                    ".validate": "!data.exists() && newData.val() === auth.uid"
+                },
+                "title": {
+                    ".validate": "!data.exists() && newData.isString()"
+                },
+                "liar": {
+                    ".validate": "!data.exists() && newData.isString()"
+                },
+                "text": {
+                    ".validate": "!data.exists() && newData.isString()"
+                },
+                "votes": {
+                    "liar": {
+                        ".validate": "
+                            (!data.exists() && newData.val() === 0)
+                            ||
+                            (
+                                data.exists() && newData.val() === data.val() + 1
+                                &&
+                                (
+                                    !root.child('users').child(auth.uid).child('votes').child($lieUid).exists()
+                                    ||
+                                    root.child('users').child(auth.uid).child('votes').child($lieUid).val() === 'notLiar'
+                                )
+                            )
+                            ||
+                            (
+                                data.exists() && newData.val() === data.val() - 1
+                                &&
+                                root.child('users').child(auth.uid).child('votes').child($lieUid).val() === 'liar'
+                            )
+                        "
+                    },
+                    "notLiar": {
+                        ".validate": "
+                            (!data.exists() && newData.val() === 0)
+                            ||
+                            (
+                                data.exists() && newData.val() === data.val() + 1
+                                &&
+                                (
+                                    !root.child('users').child(auth.uid).child('votes').child($lieUid).exists()
+                                    ||
+                                    root.child('users').child(auth.uid).child('votes').child($lieUid).val() === 'liar'
+                                )
+                            )
+                            ||
+                            (
+                                data.exists() && newData.val() === data.val() - 1
+                                &&
+                                root.child('users').child(auth.uid).child('votes').child($lieUid).val() === 'notLiar'
+                            )
+                        "
+                    }
+                },
+                "sources": {
+                    ".validate": "!data.exists()",
+
+                    "statements": {
+                        "$key": {
+                            "url": {
+                                ".validate": "!data.exists() && newData.isString() && newData.val().contains('//')"
+                            }
+                        }
+                    },
+                    "refutations": {
+                        "$key": {
+                            "url": {
+                                ".validate": "!data.exists() && newData.isString() && newData.val().contains('//')"
+                            }
+                        }
+                    },
+                    "confirmations": {
+                        "$key": {
+                            "url": {
+                                ".validate": "!data.exists() && newData.isString() && newData.val().contains('//')"
+                            }
+                        }
+                    },
+                },
+                "pictures": {
+                    ".validate": "!data.exists() && newData.hasChildren(['main'])",
+
+                    "main": {
+                        ".validate": "!data.exists() && newData.isString() && newData.val().beginsWith('https://firebasestorage.googleapis.com/v0/b/liarbustr.appspot.com/o/images%2Flies%2F')"
+                    }
+                }
+            }
+        },
+        "users": {
+            "$userUid": {
+                ".read": "auth.uid === $userUid",
+                ".write": "!data.exists() || (data.exists() && auth.uid === $userUid)",
+
+                "lastLogin": {
+                    ".validate": "newData.isNumber()"
+                },
+                "email": {
+                    ".validate": "newData.isString()"
+                },
+                "name": {
+                    ".validate": "newData.isString()"
+                },
+                "profilePicture": {
+                    ".validate": "newData.isString() && newData.val().contains('//')"
+                },
+                "uid": {
+                    ".validate": "!data.exists() || data.val() === newData.val()"
+                },
+                "votes": {
+                    "$lieUid": {
+                        ".validate": "newData.isString() && (newData.val() === 'liar' || newData.val() === 'notLiar')"
+                    }
+                }
+            }
+        }
     }
 }
