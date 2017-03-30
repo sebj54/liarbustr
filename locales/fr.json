@@ -34,7 +34,11 @@
         "votes": {
             "liar": "Menteur",
             "notLiar": "Pas menteur"
-        }
+        },
+        "share": {
+            "title": "{liar} a t-il menti ?",
+            "description": "\"{title}\" - {liar}"
+        },
     },
     "lieForm": {
         "liar": "Qui a dit ce mensonge ? ",

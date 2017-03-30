@@ -34,6 +34,10 @@
         "votes": {
             "liar": "Liar",
             "notLiar": "Not liar"
+        },
+        "share": {
+            "title": "{liar} has he lied?",
+            "description": "\"{title}\" - {liar}"
         }
     },
     "lieForm": {
