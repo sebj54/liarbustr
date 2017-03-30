@@ -27,9 +27,12 @@
             & > * {
                 visibility: visible;
             }
+            .lie-item-share-url {
+                opacity: 1;
+            }
         }
         &.-is-expanded {
-            transition-delay: .6s transform;
+            transition-delay: .6s;
             .lie-item-front,
             .lie-item-back {
                 transition-delay: .6s;
@@ -642,6 +645,12 @@
             svg {
                 margin-right: 8px;
             }
+        }
+
+        .lie-item-share-url {
+            opacity: 0;
+            transition: .6s;
+            transition-delay: .6s;
         }
     }
 }
