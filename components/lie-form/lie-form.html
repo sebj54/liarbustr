@@ -5,20 +5,20 @@
         </figure>
 
         <div class="lie-item-form-group -upload-picture">
+            <input type="file" name="upload[pictures][main]" :id="fieldId('upload-picture-main')" class="lie-item-form-field -upload-picture -main" required @change="uploadMainPicture">
             <label :for="fieldId('upload-picture-main')" class="lie-item-form-label -upload-picture -main button">
                 <svg-icon name="upload" v-if="!isUploading"></svg-icon>
                 <spinner v-if="isUploading"></spinner>
                 <span>{{ isUploading ? $t('lieForm.uploading') : $t('lieForm.upload.pictures.main') }}</span>
             </label>
-            <input type="file" name="upload[pictures][main]" :id="fieldId('upload-picture-main')" class="lie-item-form-field -upload-picture -main" @change="uploadMainPicture">
         </div>
 
         <div class="lie-item-title">
-            <textarea name="title" :id="fieldId('title')" class="lie-item-form-field -title" :placeholder="$t('lieForm.title')" rows="1" autofocus v-model="lie.title" v-autosize></textarea>
+            <textarea name="title" :id="fieldId('title')" class="lie-item-form-field -title" :placeholder="$t('lieForm.title')" rows="1" autofocus required v-model="lie.title" v-autosize></textarea>
         </div>
 
         <p class="lie-item-liar">
-            <input type="text" name="liar" :id="fieldId('liar')" class="lie-item-form-field -liar" :placeholder="$t('lieForm.liar')" v-model="lie.liar" v-autosize>
+            <input type="text" name="liar" :id="fieldId('liar')" class="lie-item-form-field -liar" :placeholder="$t('lieForm.liar')" required v-model="lie.liar" v-autosize>
         </p>
     </div>
 
@@ -27,7 +27,7 @@
             <div class="lie-item-more-content">
                 <div class="lie-item-text">
                     <label :for="fieldId('text')" class="lie-item-form-label -text">{{ $t('lieForm.text') }}</label>
-                    <textarea name="text" :id="fieldId('text')" class="lie-item-form-field -text" :placeholder="$t('lieForm.textPlaceholder')" v-model="lie.text"></textarea>
+                    <textarea name="text" :id="fieldId('text')" class="lie-item-form-field -text" :placeholder="$t('lieForm.textPlaceholder')" required v-model="lie.text"></textarea>
                 </div>
 
                 <div class="lie-item-sources-wrapper">
@@ -38,7 +38,7 @@
 
                     <ul class="lie-item-sources -statements">
                         <li class="lie-item-source" v-for="(statement, index) in lie.sources.statements">
-                            <lie-form-source :id="fieldId('source-' + index)" :number="index + 1" :source="lie.sources.statements[index]"></lie-form-source>
+                            <lie-form-source :id="fieldId('source-' + index)" :number="index + 1" :source="lie.sources.statements[index]" :is-required="index === 0"></lie-form-source>
                         </li>
                     </ul>
 
