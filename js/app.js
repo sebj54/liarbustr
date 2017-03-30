@@ -70,6 +70,7 @@ const app = {
         }
 
         Vue.use(SocialSharing)
+        Vue.use(VueHead)
 
         app.vue = new Vue({
             el: '#app',
