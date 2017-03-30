@@ -29,13 +29,15 @@
             }
             .lie-item-share-url {
                 opacity: 1;
+                transition: 0s;
+                transition-delay: .3s;
             }
         }
         &.-is-expanded {
             transition-delay: .6s;
             .lie-item-front,
             .lie-item-back {
-                transition-delay: .6s;
+                transition-delay: .2s;
             }
             .lie-item-more-content {
                 height: 0 !important;
@@ -591,6 +593,7 @@
 
         .lie-item-title {
             color: white;
+            display: inline-block;
         }
 
         .lie-item-share-social-network-list {
@@ -649,8 +652,8 @@
 
         .lie-item-share-url {
             opacity: 0;
-            transition: .6s;
-            transition-delay: .6s;
+            transition: .1s;
+            transition-delay: .2s;
         }
     }
 }
