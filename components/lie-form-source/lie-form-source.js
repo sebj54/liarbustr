@@ -7,6 +7,7 @@
 Vue.component('lie-form-source', app.resolveTemplate('lie-form-source', {
     props: [
         'id',
+        'is-required',
         'number',
         'source',
     ],

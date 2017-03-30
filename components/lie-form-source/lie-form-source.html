@@ -1,4 +1,4 @@
 <div class="lie-item-form-group -source -statement">
     <label :for="id" class="lie-item-form-label -source -statement">{{ $t('lieForm.sources.number', { number: number }) }}</label>
-    <input type="url" :name="'sources[statements][]'" :id="id" class="lie-item-form-field -source -statement" :placeholder="$t('lieForm.sources.addPlaceholder')" v-model="source.url">
+    <input type="url" :name="'sources[statements][]'" :id="id" class="lie-item-form-field -source -statement" :placeholder="$t('lieForm.sources.addPlaceholder')" :required="isRequired" v-model="source.url">
 </div>

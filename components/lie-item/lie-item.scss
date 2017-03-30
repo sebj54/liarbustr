@@ -378,9 +378,19 @@
 
         &-field {
             &.-upload-picture {
-                width: 0;
+                position: absolute;
+                z-index: -1;
+                bottom: 1em;
+                left: 50%;
+                width: 1px;
+                height: 1px;
                 flex-grow: 0;
                 opacity: 0;
+                overflow: hidden;
+
+                &:focus + .lie-item-form-label {
+                    box-shadow: 0 0 6px #43cec0;
+                }
             }
 
             &.-title,
