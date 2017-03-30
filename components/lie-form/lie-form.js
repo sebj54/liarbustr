@@ -159,6 +159,8 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
             this.lie.accuser = user.uid
             this.$firebaseRefs.lies.child(this.lie.uid).set(this.lie)
 
+            app.router.push('lie/' + this.lie.uid)
+
             this.lie = this.lieEmptyStructure()
             setTimeout(this.addStatement) // setTimeout is mandatory for rendering to avoid not cleared source input
         },

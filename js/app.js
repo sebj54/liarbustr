@@ -35,6 +35,11 @@ const app = {
         fr: {},
     },
     /**
+     * Vue router
+     * @type {VueRouter}
+     */
+    router: null,
+    /**
      * Firebase storage
      * @type {firebase.storage.Storage}
      */
@@ -64,11 +69,13 @@ const app = {
             console.warn('Translation error: (lang: "' + lang + '" for key: "' + key + '")')
         }
 
+        app.router = new VueRouter({
+            routes: router.routes,
+        })
+
         app.vue = new Vue({
             el: '#app',
-            router: new VueRouter({
-                routes: router.routes,
-            }),
+            router: app.router,
         })
 
         user.init()
