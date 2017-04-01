@@ -18,7 +18,10 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
         }
     },
     computed: {
-        isLoggedIn: user.isLoggedIn,
+        isAnonymous: function()
+        {
+            return user.isAnonymous
+        },
     },
     methods: {
         /**

@@ -8,11 +8,11 @@
         <router-link to="/lie-form" class="header-nav-link">{{ $t('msc.lie-form') }}</router-link>
     </nav>
 
-    <div class="header-profile" v-if="!isLoggedIn">
+    <div class="header-profile" v-if="isAnonymous">
         <router-link to="/authenticate" class="header-nav-link">{{ $t('msc.authenticate') }}</router-link>
     </div>
 
-    <div class="header-profile" v-if="isLoggedIn">
+    <div class="header-profile" v-if="!isAnonymous">
         <div class="header-profile-infos">
             <p class="header-profile-name">{{ user.name }}</p>
             <button type="button" class="header-profile-logout" @click="logout">

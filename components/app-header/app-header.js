@@ -8,7 +8,10 @@ Vue.component('app-header', app.resolveTemplate('app-header', {
         }
     },
     computed: {
-        isLoggedIn: user.isLoggedIn,
+        isAnonymous: function()
+        {
+            return user.isAnonymous
+        },
     },
     methods: {
         logout: user.logout,
