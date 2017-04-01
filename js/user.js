@@ -78,6 +78,11 @@ const user = {
                     })
                 })
             }
+            else
+            {
+                firebase.auth().signInAnonymously()
+                .catch(user.handleError)
+            }
         })
     },
 
@@ -133,6 +138,15 @@ const user = {
     },
 
     /**
+     * Handle error: useful for error callbacks
+     * @param  {*} error Error passed to the callback
+     */
+    handleError: function(...args)
+    {
+        console.error(...args)
+    },
+
+    /**
      * Login with Facebook
      */
     loginWithFacebook: function()
@@ -164,10 +178,8 @@ const user = {
         firebase.auth().createUserWithEmailAndPassword(user.signup.email, user.signup.password)
         .then(function(response)
         {
-        }).catch(function(error)
-        {
-            console.error(error)
         })
+        .catch(user.handleError)
     },
 
     signinWithEmail: function(data)
@@ -182,7 +194,7 @@ const user = {
             const errorCode = error.code
             const errorMessage = error.message
 
-            console.error(errorCode, errorMessage)
+            user.handleError(errorCode, errorMessage)
         })
     },
 
@@ -193,13 +205,23 @@ const user = {
      */
     loginWith: function(provider)
     {
-        firebase.auth().signInWithPopup(provider)
+        const anonUser = firebase.auth().currentUser
+
+        anonUser.linkWithPopup(provider)
         .then(function(result)
         {
         })
         .catch(function(error)
         {
-            console.error(error)
+            if (error.code === 'auth/credential-already-in-use' && _.hasProp(error, 'credential'))
+            {
+                firebase.auth().signInWithCredential(error.credential)
+                .catch(user.handleError)
+            }
+            else
+            {
+                user.handleError(error)
+            }
         })
     },
 
@@ -211,11 +233,8 @@ const user = {
         firebase.auth().signOut()
         .then(function()
         {
-            user.fetch(null)
+            firebase.auth().signInAnonymously()
         })
-        .catch(function(error)
-        {
-            console.error(error)
-        })
+        .catch(user.handleError)
     },
 }
