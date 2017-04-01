@@ -102,17 +102,6 @@ const _ = {
     },
 
     /**
-     * Test if an object has a property
-     * @param  {object} object Object which should contain the property
-     * @param  {string} prop Property name
-     * @return {boolean} true if object has property
-     */
-    hasProp: function(object, prop)
-    {
-        return Object.prototype.hasOwnProperty.call(object, prop)
-    },
-
-    /**
      * Get property value from an object or null if property doesn't exist
      * @param  {object} object Object which contains the property
      * @param  {string} prop Property name
@@ -120,7 +109,18 @@ const _ = {
      */
     getPropValue: function(object, prop)
     {
-        return (_.hasProp(object, prop) && object[prop]) ? object[prop] : null
+        return (_.hasProp(object, prop)) ? object[prop] : null
+    },
+
+    /**
+     * Test if an object has a property
+     * @param  {object} object Object which should contain the property
+     * @param  {string} prop Property name
+     * @return {boolean} true if object has property
+     */
+    hasProp: function(object, prop)
+    {
+        return _.isObject(object) && Object.prototype.hasOwnProperty.call(object, prop)
     },
 
     /**
@@ -135,11 +135,21 @@ const _ = {
 
     /**
      * Test if an object is empty
-     * @param  {*} obj object to test
+     * @param  {*} object Object to test
      * @return {Boolean} true if object is empty or is not an object, false otherwise
      */
-    isEmptyObject: function(obj)
+    isEmptyObject: function(object)
     {
-        return Object.getOwnPropertyNames(obj).length === 0
+        return Object.getOwnPropertyNames(object).length === 0
+    },
+
+    /**
+     * Test if a variable is an object
+     * @param  {*} object Variable to test
+     * @return {Boolean} true if variable is an object, false otherwise
+     */
+    isObject: function(object)
+    {
+        return object !== null && typeof object === 'object'
     },
 }

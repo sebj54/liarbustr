@@ -2,13 +2,13 @@
     <h1 class="authenticate-title">{{ $t('authenticate.title') }}</h1>
 
     <div class="authenticate-buttons-wrapper">
-        <button type="button" class="authenticate-button -facebook" @click="loginWithFacebook" v-if="!isLoggedIn">{{ $t('authenticate.loginWithFacebook') }}</button>
-        <button type="button" class="authenticate-button -twitter" @click="loginWithTwitter" v-if="!isLoggedIn">{{ $t('authenticate.loginWithTwitter') }}</button>
-        <button type="button" class="authenticate-button -google" @click="loginWithGoogle" v-if="!isLoggedIn">{{ $t('authenticate.loginWithGoogle') }}</button>
+        <button type="button" class="authenticate-button -facebook" @click="loginWithFacebook" v-if="isAnonymous">{{ $t('authenticate.loginWithFacebook') }}</button>
+        <button type="button" class="authenticate-button -twitter" @click="loginWithTwitter" v-if="isAnonymous">{{ $t('authenticate.loginWithTwitter') }}</button>
+        <button type="button" class="authenticate-button -google" @click="loginWithGoogle" v-if="isAnonymous">{{ $t('authenticate.loginWithGoogle') }}</button>
     </div>
 
-    <button type="button" class="authenticate-logout" @click="logout" v-if="isLoggedIn">{{ $t('authenticate.logout') }}</button>
-        <button type="button "class="signup-title" v-if="!showSignupWithEmail && !isLoggedIn" @click="showSignupForm">{{ $t('authenticate.signUpTitle') }}</button>
+    <button type="button" class="authenticate-logout" @click="logout" v-if="!isAnonymous">{{ $t('authenticate.logout') }}</button>
+        <button type="button "class="signup-title" v-if="!showSignupWithEmail && isAnonymous" @click="showSignupForm">{{ $t('authenticate.signUpTitle') }}</button>
     <div class="signup-form-container" :class="{ '-hide-signup-form' : showSigninWithEmail }">
 
 

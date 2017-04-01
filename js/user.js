@@ -11,6 +11,11 @@ const user = {
      */
     email: null,
     /**
+     * User is not actually logged in if true
+     * @type {Boolean}
+     */
+    isAnonymous: true,
+    /**
      * User full name
      * @type {string}
      */
@@ -85,7 +90,18 @@ const user = {
     {
         return new Promise(function(resolve, reject)
         {
-            const providerData = (typeof userData === 'object' && userData !== null) ? userData.providerData[0] : {}
+            let providerData
+
+            if (_.isObject(userData))
+            {
+                providerData = userData.providerData[0]
+                user.isAnonymous = _.getPropValue(userData, 'isAnonymous')
+            }
+            else
+            {
+                providerData = {}
+                user.isAnonymous = true
+            }
 
             user.source = _.getPropValue(providerData, 'providerId')
 
@@ -114,11 +130,6 @@ const user = {
 
             resolve(user)
         })
-    },
-
-    isLoggedIn: function()
-    {
-        return user.uid !== null && user.uid !== undefined
     },
 
     /**
