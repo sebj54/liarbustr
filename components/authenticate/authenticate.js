@@ -13,8 +13,8 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
                 email: null,
                 password: null,
             },
-            showSignupWithEmail: false,
-            showSigninWithEmail: false,
+            showRegisterWithEmail: false,
+            showLoginWithEmail: false,
         }
     },
     computed: {
@@ -24,6 +24,14 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
         },
     },
     methods: {
+        /**
+         * Signin with email form
+         */
+        loginWithEmail: function()
+        {
+            user.loginWithEmail(this.signin)
+            this.signin = {}
+        },
         /**
          * Login with Facebook
          */
@@ -46,46 +54,26 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
             user.loginWithGoogle()
         },
         /**
-         * Sign up with an e-mail address
-         */
-        signupEmail: function()
-        {
-            user.signupWithEmail()
-        },
-        /**
-         * Signin with email form
-         */
-        signinEmail: function()
-        {
-            user.signinWithEmail(this.signin)
-            this.signin = {}
-        },
-
-        editDisplayName: function(name)
-        {
-            user.userObject.updateProfile({
-                displayName: name,
-            })
-            user.userObject.displayName = name
-        },
-        /**
          * Log out
          */
         logout: function()
         {
             user.logout()
         },
-
-        showSignupForm: function()
+        /**
+         * Sign up with an e-mail address
+         */
+        registerWithEmail: function()
         {
-            this.showSigninWithEmail = false
-            this.showSignupWithEmail = true
+            user.registerWithEmail()
         },
-
-        showSigninForm: function()
+        /**
+         * Toogle login and register forms
+         */
+        toggleForms: function()
         {
-            this.showSignupWithEmail = false
-            this.showSigninWithEmail = true
+            this.showLoginWithEmail = !this.showLoginWithEmail
+            this.showRegisterWithEmail = !this.showRegisterWithEmail
         },
     },
 }))
