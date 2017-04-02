@@ -29,7 +29,7 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
          */
         loginWithEmail: function()
         {
-            user.loginWithEmail(this.signin)
+            user.loginWithEmail(this.signin.email, this.signin.password)
             this.signin = {}
         },
         /**
@@ -68,20 +68,20 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
             user.registerWithEmail()
         },
         /**
+         * Show login form
+         */
+        showLoginForm: function()
+        {
+            this.showLoginWithEmail = true
+            this.showRegisterWithEmail = false
+        },
+        /**
          * Show register form
          */
         showRegisterForm: function()
         {
             this.showLoginWithEmail = false
             this.showRegisterWithEmail = true
-        },
-        /**
-         * Toogle login and register forms
-         */
-        toggleForms: function()
-        {
-            this.showLoginWithEmail = !this.showLoginWithEmail
-            this.showRegisterWithEmail = !this.showRegisterWithEmail
         },
     },
 }))

@@ -121,7 +121,6 @@ const user = {
         console.error(...args)
     },
 
-
     /**
      * Login with an external service
      * @param  {FacebookAuthProvider|TwitterAuthProvider|GoogleAuthProvider} provider Firebase provider
@@ -148,11 +147,13 @@ const user = {
         })
     },
 
-    loginWithEmail: function(data)
+    /**
+     * Login with an e-mail and a password
+     * @param  {string} email E-mail address
+     * @param  {string} password Password
+     */
+    loginWithEmail: function(email, password)
     {
-        const email = data.email
-        const password = data.password
-
         firebase.auth().signInWithEmailAndPassword(email, password)
         .catch(function(error)
         {
