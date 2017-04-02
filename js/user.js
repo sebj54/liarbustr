@@ -138,6 +138,45 @@ const user = {
             if (error.code === 'auth/credential-already-in-use' && _.hasProp(error, 'credential'))
             {
                 firebase.auth().signInWithCredential(error.credential)
+                .then(function(firebaseUser)
+                {
+                    // Merge anonymous user's data and existing user's data
+                    app.db.ref('/users/' + anonUser.uid + '/votes').once('value')
+                    .then(function(anonVotesSnapshot)
+                    {
+                        const anonVotes = anonVotesSnapshot.val()
+
+                        if (_.isObject(anonVotes) && !_.isEmptyObject(anonVotes))
+                        {
+                            app.db.ref('/users/' + firebaseUser.uid + '/votes').once('value')
+                            .then(function(userVotesSnapshot)
+                            {
+                                const userVotes = userVotesSnapshot.val()
+
+                                Object.keys(anonVotes).forEach(function(lieUid)
+                                {
+                                    const updates = {}
+                                    const lieVotePath = '/lies/' + lieUid + '/votes/' + userVotes[lieUid]
+
+                                    updates['/users/' + firebaseUser.uid + '/votes/' + lieUid] = anonVotes[lieUid]
+
+                                    app.db.ref(lieVotePath).once('value')
+                                    .then(function(lieVoteSnapshot)
+                                    {
+                                        updates[lieVotePath] = lieVoteSnapshot.val() - 1
+                                        app.db.ref().update(updates)
+                                    })
+                                    .catch(function()
+                                    {
+                                        app.db.ref().update(updates)
+                                    })
+                                })
+                            })
+                            .catch(user.handleError)
+                        }
+                    })
+                    .catch(user.handleError)
+                })
                 .catch(user.handleError)
             }
             else
@@ -197,6 +236,7 @@ const user = {
         .then(function()
         {
             firebase.auth().signInAnonymously()
+            app.router.push('/')
         })
         .catch(user.handleError)
     },
