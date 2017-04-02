@@ -8,17 +8,16 @@
     </div>
 
     <button type="button" class="authenticate-logout" @click="logout" v-if="!isAnonymous">{{ $t('authenticate.logout') }}</button>
-        <button type="button "class="signup-title" v-if="!showRegisterWithEmail && isAnonymous" @click="toggleForms">{{ $t('authenticate.signUpTitle') }}</button>
+    <button type="button "class="signup-title" v-if="!showRegisterWithEmail && isAnonymous" @click="showRegisterForm">{{ $t('authenticate.signUpTitle') }}</button>
+
     <div class="signup-form-container" :class="{ '-hide-signup-form' : showLoginWithEmail }">
-
-
-        <form class="signup-form" v-if="showRegisterWithEmail" @submit.prevent="registerWithEmail">
+        <form class="signup-form" v-if="showRegisterWithEmail && isAnonymous" @submit.prevent="registerWithEmail">
 
             <div class="signup-group -name">
                 <label for="name" class="authenticate-label -name">{{ $t('authenticate.name') }}</label>
                 <div class="authenticate-input-wrapper">
                     <svg-icon name="user"></svg-icon>
-                    <input class="authenticate-input -name" v-model="signup.name" type="name" name="name" :placeholder="$t('authenticate.namePlaceholder')" required>
+                    <input class="authenticate-input -name" v-model="signup.name" type="text" name="name" :placeholder="$t('authenticate.namePlaceholder')" required>
                 </div>
             </div>
 
@@ -40,10 +39,10 @@
 
             <button type="submit" class="authenticate-form-submit">{{ $t('authenticate.signupSubmitButton') }}</button>
         </form>
-        <button class="authenticate-got-account" v-if="!showLoginWithEmail" @click="toggleForms">{{ $t('authenticate.gotAnAccountTitle') }}</button>
+        <button class="authenticate-got-account" v-if="!showLoginWithEmail && isAnonymous" @click="toggleForms">{{ $t('authenticate.gotAnAccountTitle') }}</button>
     </div>
 
-    <div class="signin-form-container" v-if="showLoginWithEmail">
+    <div class="signin-form-container" v-if="showLoginWithEmail && isAnonymous">
         <form class="signin-form" @submit.prevent="loginWithEmail" >
             <div class="signin-group">
                 <label class="authenticate-label" for="email">{{ $t('authenticate.email') }}</label>
@@ -59,7 +58,7 @@
                     <input class="authenticate-input" type="password" name="password" v-model="signin.password" :placeholder="$t('authenticate.password')">
                 </div>
             </div>
-            <button type="submit" class="authenticate-form-submit""  name="signin">{{ $t('authenticate.signinSubmitButton') }}</button>
+            <button type="submit" class="authenticate-form-submit"  name="signin">{{ $t('authenticate.signinSubmitButton') }}</button>
         </form>
     </div>
 </div>
