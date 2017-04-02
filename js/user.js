@@ -277,6 +277,7 @@ const user = {
         {
             const keys = [
                 'email',
+                'isAnonymous',
                 'name',
                 'profilePicture',
                 'uid',

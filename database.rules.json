@@ -3,21 +3,25 @@
         "lies": {
             ".read": true,
             "$lieUid": {
-                ".write": "auth !== null",
-
                 "accuser": {
-                    ".validate": "!data.exists() && newData.val() === auth.uid"
+                    ".validate": "!data.exists() && newData.val() === auth.uid",
+                    ".write": "auth !== null && auth.provider !== 'anonymous'"
                 },
                 "title": {
-                    ".validate": "!data.exists() && newData.isString()"
+                    ".validate": "!data.exists() && newData.isString()",
+                    ".write": "auth !== null && auth.provider !== 'anonymous'"
                 },
                 "liar": {
-                    ".validate": "!data.exists() && newData.isString()"
+                    ".validate": "!data.exists() && newData.isString()",
+                    ".write": "auth !== null && auth.provider !== 'anonymous'"
                 },
                 "text": {
-                    ".validate": "!data.exists() && newData.isString()"
+                    ".validate": "!data.exists() && newData.isString()",
+                    ".write": "auth !== null && auth.provider !== 'anonymous'"
                 },
                 "votes": {
+                    ".write": "auth !== null",
+
                     "liar": {
                         ".validate": "
                             (!data.exists() && newData.val() === 0)
@@ -63,6 +67,7 @@
                 },
                 "sources": {
                     ".validate": "!data.exists()",
+                    ".write": "auth !== null && auth.provider !== 'anonymous'",
 
                     "statements": {
                         "$key": {
@@ -88,6 +93,7 @@
                 },
                 "pictures": {
                     ".validate": "!data.exists() && newData.hasChildren(['main'])",
+                    ".write": "auth !== null && auth.provider !== 'anonymous'",
 
                     "main": {
                         ".validate": "!data.exists() && newData.isString() && newData.val().beginsWith('https://firebasestorage.googleapis.com/v0/b/liarbustr.appspot.com/o/images%2Flies%2F')"
@@ -105,6 +111,9 @@
                 },
                 "email": {
                     ".validate": "newData.isString()"
+                },
+                "isAnonymous": {
+                    ".validate": "newData.isBoolean()"
                 },
                 "name": {
                     ".validate": "newData.isString()"
