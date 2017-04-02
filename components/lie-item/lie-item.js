@@ -1,4 +1,4 @@
-/* global Vue app _ user Vibrant window */
+/* global Vue app _ user Vibrant window router */
 
 /**
  * Lie item component
@@ -16,6 +16,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
             isReady: false,
             liePictureMainColor: null,
             flipped: false,
+            lie: null,
         }
         return data
     },
@@ -34,6 +35,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
     },
     props: [
         'lie-uid',
+        'meta',
     ],
     computed: {
         /**
@@ -58,7 +60,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
          */
         liePictureMain: function()
         {
-            return this.liePicture('main')
+            return this.liePicture('main') || null
         },
         /**
          * Get lie statements sources
@@ -92,6 +94,13 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         {
             return (this.lie.text) ? this.lie.text.split('\n') : []
         },
+
+        getDescriptionSample: function()
+        {
+            return this.lie.text ? this.lie.text.substring(0, 300) : null
+        },
+
+
         /**
          * Get liar votes count
          * @return {integer} Votes count
@@ -127,6 +136,33 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         shareUrl: function()
         {
             return window.location.protocol + '//' + window.location.hostname + '/lie/' + this.lie.uid
+        },
+    },
+    watch: {
+        lie: function()
+        {
+            router.meta.length = 0
+            router.meta.push(
+                {
+                    name: 'og:title', content: this.$t('lie.share.title', { liar: this.lie.liar }),
+                },
+                {
+                    name: 'og:type',
+                    content: 'article',
+                },
+                {
+                    name: 'og:image',
+                    content: this.liePicture('main'),
+                },
+                {
+                    name: 'og:url',
+                    content: this.shareUrl,
+                },
+                {
+                    name: 'og:description',
+                    content: this.getDescriptionSample,
+                }
+            )
         },
     },
     methods: {

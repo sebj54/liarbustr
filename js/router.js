@@ -10,7 +10,13 @@ const router = {
      * @type {Array}
      */
     routes: [],
-
+    meta:
+    [
+        {
+            name: 'og:title',
+            content: 'Coucou',
+        },
+    ],
     /**
      * Add a route with lazy loading
      * @param {string} route Route URL (e.g. 'home')
@@ -36,6 +42,9 @@ const router = {
                             }
                         },
                         template: template,
+                        metaInfo: {
+                            meta: router.meta,
+                        },
                     })
                 })
             },
