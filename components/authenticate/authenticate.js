@@ -68,6 +68,14 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
             user.registerWithEmail()
         },
         /**
+         * Show register form
+         */
+        showRegisterForm: function()
+        {
+            this.showLoginWithEmail = false
+            this.showRegisterWithEmail = true
+        },
+        /**
          * Toogle login and register forms
          */
         toggleForms: function()

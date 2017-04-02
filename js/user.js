@@ -51,32 +51,7 @@ const user = {
             if (firebaseUser)
             {
                 user.fetch(firebaseUser)
-                .then(function(fetchedUser)
-                {
-                    const updates = {}
-                    updates['/users/' + fetchedUser.uid + '/lastLogin'] = Date.now()
-
-                    app.db.ref('/users/' + fetchedUser.uid).once('value')
-                    .then(function(snapshot)
-                    {
-                        const keys = [
-                            'email',
-                            'name',
-                            'profilePicture',
-                            'uid',
-                        ]
-
-                        keys.forEach(function(key)
-                        {
-                            if (!_.hasProp(snapshot, key) || snapshot[key] !== fetchedUser[key])
-                            {
-                                updates['/users/' + fetchedUser.uid + '/' + key] = fetchedUser[key]
-                            }
-                        })
-
-                        app.db.ref().update(updates)
-                    })
-                })
+                .then(user.updateFromFirebaseUser)
             }
             else
             {
@@ -178,7 +153,6 @@ const user = {
         const email = data.email
         const password = data.password
 
-
         firebase.auth().signInWithEmailAndPassword(email, password)
         .catch(function(error)
         {
@@ -231,10 +205,45 @@ const user = {
      */
     registerWithEmail: function()
     {
-        firebase.auth().createUserWithEmailAndPassword(user.signup.email, user.signup.password)
-        .then(function(response)
+        const credential = firebase.auth.EmailAuthProvider.credential(user.signup.email, user.signup.password)
+
+        firebase.auth().currentUser.link(credential)
+        .then(function(firebaseUser)
         {
+            user.fetch(firebaseUser)
+            .then(user.updateFromFirebaseUser)
+        },
+        user.handleError)
+    },
+
+    /**
+     * Update Database User from Firebase User
+     * @param  {firebase.User} firebaseUser Firebase User
+     */
+    updateFromFirebaseUser: function(firebaseUser)
+    {
+        const updates = {}
+        updates['/users/' + firebaseUser.uid + '/lastLogin'] = Date.now()
+
+        app.db.ref('/users/' + firebaseUser.uid).once('value')
+        .then(function(snapshot)
+        {
+            const keys = [
+                'email',
+                'name',
+                'profilePicture',
+                'uid',
+            ]
+
+            keys.forEach(function(key)
+            {
+                if (!_.hasProp(snapshot, key) || snapshot[key] !== firebaseUser[key])
+                {
+                    updates['/users/' + firebaseUser.uid + '/' + key] = firebaseUser[key]
+                }
+            })
+
+            app.db.ref().update(updates)
         })
-        .catch(user.handleError)
     },
 }
