@@ -1,0 +1,16 @@
+.alert {
+    margin-bottom: 2em;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 24px;
+    padding-right: 24px;
+
+    &.-danger {
+    }
+    &.-info {
+    }
+    &.-success {
+    }
+    &.-warning {
+    }
+}
