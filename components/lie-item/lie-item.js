@@ -144,22 +144,22 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
             router.meta.length = 0
             router.meta.push(
                 {
-                    name: 'og:title', content: this.$t('lie.share.title', { liar: this.lie.liar }),
+                    property: 'og:title', content: this.$t('lie.share.title', { liar: this.lie.liar }),
                 },
                 {
-                    name: 'og:type',
+                    property: 'og:type',
                     content: 'article',
                 },
                 {
-                    name: 'og:image',
+                    property: 'og:image',
                     content: this.liePicture('main'),
                 },
                 {
-                    name: 'og:url',
+                    property: 'og:url',
                     content: this.shareUrl,
                 },
                 {
-                    name: 'og:description',
+                    property: 'og:description',
                     content: this.getDescriptionSample,
                 }
             )
