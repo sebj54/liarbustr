@@ -137,47 +137,54 @@ const user = {
         {
             if (error.code === 'auth/credential-already-in-use' && _.hasProp(error, 'credential'))
             {
-                firebase.auth().signInWithCredential(error.credential)
-                .then(function(firebaseUser)
+                // Merge anonymous user's data and existing user's data
+                app.db.ref('/users/' + anonUser.uid + '/votes').once('value')
+                .then(function(anonVotesSnapshot)
                 {
-                    // Merge anonymous user's data and existing user's data
-                    app.db.ref('/users/' + anonUser.uid + '/votes').once('value')
-                    .then(function(anonVotesSnapshot)
+                    const anonVotes = anonVotesSnapshot.val()
+
+                    app.db.ref('/users/' + anonUser.uid).remove()
+                    .then(function()
                     {
-                        const anonVotes = anonVotesSnapshot.val()
-
-                        if (_.isObject(anonVotes) && !_.isEmptyObject(anonVotes))
+                        firebase.auth().signInWithCredential(error.credential)
+                        .then(function(firebaseUser)
                         {
-                            app.db.ref('/users/' + firebaseUser.uid + '/votes').once('value')
-                            .then(function(userVotesSnapshot)
+                            if (_.isObject(anonVotes) && !_.isEmptyObject(anonVotes))
                             {
-                                const userVotes = userVotesSnapshot.val()
-
-                                Object.keys(anonVotes).forEach(function(lieUid)
+                                app.db.ref('/users/' + firebaseUser.uid + '/votes').once('value')
+                                .then(function(userVotesSnapshot)
                                 {
-                                    const updates = {}
-                                    const lieVotePath = '/lies/' + lieUid + '/votes/' + userVotes[lieUid]
+                                    const userVotes = userVotesSnapshot.val()
 
-                                    updates['/users/' + firebaseUser.uid + '/votes/' + lieUid] = anonVotes[lieUid]
+                                    Object.keys(anonVotes).forEach(function(lieUid)
+                                    {
+                                        const updates = {}
+                                        const lieVotePath = '/lies/' + lieUid + '/votes/' + userVotes[lieUid]
 
-                                    app.db.ref(lieVotePath).once('value')
-                                    .then(function(lieVoteSnapshot)
-                                    {
-                                        updates[lieVotePath] = lieVoteSnapshot.val() - 1
-                                        app.db.ref().update(updates)
-                                    })
-                                    .catch(function()
-                                    {
-                                        app.db.ref().update(updates)
+                                        updates['/users/' + firebaseUser.uid + '/votes/' + lieUid] = anonVotes[lieUid]
+
+                                        app.db.ref(lieVotePath).once('value')
+                                        .then(function(lieVoteSnapshot)
+                                        {
+                                            updates[lieVotePath] = lieVoteSnapshot.val() - 1
+                                            app.db.ref().update(updates)
+                                        })
+                                        .catch(function()
+                                        {
+                                            app.db.ref().update(updates)
+                                        })
                                     })
                                 })
-                            })
-                            .catch(user.handleError)
-                        }
+                                .catch(user.handleError)
+                            }
+                        })
+                        .catch(user.handleError)
                     })
-                    .catch(user.handleError)
                 })
-                .catch(user.handleError)
+                .catch(function()
+                {
+                    app.db.ref('/users/' + anonUser.uid).remove()
+                })
             }
             else
             {
@@ -235,7 +242,6 @@ const user = {
         firebase.auth().signOut()
         .then(function()
         {
-            firebase.auth().signInAnonymously()
             app.router.push('/')
         })
         .catch(user.handleError)
