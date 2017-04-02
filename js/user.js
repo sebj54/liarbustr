@@ -146,58 +146,6 @@ const user = {
         console.error(...args)
     },
 
-    /**
-     * Login with Facebook
-     */
-    loginWithFacebook: function()
-    {
-        user.loginWith(new firebase.auth.FacebookAuthProvider())
-    },
-
-    /**
-     * Login with Twitter
-     */
-    loginWithTwitter: function()
-    {
-        user.loginWith(new firebase.auth.TwitterAuthProvider())
-    },
-
-    /**
-     * Login with Google
-     */
-    loginWithGoogle: function()
-    {
-        user.loginWith(new firebase.auth.GoogleAuthProvider())
-    },
-
-    /**
-     * Sign up with an e-mail address
-     */
-    signupWithEmail: function()
-    {
-        firebase.auth().createUserWithEmailAndPassword(user.signup.email, user.signup.password)
-        .then(function(response)
-        {
-        })
-        .catch(user.handleError)
-    },
-
-    signinWithEmail: function(data)
-    {
-        const email = data.email
-        const password = data.password
-
-
-        firebase.auth().signInWithEmailAndPassword(email, password)
-        .catch(function(error)
-        {
-            const errorCode = error.code
-            const errorMessage = error.message
-
-            user.handleError(errorCode, errorMessage)
-        })
-    },
-
 
     /**
      * Login with an external service
@@ -225,6 +173,46 @@ const user = {
         })
     },
 
+    loginWithEmail: function(data)
+    {
+        const email = data.email
+        const password = data.password
+
+
+        firebase.auth().signInWithEmailAndPassword(email, password)
+        .catch(function(error)
+        {
+            const errorCode = error.code
+            const errorMessage = error.message
+
+            user.handleError(errorCode, errorMessage)
+        })
+    },
+
+    /**
+     * Login with Facebook
+     */
+    loginWithFacebook: function()
+    {
+        user.loginWith(new firebase.auth.FacebookAuthProvider())
+    },
+
+    /**
+     * Login with Google
+     */
+    loginWithGoogle: function()
+    {
+        user.loginWith(new firebase.auth.GoogleAuthProvider())
+    },
+
+    /**
+     * Login with Twitter
+     */
+    loginWithTwitter: function()
+    {
+        user.loginWith(new firebase.auth.TwitterAuthProvider())
+    },
+
     /**
      * Log out
      */
@@ -234,6 +222,18 @@ const user = {
         .then(function()
         {
             firebase.auth().signInAnonymously()
+        })
+        .catch(user.handleError)
+    },
+
+    /**
+     * Sign up with an e-mail address
+     */
+    registerWithEmail: function()
+    {
+        firebase.auth().createUserWithEmailAndPassword(user.signup.email, user.signup.password)
+        .then(function(response)
+        {
         })
         .catch(user.handleError)
     },

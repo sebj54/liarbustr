@@ -8,11 +8,11 @@
     </div>
 
     <button type="button" class="authenticate-logout" @click="logout" v-if="!isAnonymous">{{ $t('authenticate.logout') }}</button>
-        <button type="button "class="signup-title" v-if="!showSignupWithEmail && isAnonymous" @click="showSignupForm">{{ $t('authenticate.signUpTitle') }}</button>
-    <div class="signup-form-container" :class="{ '-hide-signup-form' : showSigninWithEmail }">
+        <button type="button "class="signup-title" v-if="!showRegisterWithEmail && isAnonymous" @click="toggleForms">{{ $t('authenticate.signUpTitle') }}</button>
+    <div class="signup-form-container" :class="{ '-hide-signup-form' : showLoginWithEmail }">
 
 
-        <form class="signup-form" v-if="showSignupWithEmail" @submit.prevent="signupEmail">
+        <form class="signup-form" v-if="showRegisterWithEmail" @submit.prevent="registerWithEmail">
 
             <div class="signup-group -name">
                 <label for="name" class="authenticate-label -name">{{ $t('authenticate.name') }}</label>
@@ -40,11 +40,11 @@
 
             <button type="submit" class="authenticate-form-submit">{{ $t('authenticate.signupSubmitButton') }}</button>
         </form>
-        <button class="authenticate-got-account" v-if="!showSigninWithEmail" @click="showSigninForm">{{ $t('authenticate.gotAnAccountTitle') }}</button>
+        <button class="authenticate-got-account" v-if="!showLoginWithEmail" @click="toggleForms">{{ $t('authenticate.gotAnAccountTitle') }}</button>
     </div>
 
-    <div class="signin-form-container" v-if="showSigninWithEmail">
-        <form class="signin-form" @submit.prevent="signinEmail" >
+    <div class="signin-form-container" v-if="showLoginWithEmail">
+        <form class="signin-form" @submit.prevent="loginWithEmail" >
             <div class="signin-group">
                 <label class="authenticate-label" for="email">{{ $t('authenticate.email') }}</label>
                 <div class="authenticate-input-wrapper">
