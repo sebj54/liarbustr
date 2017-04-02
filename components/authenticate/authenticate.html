@@ -39,7 +39,7 @@
 
             <button type="submit" class="authenticate-form-submit">{{ $t('authenticate.signupSubmitButton') }}</button>
         </form>
-        <button class="authenticate-got-account" v-if="!showLoginWithEmail && isAnonymous" @click="toggleForms">{{ $t('authenticate.gotAnAccountTitle') }}</button>
+        <button class="authenticate-got-account" v-if="!showLoginWithEmail && isAnonymous" @click="showLoginForm">{{ $t('authenticate.gotAnAccountTitle') }}</button>
     </div>
 
     <div class="signin-form-container" v-if="showLoginWithEmail && isAnonymous">
