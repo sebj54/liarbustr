@@ -141,30 +141,34 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
     watch: {
         lie: function()
         {
-            router.meta.length = 0
-            router.meta.push(
-                {
-                    property: 'og:title', content: this.$t('lie.share.title', { liar: this.lie.liar }),
-                },
-                {
-                    property: 'og:type',
-                    content: 'article',
-                },
-                {
-                    property: 'og:image',
-                    content: this.liePicture('main'),
-                },
-                {
-                    property: 'og:url',
-                    content: this.shareUrl,
-                },
-                {
-                    property: 'og:description',
-                    content: this.getDescriptionSample,
-                }
-            )
-            router.title = this.$t('lie.share.title', { liar: this.lie.liar })
-            router.description = this.getDescriptionSample
+            console.log(this)
+            if (this.meta)
+            {
+                router.meta.length = 0
+                router.meta.push(
+                    {
+                        property: 'og:title', content: this.$t('lie.share.title', { liar: this.lie.liar }),
+                    },
+                    {
+                        property: 'og:type',
+                        content: 'article',
+                    },
+                    {
+                        property: 'og:image',
+                        content: this.liePicture('main'),
+                    },
+                    {
+                        property: 'og:url',
+                        content: this.shareUrl,
+                    },
+                    {
+                        property: 'og:description',
+                        content: this.getDescriptionSample,
+                    }
+                )
+                router.title = this.$t('lie.share.title', { liar: this.lie.liar })
+                router.description = this.getDescriptionSample
+            }
         },
     },
     methods: {

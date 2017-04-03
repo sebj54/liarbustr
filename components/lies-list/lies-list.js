@@ -1,10 +1,17 @@
-/* global Vue app */
+/* global Vue app router */
 
 /**
  * Lies list component
  * @type {VueComponent}
  */
 Vue.component('lies-list', app.resolveTemplate('lies-list', {
+    data: function()
+    {
+        const data = {}
+        router.title = 'Politicians lies'
+        router.description = 'Discover new politians lies and vote!'
+        return data
+    },
     firebase: function()
     {
         return {
