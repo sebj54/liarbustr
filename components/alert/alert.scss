@@ -4,13 +4,39 @@
     padding-bottom: 12px;
     padding-left: 24px;
     padding-right: 24px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: transparent;
+    text-align: center;
 
     &.-danger {
+        background-color: #f2dede;
+        border-color: #ebcccc;
+        color: #a94442;
     }
     &.-info {
+        background-color: #d9edf7;
+        border-color: #bcdff1;
+        color: #31708f;
     }
     &.-success {
+        background-color: #dff0d8;
+        border-color: #d0e9c6;
+        color: #3c763d;
     }
     &.-warning {
+        background-color: #fcf8e3;
+        border-color: #faf2cc;
+        color: #8a6d3b;
+    }
+
+    p {
+        &:first-child {
+            margin-top: 0;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 }
