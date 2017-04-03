@@ -163,6 +163,8 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
                     content: this.getDescriptionSample,
                 }
             )
+            router.title = this.$t('lie.share.title', { liar: this.lie.liar })
+            router.description = this.getDescriptionSample
         },
     },
     methods: {
