@@ -39,6 +39,7 @@
     "lieForm": {
         "liar": "Qui a dit ce mensonge ? ",
         "liarPlaceholder" : "ex. : François Fillon",
+        "mustLoginAlert": "Vous devez être connecté pour révéler un mensonge !",
         "sources": {
             "add": "Ajouter une source",
             "addPlaceholder": "ex. : http://emailsanta.com/Santa-Claus-FAQ/is-santa-real.asp",
