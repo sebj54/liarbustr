@@ -1,8 +1,45 @@
 input:focus,
 select:focus,
-textarea:focus,
-button:focus {
+textarea:focus {
     outline: none;
+}
+
+@mixin button-small() {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+@mixin button-large() {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+@mixin button-color($color-start: #ff9a44, $color-stop: #fc6076, $text-color: #fff) {
+    background-image: linear-gradient(-20deg, #{$color-stop} 0%, #{$color-start} 100%);
+    color: #{$text-color};
+
+    &:hover,
+    &:focus {
+        filter: brightness(1.2) saturate(1.2);
+    }
+
+    &:focus {
+        outline-color: $color-start;
+        outline-style: solid;
+        outline-width: 1px;
+    }
+
+    &:active {
+        outline: none;
+    }
+}
+
+@mixin button-color-secondary() {
+    @include button-color(#43cec0, #99d8fc);
 }
 
 button,
@@ -19,7 +56,7 @@ button,
     font-family: inherit;
     font-size: 1.1em;
     transform: translateY(0);
-    transition-property: box-shadow;
+    transition-property: filter;
     transition-duration: .2s;
     transition-timing-function: ease-out;
     cursor: pointer;
@@ -36,46 +73,32 @@ button,
         margin-right: 8px;
         flex-shrink: 0;
     }
-}
 
-@mixin button-small() {
-    padding-top: 3px;
-    padding-bottom: 3px;
-    padding-left: 8px;
-    padding-right: 8px;
-}
-
-@mixin button-color($color-start: #ff9a44, $color-stop: #fc6076, $text-color: #fff) {
-    background-image: linear-gradient(-20deg, #{$color-stop} 0%, #{$color-start} 100%);
-    color: #{$text-color};
-
-    &:hover,
-    &:focus {
-        box-shadow: 0 0 6px #{$color-start};
+    &.-facebook {
+        @include button-color(#3b5998, #2b4170);
     }
 
-    &:active {
-        outline: none;
-        box-shadow: 0 0 20px #{$color-start};
+    &.-google {
+        @include button-color(#e64522, #c33219);
+    }
+
+    &.-twitter {
+        @include button-color(#00aced, #0081ce);
     }
 }
 
-@mixin button-color-secondary() {
-    @include button-color(#43cec0, #99d8fc);
-}
-
-input[type="date"],
-input[type="datetime-local"],
-input[type="email"],
-input[type="month"],
-input[type="number"],
-input[type="password"],
-input[type="search"],
-input[type="tel"],
-input[type="text"],
-input[type="time"],
-input[type="url"],
-input[type="week"],
+[type="date"],
+[type="datetime-local"],
+[type="email"],
+[type="month"],
+[type="number"],
+[type="password"],
+[type="search"],
+[type="tel"],
+[type="text"],
+[type="time"],
+[type="url"],
+[type="week"],
 textarea,
 .-is-fake-input {
     padding-top: 4px;
@@ -86,6 +109,7 @@ textarea,
     border-style: solid;
     border-color: $color-grey;
     border-radius: 3px;
+    line-height: 1.4;
     font-family: inherit;
     text-overflow: ellipsis;
     transition-property: border-color, box-shadow;
