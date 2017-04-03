@@ -1,3 +1,7 @@
 <div class="lie-form-view">
-    <lie-form></lie-form>
+    <alert type="danger" :message="$t('lieForm.mustLoginAlert')" v-if="user.isAnonymous"></alert>
+
+    <authenticate v-if="user.isAnonymous"></authenticate>
+
+    <lie-form v-if="!user.isAnonymous"></lie-form>
 </div>

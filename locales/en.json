@@ -39,6 +39,7 @@
     "lieForm": {
         "liar": "Who told that lie? ",
         "liarPlaceholder" : "e.g. Donald J. Trump",
+        "mustLoginAlert": "You must login to reveal a lie!",
         "sources": {
             "add": "Add another source",
             "addPlaceholder": "e.g. http://emailsanta.com/Santa-Claus-FAQ/is-santa-real.asp",
