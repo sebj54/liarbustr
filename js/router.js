@@ -1,4 +1,4 @@
-/* global app user */
+/* global app user document */
 
 /**
  * Router - Contain routes and routes-related properties and methods
@@ -17,6 +17,8 @@ const router = {
             content: 'LiarBustr',
         },
     ],
+    title: 'Liarbustr - Liar or not?',
+    description: 'Report politicians lies, vote with the community and we\'ll know if they lied about corruption, tax evasion, economy, ecology, immigration, fictional employment..."',
     /**
      * Add a route with lazy loading
      * @param {string} route Route URL (e.g. 'home')
@@ -44,6 +46,11 @@ const router = {
                         template: template,
                         metaInfo: {
                             meta: router.meta,
+                            changed: function(newInfo, addedTags, removedTags)
+                            {
+                                document.title = router.title
+                                document.getElementsByName('description')[0].content = router.description
+                            },
                         },
                     })
                 })
