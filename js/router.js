@@ -1,4 +1,4 @@
-/* global app */
+/* global app user */
 
 /**
  * Router - Contain routes and routes-related properties and methods
@@ -29,6 +29,12 @@ const router = {
                 app.get('views' + absolutePath + absolutePath + '.html', function(template)
                 {
                     resolve({
+                        data: function()
+                        {
+                            return {
+                                user: user,
+                            }
+                        },
                         template: template,
                     })
                 })
