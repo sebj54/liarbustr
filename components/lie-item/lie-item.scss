@@ -379,8 +379,15 @@
     }
 
     &-form {
+        box-shadow: 0 10px 20px rgba($color-grey-dark, .19), 0 6px 6px rgba($color-grey-dark, .23);
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        background-color: $color-whitey;
+
         .lie-item-figure {
             color: #b58e4f;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
         }
 
         .lie-item-title {

@@ -14,7 +14,7 @@ const router = {
     [
         {
             name: 'og:title',
-            content: 'Coucou',
+            content: 'LiarBustr',
         },
     ],
     /**
