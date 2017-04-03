@@ -8,10 +8,12 @@
     </div>
 
     <button type="button" class="authenticate-logout" @click="logout" v-if="!isAnonymous">{{ $t('authenticate.logout') }}</button>
-    <button type="button "class="signup-title" v-if="!showRegisterWithEmail && isAnonymous" @click="showRegisterForm">{{ $t('authenticate.signUpTitle') }}</button>
 
-    <div class="signup-form-container" :class="{ '-hide-signup-form' : showLoginWithEmail }">
-        <form class="signup-form" v-if="showRegisterWithEmail && isAnonymous" @submit.prevent="registerWithEmail">
+    <button type="button "class="signup-title" v-if="!showRegisterWithEmail && isAnonymous" @click="showRegisterForm">{{ $t('authenticate.signUpTitle') }}</button>
+    <button class="authenticate-got-account" v-if="!showLoginWithEmail && isAnonymous" @click="showLoginForm">{{ $t('authenticate.gotAnAccountTitle') }}</button>
+
+    <div class="signup-form-container" v-expand="showRegisterWithEmail && isAnonymous">
+        <form class="signup-form" @submit.prevent="registerWithEmail">
 
             <div class="signup-group -name">
                 <label for="name" class="authenticate-label -name">{{ $t('authenticate.name') }}</label>
@@ -39,10 +41,9 @@
 
             <button type="submit" class="authenticate-form-submit">{{ $t('authenticate.signupSubmitButton') }}</button>
         </form>
-        <button class="authenticate-got-account" v-if="!showLoginWithEmail && isAnonymous" @click="showLoginForm">{{ $t('authenticate.gotAnAccountTitle') }}</button>
     </div>
 
-    <div class="signin-form-container" v-if="showLoginWithEmail && isAnonymous">
+    <div class="signin-form-container" v-expand="showLoginWithEmail && isAnonymous">
         <form class="signin-form" @submit.prevent="loginWithEmail" >
             <div class="signin-group">
                 <label class="authenticate-label" for="email">{{ $t('authenticate.email') }}</label>

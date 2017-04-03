@@ -9,112 +9,93 @@
     box-shadow: 0px 10px 20px -5px rgba(194,194,194,1);
     border-radius: 5px;
     background-color: rgba(255, 255, 255, .9);
-}
 
-.authenticate-title {
-    position: relative;
-    margin-top: 0;
-    padding: 6px 10px 10px;
+    &-title {
+        position: relative;
+        margin-top: 0;
+        padding: 6px 10px 10px;
 
-    &:after {
-        content: "";
-        display: block;
-        margin: 9px auto 0 auto;
-        height: 2px;
-        width: 80%;
+        &:after {
+            content: "";
+            display: block;
+            margin: 9px auto 0 auto;
+            height: 2px;
+            width: 80%;
 
-        background-color: $color-primary-normal;
-    }
-}
-
-.authenticate-button {
-    display: block;
-    width: 280px;
-    margin-bottom: 20px;
-    padding: 8px 22px;
-
-    color: white;
-    border-radius: 3px;
-
-    &.-facebook {
-        background-color: $facebook-color;
-    }
-
-    &.-twitter {
-        background-color: $twitter-color;
-    }
-
-    &.-google {
-        background-color: $google-color;
-    }
-}
-
-
-.signup-title {
-    text-align: center;
-    font-weight: normal;
-    text-decoration: underline;
-
-    color: rgb(80, 80, 80);
-}
-.signup-form-container, .signin-form-container {
-    width: 280px;
-}
-.signup-form, .signin-form {
-    width: 100%;
-    text-align: left;
-}
-
-.authenticate-input-wrapper {
-    position: relative;
-
-    .svg-icon {
-        position: absolute;
-        top: 50%;
-        left: 10px;
-
-        height: 20px;
-        width: 20px;
-
-        transform: translateY(-50%);
-        fill: lightgrey;
-        &.-user {
-            stroke: none;
+            background-color: $color-primary-normal;
         }
     }
+
+    &-button {
+        display: block;
+        min-width: 280px;
+        margin-bottom: 20px;
+        @include button-large();
+    }
+
+    &-label {
+        display: block;
+        margin-top: 4px;
+        margin-bottom: 4px;
+        text-align: left;
+    }
+
+    &-input {
+        display: block;
+        width: 100%;
+        margin-bottom: 12px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        padding-left: 36px;
+
+        &-wrapper {
+            position: relative;
+
+            .svg-icon {
+                position: absolute;
+                top: 50%;
+                left: 10px;
+
+                height: 20px;
+                width: 20px;
+
+                transform: translateY(-50%);
+                fill: lightgrey;
+            }
+        }
+    }
+
+    &-form-submit {
+        @include button-color();
+    }
+
+    &-got-account {
+        font-size: .9em;
+        color: #848484;
+    }
 }
 
-.authenticate-label {
-    display: block;
-    margin: 4px 0;
+.signup-title {
+    text-decoration: underline;
+    color: #505050;
 }
-
-.authenticate-input {
-    width: 100%;
-    padding: 6px 10px 6px 40px;
-
-    box-sizing: border-box;
-    border: 1px solid $color-grey-light;
-    border-radius: 3px;
-}
-
-.authenticate-form-submit {
-    width: 100%;
-    margin-top: 10px;
-    padding: 6px 0;
-
-    box-sizing: border-box;
-    color: white;
-    border-radius: 5px;
-    background-color: $color-primary-normal;
-}
-
-.authenticate-got-account {
-    font-size: .7em;
-    color: lightgrey;
-    cursor: pointer;
-}
-
-.signin-form-container{
+.signup-form-container,
+.signin-form-container {
+    min-width: 280px;
     margin-top: 20px;
+    overflow: hidden;
+    transition-property: height, margin-top;
+    transition-duration: .4s;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    &.-is-not-expanded {
+        height: 0 !important;
+        margin-top: 0;
+        transition-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    }
+}
+.signup-form,
+.signin-form {
+    width: 100%;
+    text-align: center;
 }
