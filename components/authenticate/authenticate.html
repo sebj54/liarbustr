@@ -2,9 +2,18 @@
     <h1 class="authenticate-title">{{ $t('authenticate.title') }}</h1>
 
     <div class="authenticate-buttons-wrapper">
-        <button type="button" class="authenticate-button -facebook" @click="loginWithFacebook" v-if="isAnonymous">{{ $t('authenticate.loginWithFacebook') }}</button>
-        <button type="button" class="authenticate-button -twitter" @click="loginWithTwitter" v-if="isAnonymous">{{ $t('authenticate.loginWithTwitter') }}</button>
-        <button type="button" class="authenticate-button -google" @click="loginWithGoogle" v-if="isAnonymous">{{ $t('authenticate.loginWithGoogle') }}</button>
+        <button type="button" class="authenticate-button -facebook" @click="loginWithFacebook" v-if="isAnonymous">
+            <svg-icon name="facebook" class="authenticate-button-icon -facebook"></svg-icon>
+            <span class="authenticate-button-text -facebook">{{ $t('authenticate.loginWithFacebook') }}</span>
+        </button>
+        <button type="button" class="authenticate-button -twitter" @click="loginWithTwitter" v-if="isAnonymous">
+            <svg-icon name="twitter" class="authenticate-button-icon -twitter"></svg-icon>
+            <span class="authenticate-button-text -twitter">{{ $t('authenticate.loginWithTwitter') }}</span>
+        </button>
+        <button type="button" class="authenticate-button -google" @click="loginWithGoogle" v-if="isAnonymous">
+            <svg-icon name="google" class="authenticate-button-icon -google"></svg-icon>
+            <span class="authenticate-button-text -google">{{ $t('authenticate.loginWithGoogle') }}</span>
+        </button>
     </div>
 
     <button type="button" class="authenticate-logout" @click="logout" v-if="!isAnonymous">{{ $t('authenticate.logout') }}</button>
