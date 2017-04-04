@@ -9,13 +9,15 @@
 
     <button type="button" class="authenticate-logout" @click="logout" v-if="!isAnonymous">{{ $t('authenticate.logout') }}</button>
 
-    <button type="button "class="signup-title" v-if="!showRegisterWithEmail && isAnonymous" @click="showRegisterForm">{{ $t('authenticate.signUpTitle') }}</button>
+    <button type="button "class="authenticate-login" v-if="!showRegisterWithEmail && isAnonymous" @click="showRegisterForm">{{ $t('authenticate.signUpTitle') }}</button>
     <button class="authenticate-got-account" v-if="!showLoginWithEmail && isAnonymous" @click="showLoginForm">{{ $t('authenticate.gotAnAccountTitle') }}</button>
 
-    <div class="signup-form-container" v-expand="showRegisterWithEmail && isAnonymous">
-        <form class="signup-form" @submit.prevent="registerWithEmail">
+    <alert class="authenticate-form-alert" type="danger" :message="error.message" v-for="error in errors"></alert>
 
-            <div class="signup-group -name">
+    <div class="authenticate-form-container" v-expand="showRegisterWithEmail && isAnonymous">
+        <form class="authenticate-form" @submit.prevent="registerWithEmail">
+
+            <div class="authenticate-form-group -name">
                 <label for="name" class="authenticate-label -name">{{ $t('authenticate.name') }}</label>
                 <div class="authenticate-input-wrapper">
                     <svg-icon name="user"></svg-icon>
@@ -23,7 +25,7 @@
                 </div>
             </div>
 
-            <div class="signup-group -email">
+            <div class="authenticate-form-group -email">
                 <label for="email" class="authenticate-label -email">{{ $t('authenticate.email') }}</label>
                 <div class="authenticate-input-wrapper">
                     <svg-icon name="email"></svg-icon>
@@ -31,7 +33,7 @@
                 </div>
             </div>
 
-            <div class="signup-group -password">
+            <div class="authenticate-form-group -password">
                 <label for="password" class="authenticate-label -password">{{ $t('authenticate.password') }}</label>
                 <div class="authenticate-input-wrapper">
                     <svg-icon name="locker"></svg-icon>
@@ -43,16 +45,16 @@
         </form>
     </div>
 
-    <div class="signin-form-container" v-expand="showLoginWithEmail && isAnonymous">
-        <form class="signin-form" @submit.prevent="loginWithEmail" >
-            <div class="signin-group">
+    <div class="authenticate-form-container" v-expand="showLoginWithEmail && isAnonymous">
+        <form class="authenticate-form" @submit.prevent="loginWithEmail" >
+            <div class="authenticate-form-group">
                 <label class="authenticate-label" for="email">{{ $t('authenticate.email') }}</label>
                 <div class="authenticate-input-wrapper">
                     <svg-icon name="email"></svg-icon>
                     <input class="authenticate-input" type="email" name="email" v-model="signin.email" :placeholder="$t('authenticate.email')">
                 </div>
             </div>
-            <div class="signin-group">
+            <div class="authenticate-form-group">
                 <label class="authenticate-label" for="password">{{ $t('authenticate.password') }}</label>
                 <div class="authenticate-input-wrapper">
                     <svg-icon name="locker"></svg-icon>

@@ -1,4 +1,4 @@
-/* global firebase Vue VueRouter XMLHttpRequest _ router user document SocialSharing */
+/* global firebase Vue VueRouter XMLHttpRequest _ router user document SocialSharing $t */
 
 /**
  * App - Provide useful methods across components
@@ -133,6 +133,19 @@ const app = {
         xhr.onerror = wrappedErrorCallback
 
         xhr.send()
+    },
+
+    /**
+     * Get an error object (with code and translated message as properties) from an error code
+     * @param  {string} errorCode Error code
+     * @return {object} Error object
+     */
+    getError: function(errorCode)
+    {
+        return {
+            code: errorCode,
+            message: app.vue.$t('errors.' + errorCode.replace('/', '.')),
+        }
     },
 
     /**

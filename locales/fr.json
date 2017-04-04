@@ -9,22 +9,33 @@
             "twitter": "Partager sur Twitter"
         }
     },
+    "errors": {
+        "auth": {
+            "credential-already-in-use": "Données de connexion déjà utilisées par un autre compte.",
+            "email-already-in-use": "Cet e-mail est déjà utilisé par un autre compte. Veuillez-vous connecter ou utiliser une autre adresse.",
+            "invalid-credential": "Données de connexion invalides. Elles ont probablement expirées.",
+            "invalid-email": "Cette adresse e-mail est invalide.",
+            "operation-not-allowed": "Opération non permise.",
+            "provider-already-linked": "Ces comptes ont déjà été liés.",
+            "wrong-password": "Mot de passe incorrect. Veuillez le saisir à nouveau."
+        }
+    },
     "authenticate": {
         "email": "Adresse e-mail",
+        "emailPlaceholder": "ex : pierre.dupont@email.com",
         "gotAnAccountTitle": "Se connecter avec une adresse email",
-        "namePlaceholder": "ex : Pierre Dupont",
         "loginWithFacebook": "Se connecter avec Facebook",
         "loginWithTwitter": "Se connecter avec Twitter",
         "loginWithGoogle": "Se connecter avec Google",
         "logout": "Se déconnecter",
         "name": "Nom",
-        "emailPlaceholder": "ex : pierre.dupont@email.com",
+        "namePlaceholder": "ex : Pierre Dupont",
         "password": "Mot de passe",
         "passwordPlaceholder": "Choisissez un mot de passe, tapez-le et mémorisez-le !",
-        "signInTitle": "Se connecter",
-        "signUpTitle": "ou s'inscrire avec une adresse e-mail",
-        "signupSubmitButton": "S'inscrire",
         "signinSubmitButton": "Se connecter",
+        "signInTitle": "Se connecter",
+        "signupSubmitButton": "S'inscrire",
+        "signUpTitle": "ou s'inscrire avec une adresse e-mail",
         "title": "Venez comme vous êtes"
     },
     "lie": {

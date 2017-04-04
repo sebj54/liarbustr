@@ -249,18 +249,29 @@ const user = {
 
     /**
      * Sign up with an e-mail address
+     * @return {Promise<object>} A promise to the registered user
      */
     registerWithEmail: function()
     {
-        const credential = firebase.auth.EmailAuthProvider.credential(user.signup.email, user.signup.password)
-
-        firebase.auth().currentUser.link(credential)
-        .then(function(firebaseUser)
+        return new Promise(function(resolve, reject)
         {
-            user.fetch(firebaseUser)
-            .then(user.updateFromFirebaseUser)
-        },
-        user.handleError)
+            const credential = firebase.auth.EmailAuthProvider.credential(user.signup.email, user.signup.password)
+
+            firebase.auth().currentUser.link(credential)
+            .then(function(firebaseUser)
+            {
+                user.fetch(firebaseUser)
+                .then(function(fetchedUser)
+                {
+                    resolve(fetchedUser)
+                    user.updateFromFirebaseUser(fetchedUser)
+                })
+            },
+            function(error)
+            {
+                reject(app.getError(error.code))
+            })
+        })
     },
 
     /**
