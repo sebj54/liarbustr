@@ -69,14 +69,16 @@ const app = {
             console.warn('Translation error: (lang: "' + lang + '" for key: "' + key + '")')
         }
 
+        app.router = new VueRouter({
+            routes: router.routes,
+            mode: 'history',
+        })
+
         Vue.use(SocialSharing)
 
         app.vue = new Vue({
             el: '#app',
-            router: new VueRouter({
-                routes: router.routes,
-                mode: 'history',
-            }),
+            router: app.router,
         })
 
         user.init()
