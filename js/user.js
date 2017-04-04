@@ -197,16 +197,21 @@ const user = {
      * Login with an e-mail and a password
      * @param  {string} email E-mail address
      * @param  {string} password Password
+     * @return {Promise<object>} A promise to the logged in user
      */
     loginWithEmail: function(email, password)
     {
-        firebase.auth().signInWithEmailAndPassword(email, password)
-        .catch(function(error)
+        return new Promise(function(resolve, reject)
         {
-            const errorCode = error.code
-            const errorMessage = error.message
-
-            user.handleError(errorCode, errorMessage)
+            firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(function()
+            {
+                resolve()
+            })
+            .catch(function(error)
+            {
+                reject(app.getError(error.code))
+            })
         })
     },
 
