@@ -1,4 +1,4 @@
-/* global Vue app user */
+/* global Vue app user _ */
 
 /**
  * Lie item component
@@ -26,12 +26,33 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
     },
     methods: {
         /**
+         * Add an error for this component
+         * @param  {object} error Error object
+         */
+        addError: function(error)
+        {
+            this.errors.push(error)
+        },
+        /**
+         * Remove all errors
+         */
+        cleanErrors: function()
+        {
+            this.errors.length = 0
+        },
+        /**
          * Signin with email form
          */
         loginWithEmail: function()
         {
+            this.cleanErrors()
+
             user.loginWithEmail(this.signin.email, this.signin.password)
-            this.signin = {}
+            .then(function()
+            {
+                _.cleanObject(this.signin)
+            }.bind(this))
+            .catch(this.addError)
         },
         /**
          * Login with Facebook
@@ -66,13 +87,10 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
          */
         registerWithEmail: function()
         {
-            this.errors.length = 0
+            this.cleanErrors()
 
             user.registerWithEmail()
-            .catch(function(error)
-            {
-                this.errors.push(error)
-            }.bind(this))
+            .catch(this.addError)
         },
         /**
          * Show login form
