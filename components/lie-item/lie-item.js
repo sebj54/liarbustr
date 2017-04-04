@@ -141,7 +141,6 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
     watch: {
         lie: function()
         {
-            console.log(this)
             if (this.meta)
             {
                 router.meta.length = 0
