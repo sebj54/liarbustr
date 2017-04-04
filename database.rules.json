@@ -112,7 +112,7 @@
                     ".validate": "newData.isString()"
                 },
                 "profilePicture": {
-                    ".validate": "newData.isString() && newData.val().contains('//')"
+                    ".validate": "newData.isString() && (newData.val().length === 0 || newData.val().contains('//'))"
                 },
                 "uid": {
                     ".validate": "!data.exists() || data.val() === newData.val()"
