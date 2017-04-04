@@ -2,26 +2,21 @@
     "rules": {
         "lies": {
             ".read": true,
+            ".write": "auth !== null",
             "$lieUid": {
                 "accuser": {
-                    ".validate": "!data.exists() && newData.val() === auth.uid",
-                    ".write": "auth !== null && auth.provider !== 'anonymous'"
+                    ".validate": "auth.provider !== 'anonymous' && !data.exists() && newData.val() === auth.uid",
                 },
                 "title": {
-                    ".validate": "!data.exists() && newData.isString()",
-                    ".write": "auth !== null && auth.provider !== 'anonymous'"
+                    ".validate": "auth.provider !== 'anonymous' && !data.exists() && newData.isString()",
                 },
                 "liar": {
-                    ".validate": "!data.exists() && newData.isString()",
-                    ".write": "auth !== null && auth.provider !== 'anonymous'"
+                    ".validate": "auth.provider !== 'anonymous' && !data.exists() && newData.isString()",
                 },
                 "text": {
-                    ".validate": "!data.exists() && newData.isString()",
-                    ".write": "auth !== null && auth.provider !== 'anonymous'"
+                    ".validate": "auth.provider !== 'anonymous' && !data.exists() && newData.isString()",
                 },
                 "votes": {
-                    ".write": "auth !== null",
-
                     "liar": {
                         ".validate": "
                             (!data.exists() && newData.val() === 0)
@@ -66,8 +61,7 @@
                     }
                 },
                 "sources": {
-                    ".validate": "!data.exists()",
-                    ".write": "auth !== null && auth.provider !== 'anonymous'",
+                    ".validate": "auth.provider !== 'anonymous' && !data.exists()",
 
                     "statements": {
                         "$key": {
@@ -92,8 +86,7 @@
                     },
                 },
                 "pictures": {
-                    ".validate": "!data.exists() && newData.hasChildren(['main'])",
-                    ".write": "auth !== null && auth.provider !== 'anonymous'",
+                    ".validate": "auth.provider !== 'anonymous' && !data.exists() && newData.hasChildren(['main'])",
 
                     "main": {
                         ".validate": "!data.exists() && newData.isString() && newData.val().beginsWith('https://firebasestorage.googleapis.com/v0/b/liarbustr.appspot.com/o/images%2Flies%2F')"
