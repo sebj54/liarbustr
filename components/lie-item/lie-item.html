@@ -5,7 +5,7 @@
                 <img :src="liePicture('main')" :alt="$t('lie.picture', { liar: lie.liar })" class="lie-item-picture -main" @load="checkIfReady">
             </figure>
             <button @click="showCardBack" class="lie-item-share-button">
-                <span>{{$t('Share')}}</span>
+                <span>{{ $t('msc.share.global') }}</span>
                 <svg-icon name="share"></svg-icon>
             </button>
             <h2 class="lie-item-title">{{ lie.title }}</h2>
@@ -98,15 +98,15 @@
                     <network network="facebook" class="lie-item-share-action-button-wrapper">
                         <button type="button" name="button" class="lie-item-share-action-button">
                             <svg-icon name="facebook"></svg-icon>
-                            <span>{{$t('share.facebook')}}</span>
+                            <span>{{ $t('msc.share.facebook') }}</span>
                         </button>
                     </network>
                 </li>
                 <li class="lie-item-share-social-network-item -twitter">
                     <network network="twitter" class="lie-item-share-action-button-wrapper">
                         <button type="button" name="button" class="lie-item-share-action-button">
-                                <svg-icon name="twitter"></svg-icon>
-                                <span>{{$t('share.facebook')}}</span>
+                            <svg-icon name="twitter"></svg-icon>
+                            <span>{{ $t('msc.share.twitter') }}</span>
                         </button>
                     </network>
                 </li>

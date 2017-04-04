@@ -2,7 +2,12 @@
     "msc": {
         "authenticate": "Authenticate",
         "lie-form": "I accuse",
-        "lies-list": "Lies"
+        "lies-list": "Lies",
+        "share": {
+            "global": "Share",
+            "facebook": "Share on Facebook",
+            "twitter": "Share on Twitter"
+        }
     },
     "authenticate": {
         "email": "Email address",
@@ -61,9 +66,5 @@
             }
         },
         "uploading": "Uploading"
-    },
-    "share": {
-        "facebook": "Share on Facebook",
-        "twitter": "Share on Twitter"
     }
 }
