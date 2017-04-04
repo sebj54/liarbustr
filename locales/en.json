@@ -9,22 +9,33 @@
             "twitter": "Share on Twitter"
         }
     },
+    "errors": {
+        "auth": {
+            "credential-already-in-use": "Credential already used by another account.",
+            "email-already-in-use": "This e-mail address is already used by another account. Please login or use another.",
+            "invalid-credential": "Credential invalid. It may have expired.",
+            "invalid-email": "This e-mail address is invalid.",
+            "operation-not-allowed": "Operation not allowed.",
+            "provider-already-linked": "Your accounts have already been linked.",
+            "wrong-password": "Wrong password. Please retype it."
+        }
+    },
     "authenticate": {
-        "email": "Email address",
-        "gotAnAccountTitle": "User email to login",
-        "namePlaceholder": "e.g. John Doe",
+        "email": "E-mail address",
+        "emailPlaceholder": "e.g. johndoe@email.com",
+        "gotAnAccountTitle": "Login with your e-mail",
         "loginWithFacebook": "Login with Facebook",
         "loginWithTwitter": "Login with Twitter",
         "loginWithGoogle": "Login with Google",
         "logout": "Log out",
         "name": "Name",
-        "emailPlaceholder": "e.g. johndoe@email.com",
+        "namePlaceholder": "e.g. John Doe",
         "password": "Password",
         "passwordPlaceholder": "Choose a password, type it and memorize it!",
-        "signInTitle": "Signin",
-        "signUpTitle": "or signup with email",
-        "signupSubmitButton": "Signup",
-        "signinSubmitButton": "Signin",
+        "signinSubmitButton": "Login",
+        "signInTitle": "Login",
+        "signupSubmitButton": "Register",
+        "signUpTitle": "or register with your e-mail",
         "title": "Come as you are"
     },
     "lie": {

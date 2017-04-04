@@ -8,6 +8,7 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
     data: function()
     {
         return {
+            errors: [],
             signup: user.signup,
             signin: {
                 email: null,
@@ -65,7 +66,13 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
          */
         registerWithEmail: function()
         {
+            this.errors.length = 0
+
             user.registerWithEmail()
+            .catch(function(error)
+            {
+                this.errors.push(error)
+            }.bind(this))
         },
         /**
          * Show login form
