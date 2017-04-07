@@ -5,16 +5,16 @@
             ".write": "auth !== null",
             "$lieUid": {
                 "accuser": {
-                    ".validate": "auth.provider !== 'anonymous' && !data.exists() && newData.val() === auth.uid",
+                    ".validate": "auth.provider !== 'anonymous' && !data.exists() && newData.val() === auth.uid"
                 },
                 "title": {
-                    ".validate": "auth.provider !== 'anonymous' && !data.exists() && newData.isString()",
+                    ".validate": "auth.provider !== 'anonymous' && !data.exists() && newData.isString()"
                 },
                 "liar": {
-                    ".validate": "auth.provider !== 'anonymous' && !data.exists() && newData.isString()",
+                    ".validate": "auth.provider !== 'anonymous' && !data.exists() && newData.isString()"
                 },
                 "text": {
-                    ".validate": "auth.provider !== 'anonymous' && !data.exists() && newData.isString()",
+                    ".validate": "auth.provider !== 'anonymous' && !data.exists() && newData.isString()"
                 },
                 "votes": {
                     "liar": {
