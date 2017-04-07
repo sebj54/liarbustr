@@ -89,7 +89,12 @@
                     ".validate": "auth.provider !== 'anonymous' && !data.exists() && newData.hasChildren(['main'])",
 
                     "main": {
-                        ".validate": "!data.exists() && newData.isString() && newData.val().beginsWith('https://firebasestorage.googleapis.com/v0/b/liarbustr.appspot.com/o/images%2Flies%2F')"
+                        "url": {
+                            ".validate": "!data.exists() && newData.isString() && newData.val().beginsWith('https://firebasestorage.googleapis.com/v0/b/liarbustr.appspot.com/o/images%2Flies%2F')"
+                        },
+                        "color": {
+                            ".validate": "!data.exists() && newData.isString() && newData.val().matches(/^#([0-9a-fA-F]{3}){1,2}$/)"
+                        }
                     }
                 }
             }
