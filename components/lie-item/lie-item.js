@@ -186,7 +186,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
          */
         liePictureUrl: function(type)
         {
-            return (this.lie.pictures && _.hasProp(this.lie.pictures, type) && _.hasProp(this.lie.pictures[type], 'url')) ? this.lie.pictures[type].url : ''
+            return _.getPropValue(this.lie, 'pictures.' + type + '.url')
         },
         /**
          * Get picture's main color for a given image type
@@ -195,7 +195,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
          */
         liePictureColor: function(type)
         {
-            return (this.lie.pictures && _.hasProp(this.lie.pictures, type) && _.hasProp(this.lie.pictures[type], 'color')) ? this.lie.pictures[type].color : ''
+            return _.getPropValue(this.lie, 'pictures.' + type + '.color')
         },
         /**
          * Get lie sources for a given type
@@ -204,7 +204,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
          */
         lieSources: function(type)
         {
-            return (this.lie.sources && _.hasProp(this.lie.sources, type)) ? this.lie.sources[type] : ''
+            return _.getPropValue(this.lie, 'sources.' + type)
         },
         /**
          * Get votes count for a given type of vote
@@ -213,7 +213,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
          */
         lieVotesCount: function(type)
         {
-            return (this.lie.votes && _.hasProp(this.lie.votes, type)) ? this.lie.votes[type] : 0
+            return _.getPropValue(this.lie, 'votes.' + type) || 0
         },
         /**
          * Get votes percentage for a given type of vote

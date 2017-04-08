@@ -126,7 +126,7 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
          */
         liePictureUrl: function(type)
         {
-            return (this.lie.pictures && _.hasProp(this.lie.pictures, type) && _.hasProp(this.lie.pictures[type], 'url')) ? this.lie.pictures[type].url : ''
+            return _.getPropValue(this.lie, 'pictures.' + type + '.url')
         },
         /**
          * Get picture's main color for a given image type
