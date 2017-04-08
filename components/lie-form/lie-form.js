@@ -24,11 +24,6 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
              */
             lie: this.lieEmptyStructure(),
             /**
-             * Main lie's main picture color (hex)
-             * @type {string}
-             */
-            liePictureMainColor: null,
-            /**
              * Indicates if lie-item is in viewport and loaded
              * @type {Boolean}
              */
@@ -148,7 +143,7 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
                     if (palette)
                     {
                         const color = palette.Vibrant.getHex()
-                        this['liePicture' + _.capitalize(type) + 'Color'] = color
+                        this.lie.pictures[type].color = color
                         resolve(color)
                     }
                 }.bind(this))
