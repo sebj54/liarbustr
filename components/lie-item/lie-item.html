@@ -1,7 +1,7 @@
 <article class="lie-item" :class="{ '-is-a-lie': isALie, '-is-not-a-lie': !isALie, '-is-ready': isReady, '-flipped' : flipped, '-is-expanded' : isExpanded }">
     <div class="lie-item-front">
         <div class="lie-item-header">
-            <figure class="lie-item-figure" :style="{ color: liePictureMainColor }">
+            <figure class="lie-item-figure" :style="{ color: liePictureColor('main') }">
                 <img :src="liePictureUrl('main')" :alt="$t('lie.picture', { liar: lie.liar })" class="lie-item-picture -main" @load="checkIfReady">
             </figure>
             <button @click="showCardBack" class="lie-item-share-button">
