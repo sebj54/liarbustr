@@ -109,7 +109,20 @@ const _ = {
      */
     getPropValue: function(object, prop)
     {
-        return (_.hasProp(object, prop)) ? object[prop] : null
+        let propValue = null
+
+        if (_.isObject(object) && _.hasProp(object, prop))
+        {
+            const subProps = prop.split('.')
+            propValue = object
+
+            subProps.forEach(function(subProp)
+            {
+                propValue = propValue[subProp]
+            })
+        }
+
+        return propValue
     },
 
     /**
@@ -120,7 +133,29 @@ const _ = {
      */
     hasProp: function(object, prop)
     {
-        return _.isObject(object) && Object.prototype.hasOwnProperty.call(object, prop)
+        let hasProp = false
+
+        if (typeof prop === 'string' && _.isObject(object))
+        {
+            const subProps = prop.split('.')
+            let subObject = object
+            hasProp = true
+
+            subProps.forEach(function(subProp)
+            {
+                if (hasProp)
+                {
+                    hasProp = hasProp && Object.prototype.hasOwnProperty.call(subObject, subProp)
+
+                    if (hasProp)
+                    {
+                        subObject = subObject[subProp]
+                    }
+                }
+            })
+        }
+
+        return hasProp
     },
 
     /**
