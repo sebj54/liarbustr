@@ -1,4 +1,4 @@
-/* global Vue app _ user Vibrant window router */
+/* global Vue app _ user window router */
 
 /**
  * Lie item component
@@ -14,7 +14,6 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
             $headerImg: null,
             isExpanded: false,
             isReady: false,
-            liePictureMainColor: null,
             flipped: false,
             lie: null,
         }
@@ -53,14 +52,6 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         isALie: function()
         {
             return (this.lie.votes) ? this.lie.votes.liar > this.lie.votes.notLiar : false
-        },
-        /**
-         * Get lie main picture path
-         * @return {string} Picture path
-         */
-        liePictureMain: function()
-        {
-            return this.liePictureUrl('main') || null
         },
         /**
          * Get lie statements sources
@@ -184,11 +175,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
 
                 if (readyTop && readyBottom && this.$headerImg.complete)
                 {
-                    this.liePictureColor('main')
-                    .then(function()
-                    {
-                        this.isReady = true
-                    }.bind(this))
+                    this.isReady = true
                 }
             }
         },
@@ -208,16 +195,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
          */
         liePictureColor: function(type)
         {
-            return new Promise(function(resolve, reject)
-            {
-                const vibrant = new Vibrant(this.liePictureUrl(type))
-                vibrant.getPalette(function(err, palette)
-                {
-                    const color = palette.Vibrant.getHex()
-                    this['liePicture' + _.capitalize(type) + 'Color'] = color
-                    resolve(color)
-                }.bind(this))
-            }.bind(this))
+            return (this.lie.pictures && _.hasProp(this.lie.pictures, type) && _.hasProp(this.lie.pictures[type], 'color')) ? this.lie.pictures[type].color : ''
         },
         /**
          * Get lie sources for a given type
