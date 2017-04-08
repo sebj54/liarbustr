@@ -2,7 +2,7 @@
     <div class="lie-item-front">
         <div class="lie-item-header">
             <figure class="lie-item-figure" :style="{ color: liePictureMainColor }">
-                <img :src="liePicture('main')" :alt="$t('lie.picture', { liar: lie.liar })" class="lie-item-picture -main" @load="checkIfReady">
+                <img :src="liePictureUrl('main')" :alt="$t('lie.picture', { liar: lie.liar })" class="lie-item-picture -main" @load="checkIfReady">
             </figure>
             <button @click="showCardBack" class="lie-item-share-button">
                 <span>{{ $t('msc.share.global') }}</span>

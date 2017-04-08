@@ -1,7 +1,7 @@
 <form action="" class="lie-item lie-item-form -is-ready" @submit.prevent="saveLie">
     <div class="lie-item-header">
         <figure class="lie-item-figure" :style="{ color: liePictureMainColor }">
-            <img :src="liePicture('main')" :alt="$t('lie.picture', { liar: lie.liar })" class="lie-item-picture -main" @load="checkIfReady">
+            <img :src="liePictureUrl('main')" :alt="$t('lie.picture', { liar: lie.liar })" class="lie-item-picture -main" @load="checkIfReady">
         </figure>
 
         <div class="lie-item-form-group -upload-picture">
