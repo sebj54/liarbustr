@@ -60,7 +60,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
          */
         liePictureMain: function()
         {
-            return this.liePicture('main') || null
+            return this.liePictureUrl('main') || null
         },
         /**
          * Get lie statements sources
@@ -154,7 +154,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
                     },
                     {
                         property: 'og:image',
-                        content: this.liePicture('main'),
+                        content: this.liePictureUrl('main'),
                     },
                     {
                         property: 'og:url',
@@ -197,9 +197,9 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
          * @param  {string} type Picture type
          * @return {string} Picture path
          */
-        liePicture: function(type)
+        liePictureUrl: function(type)
         {
-            return (this.lie.pictures && _.hasProp(this.lie.pictures, type)) ? this.lie.pictures[type] : ''
+            return (this.lie.pictures && _.hasProp(this.lie.pictures, type) && _.hasProp(this.lie.pictures[type], 'url')) ? this.lie.pictures[type].url : ''
         },
         /**
          * Get picture's main color for a given image type
@@ -210,7 +210,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         {
             return new Promise(function(resolve, reject)
             {
-                const vibrant = new Vibrant(this.liePicture(type))
+                const vibrant = new Vibrant(this.liePictureUrl(type))
                 vibrant.getPalette(function(err, palette)
                 {
                     const color = palette.Vibrant.getHex()

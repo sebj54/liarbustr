@@ -96,7 +96,10 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
                     confirmations: [],
                 },
                 pictures: {
-                    main: null,
+                    main: {
+                        url: '',
+                        color: '',
+                    },
                 },
             }
         },
@@ -126,9 +129,9 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
          * @param  {string} type Picture type
          * @return {string} Picture path
          */
-        liePicture: function(type)
+        liePictureUrl: function(type)
         {
-            return (this.lie.pictures && _.hasProp(this.lie.pictures, type)) ? this.lie.pictures[type] : ''
+            return (this.lie.pictures && _.hasProp(this.lie.pictures, type) && _.hasProp(this.lie.pictures[type], 'url')) ? this.lie.pictures[type].url : ''
         },
         /**
          * Get picture's main color for a given image type
@@ -139,7 +142,7 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
         {
             return new Promise(function(resolve, reject)
             {
-                const vibrant = new Vibrant(this.liePicture(type))
+                const vibrant = new Vibrant(this.liePictureUrl(type))
                 vibrant.getPalette(function(err, palette)
                 {
                     if (palette)
@@ -177,7 +180,7 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
                 const fileUploaded = function(url)
                 {
                     this.isUploading = false
-                    this.lie.pictures.main = url
+                    this.lie.pictures.main.url = url
                 }.bind(this)
 
                 this.isUploading = true
