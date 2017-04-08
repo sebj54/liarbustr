@@ -1,4 +1,4 @@
-<article class="lie-item" :class="{ '-is-a-lie': isALie, '-is-not-a-lie': !isALie, '-is-ready': isReady, '-flipped' : flipped, '-is-expanded' : isExpanded }">
+<article class="lie-item" :class="{ '-is-a-lie': isALie, '-is-not-a-lie': !isALie, '-is-ready': isReady, '-is-flipped' : isFlipped, '-is-expanded' : isExpanded }">
     <div class="lie-item-front">
         <div class="lie-item-header">
             <figure class="lie-item-figure" :style="{ color: liePictureColor('main') }">
@@ -89,7 +89,7 @@
         </button>
         <div class="lie-item-back-head">
             <h2 class="lie-item-title -white">
-                {{lie.title}}
+                {{ lie.title }}
             </h2>
         </div>
         <social-sharing :url="shareUrl" :title="$t('lie.share.title', {liar: lie.liar})" :description=" $t('lie.share.description', {title: lie.title, liar: lie.liar}) " inline-template>

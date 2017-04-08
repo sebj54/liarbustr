@@ -16,7 +16,7 @@
         background-color: $color-whitey;
     }
 
-    &.-flipped {
+    &.-is-flipped {
         transform: scale(1.1);
         .lie-item-front {
             transform: rotateY(-180deg);

@@ -4,17 +4,39 @@
  * Lie item component
  * @type {VueComponent}
  */
-
-
 Vue.component('lie-item', app.resolveTemplate('lie-item', {
     data: function()
     {
         const data = {
+            /**
+             * Header element
+             * @type {DOMElement}
+             */
             $header: null,
+            /**
+             * Header image element
+             * @type {DOMElement}
+             */
             $headerImg: null,
+            /**
+             * Expanded state (content shown)
+             * @type {Boolean}
+             */
             isExpanded: false,
+            /**
+             * Flipped state (true if back of the card is shown)
+             * @type {Boolean}
+             */
+            isFlipped: false,
+            /**
+             * Ready state (true if in viewport and image is loaded)
+             * @type {Boolean}
+             */
             isReady: false,
-            flipped: false,
+            /**
+             * Lie object (Firebase binding)
+             * @type {object}
+             */
             lie: null,
         }
         return data
@@ -85,13 +107,14 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         {
             return (this.lie.text) ? this.lie.text.split('\n') : []
         },
-
+        /**
+         * Get description sample (truncated description)
+         * @return {string|null} Description sample
+         */
         getDescriptionSample: function()
         {
-            return this.lie.text ? this.lie.text.substring(0, 300) : null
+            return _.hasProp(this.lie, 'text') ? this.lie.text.substring(0, 300) : null
         },
-
-
         /**
          * Get liar votes count
          * @return {integer} Votes count
@@ -124,9 +147,13 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         {
             return this.lieVotesPercentage('notLiar')
         },
+        /**
+         * Shareable URL
+         * @return {string} URL
+         */
         shareUrl: function()
         {
-            return window.location.protocol + '//' + window.location.hostname + '/lie/' + this.lie.uid
+            return window.location.protocol + '//' + window.location.hostname + '/lie/' + (_.hasProp(this.lie, 'uid') ? this.lie.uid : this.lieUid)
         },
     },
     watch: {
@@ -137,7 +164,8 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
                 router.meta.length = 0
                 router.meta.push(
                     {
-                        property: 'og:title', content: this.$t('lie.share.title', { liar: this.lie.liar }),
+                        property: 'og:title',
+                        content: this.$t('lie.share.title', { liar: this.lie.liar }),
                     },
                     {
                         property: 'og:type',
@@ -294,13 +322,19 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         {
             this.vote('notLiar')
         },
+        /**
+         * Show back of the card
+         */
         showCardBack: function()
         {
-            this.flipped = true
+            this.isFlipped = true
         },
+        /**
+         * Hide back of the card
+         */
         hideCardBack: function()
         {
-            this.flipped = false
+            this.isFlipped = false
         },
     },
     created: function()
