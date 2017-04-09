@@ -93,25 +93,26 @@
             </h2>
         </div>
         <social-sharing :url="shareUrl" :title="$t('lie.share.title', {liar: lie.liar})" :description=" $t('lie.share.description', {title: lie.title, liar: lie.liar}) " inline-template>
-            <ul class="lie-item-share-social-network-list">
+            <ul class="lie-item-share-social-network-list -facebook">
                 <li class="lie-item-share-social-network-item -facebook">
                     <network network="facebook" class="lie-item-share-action-button-wrapper">
-                        <button type="button" name="button" class="lie-item-share-action-button">
-                            <svg-icon name="facebook"></svg-icon>
-                            <span>{{ $t('msc.share.facebook') }}</span>
+                        <button type="button" name="button" class="lie-item-share-action-button -facebook">
+                            <svg-icon name="facebook" class="lie-item-share-action-button-icon"></svg-icon>
+                            <span class="lie-item-share-action-button-text">{{ $t('msc.share.facebook') }}</span>
                         </button>
                     </network>
                 </li>
                 <li class="lie-item-share-social-network-item -twitter">
-                    <network network="twitter" class="lie-item-share-action-button-wrapper">
-                        <button type="button" name="button" class="lie-item-share-action-button">
-                            <svg-icon name="twitter"></svg-icon>
-                            <span>{{ $t('msc.share.twitter') }}</span>
+                    <network network="twitter" class="lie-item-share-action-button-wrapper -twitter">
+                        <button type="button" name="button" class="lie-item-share-action-button -twitter">
+                            <svg-icon name="twitter" class="lie-item-share-action-button-icon"></svg-icon>
+                            <span class="lie-item-share-action-button-text">{{ $t('msc.share.twitter') }}</span>
                         </button>
                     </network>
                 </li>
                 <li class="lie-item-share-url">
-                    <input type="text" name="shareUrl" :value="url" readonly>
+                    <label :for="'lie-item-url-' + this._uid" class="lie-item-share-url-label">{{ $t('lie.share.url') }}</label>
+                    <input type="text" class="lie-item-share-url-input" name="share-url" :id="'lie-item-url-' + this._uid" :value="url" readonly>
                 </li>
             </ul>
         </social-sharing>

@@ -52,8 +52,9 @@
             "notLiar": "Not liar"
         },
         "share": {
+            "description": "\"{title}\" - {liar}",
             "title": "{liar} has he lied?",
-            "description": "\"{title}\" - {liar}"
+            "url": "Direct link:"
         }
     },
     "lieForm": {

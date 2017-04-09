@@ -52,8 +52,9 @@
             "notLiar": "Pas menteur"
         },
         "share": {
+            "description": "\"{title}\" - {liar}",
             "title": "{liar} a t-il menti ?",
-            "description": "\"{title}\" - {liar}"
+            "url": "Lien direct :"
         },
     },
     "lieForm": {
