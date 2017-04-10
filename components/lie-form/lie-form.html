@@ -5,7 +5,7 @@
         </figure>
 
         <div class="lie-item-form-group -upload-picture">
-            <input type="file" name="upload[pictures][main]" :id="fieldId('upload-picture-main')" class="lie-item-form-field -upload-picture -main" required @change="uploadMainPicture">
+            <input type="file" name="upload[pictures][main]" :id="fieldId('upload-picture-main')" class="lie-item-form-field -upload-picture -main" required @change="uploadMainPicture" accept=".png,.jpg">
             <label :for="fieldId('upload-picture-main')" class="lie-item-form-label -upload-picture -main button">
                 <svg-icon name="upload" v-if="!isUploading"></svg-icon>
                 <spinner v-if="isUploading"></spinner>
