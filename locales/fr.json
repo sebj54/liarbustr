@@ -39,6 +39,7 @@
         "title": "Venez comme vous êtes"
     },
     "lie": {
+        "notModerated": "Ce mensonge n'a pas été modéré pour le moment. Il ne peut pas être vu par les autres utilisateurs.",
         "picture": "Photographie de {liar}",
         "readLess": "Réduire",
         "readMore": "Voir plus",

@@ -62,6 +62,12 @@
         transition-timing-function: ease-out;
     }
 
+    &-not-moderated {
+        &-alert {
+            border-radius: 0;
+        }
+    }
+
     &-figure {
         margin: 0;
         overflow: hidden;
