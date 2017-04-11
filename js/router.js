@@ -1,4 +1,4 @@
-/* global app user document */
+/* global app user document _ */
 
 /**
  * Router - Contain routes and routes-related properties and methods
@@ -10,25 +10,43 @@ const router = {
      * @type {Array}
      */
     routes: [],
-    meta:
-    [
-        {
-            name: 'og:title',
-            content: 'LiarBustr',
-        },
-    ],
-    title: 'Liarbustr - Liar or not?',
-    description: 'Report politicians lies, vote with the community and we\'ll know if they lied about corruption, tax evasion, economy, ecology, immigration, fictional employment..."',
+    /**
+     * Meta information (used by vue-meta)
+     * @type {Object}
+     */
+    metaInfo: {
+        /**
+        * Meta tags
+        * @type {Array}
+        */
+        meta:
+        [
+            {
+                vmid: 'description',
+                name: 'description',
+                content: 'Report politicians lies, vote with the community and we\'ll know if they lied about corruption, tax evasion, economy, ecology, immigration, fictional employment..."',
+            },
+        ],
+        /**
+        * Page title tag
+        * @type {string}
+        */
+        title: 'LiarBustr',
+        titleTemplate: '%s | LiarBustr - Liar or not ?',
+    },
+
     /**
      * Add a route with lazy loading
      * @param {string} route Route URL (e.g. 'home')
      * @param {string|null} path View filename (optional, default: /{route})
+     * @param {object} metaInfo View meta info (optional, default: default meta infos)
      * @return {object} router, for chaining purpose
      */
-    add: function(route, path)
+    add: function(route, path, metaInfo)
     {
         const absoluteRoute = '/' + route
         const absolutePath = (!path) ? absoluteRoute : path
+        const viewMetaInfo = (_.isObject(metaInfo) && !_.isEmptyObject(metaInfo)) ? metaInfo : router.metaInfo
 
         this.routes.push({
             path: absoluteRoute,
@@ -44,14 +62,7 @@ const router = {
                             }
                         },
                         template: template,
-                        metaInfo: {
-                            meta: router.meta,
-                            changed: function(newInfo, addedTags, removedTags)
-                            {
-                                document.title = router.title
-                                document.getElementsByName('description')[0].content = router.description
-                            },
-                        },
+                        metaInfo: viewMetaInfo,
                     })
                 })
             },
