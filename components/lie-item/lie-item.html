@@ -13,6 +13,10 @@
             <p class="lie-item-liar">{{ lie.liar }}</p>
         </div>
 
+        <div class="lie-item-not-moderated">
+            <alert class="lie-item-not-moderated-alert" type="info" :message="$t('lie.notModerated')" v-if="!lie.isModerated"></alert>
+        </div>
+
         <div class="lie-item-content">
             <div class="lie-item-votes">
                 <div class="lie-item-vote -liar" :class="{ '-is-actual-vote': actualVoteValue === 'liar' }">

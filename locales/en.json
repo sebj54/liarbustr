@@ -39,6 +39,7 @@
         "title": "Come as you are"
     },
     "lie": {
+        "notModerated": "This lie has not been moderated yet. It cannot be seen from other users.",
         "picture": "{liar}'s picture",
         "readLess": "Read less",
         "readMore": "Read more",
