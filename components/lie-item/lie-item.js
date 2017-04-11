@@ -16,7 +16,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
                 {
                     vmid: 'description',
                     name: 'description',
-                    content: this.getDescriptionSample,
+                    content: this.descriptionSample,
                 },
                 {
                     property: 'og:title',
@@ -36,7 +36,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
                 },
                 {
                     property: 'og:description',
-                    content: this.getDescriptionSample,
+                    content: this.descriptionSample,
                 },
             ]
         }
@@ -149,7 +149,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
          * Get description sample (truncated description)
          * @return {string|null} Description sample
          */
-        getDescriptionSample: function()
+        descriptionSample: function()
         {
             return _.hasProp(this.lie, 'text') ? this.lie.text.substring(0, 300) : null
         },

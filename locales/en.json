@@ -1,4 +1,18 @@
 {
+    "views": {
+        "authenticate": {
+            "title": "Authenticate",
+            "description": "Log in to LiarBustr with Facebook, Twitter, Google or your e-mail address."
+        },
+        "lieForm": {
+            "title": "I accuse",
+            "description": "Submit new lies (politics, economy…) to the community."
+        },
+        "liesList": {
+            "title": "Politicians lies",
+            "description": "Discover new politicians lies and vote!"
+        }
+    },
     "msc": {
         "authenticate": "Authenticate",
         "lie-form": "I accuse",
@@ -54,7 +68,7 @@
         },
         "share": {
             "description": "\"{title}\" - {liar}",
-            "title": "{liar} has he lied?",
+            "title": "Has {liar} lied?",
             "url": "Direct link:"
         }
     },

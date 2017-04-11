@@ -11,12 +11,12 @@ Vue.component('lies-list', app.resolveTemplate('lies-list', {
 
         if (this.updateMeta)
         {
-            metaInfo.title = 'Politician lies'
+            metaInfo.title = this.$t('views.liesList.title')
             metaInfo.meta = [
                 {
                     vmid: 'description',
                     name: 'description',
-                    content: 'Discover new politians lies and vote!',
+                    content: this.$t('views.liesList.description'),
                 },
             ]
         }
