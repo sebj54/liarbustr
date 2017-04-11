@@ -3,7 +3,14 @@
         "lies": {
             ".read": true,
             ".write": "auth !== null",
+            ".indexOn": [
+                "isModerated"
+            ],
+
             "$lieUid": {
+                "isModerated": {
+                    ".validate": "newData.isBoolean() && (root.child('users').child(auth.uid).child('isAdmin').val() === true || newData.val() === false)"
+                },
                 "accuser": {
                     ".validate": "auth.provider !== 'anonymous' && !data.exists() && newData.val() === auth.uid"
                 },
