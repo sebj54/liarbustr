@@ -110,6 +110,9 @@
                 "email": {
                     ".validate": "newData.isString()"
                 },
+                "isAdmin": {
+                    ".validate": "newData.isBoolean() && (data.val() === true || newData.val() === false)"
+                },
                 "isAnonymous": {
                     ".validate": "newData.isBoolean()"
                 },
