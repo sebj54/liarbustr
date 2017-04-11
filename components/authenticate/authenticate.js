@@ -5,6 +5,24 @@
  * @type {VueComponent}
  */
 Vue.component('authenticate', app.resolveTemplate('authenticate', {
+    metaInfo: function()
+    {
+        const metaInfo = {}
+
+        if (this.updateMeta)
+        {
+            metaInfo.title = this.$t('views.authenticate.title')
+            metaInfo.meta = [
+                {
+                    vmid: 'description',
+                    name: 'description',
+                    content: this.$t('views.authenticate.description'),
+                },
+            ]
+        }
+
+        return metaInfo
+    },
     data: function()
     {
         return {
@@ -18,6 +36,9 @@ Vue.component('authenticate', app.resolveTemplate('authenticate', {
             showLoginWithEmail: false,
         }
     },
+    props: [
+        'update-meta',
+    ],
     computed: {
         isAnonymous: function()
         {

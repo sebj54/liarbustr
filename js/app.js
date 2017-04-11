@@ -1,4 +1,4 @@
-/* global firebase Vue VueRouter XMLHttpRequest _ router user document SocialSharing $t */
+/* global firebase Vue VueRouter XMLHttpRequest _ router user document SocialSharing */
 
 /**
  * App - Provide useful methods across components
@@ -79,6 +79,7 @@ const app = {
         app.vue = new Vue({
             el: '#app',
             router: app.router,
+            metaInfo: router.metaInfo,
         })
 
         user.init()

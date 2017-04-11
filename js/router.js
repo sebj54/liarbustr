@@ -24,7 +24,7 @@ const router = {
             {
                 vmid: 'description',
                 name: 'description',
-                content: 'Report politicians lies, vote with the community and we\'ll know if they lied about corruption, tax evasion, economy, ecology, immigration, fictional employment..."',
+                content: 'Report politicians lies, vote with the community and we\'ll know if they lied about corruption, tax evasion, economy, ecology, immigration, fictional employment…"',
             },
         ],
         /**
@@ -39,14 +39,14 @@ const router = {
      * Add a route with lazy loading
      * @param {string} route Route URL (e.g. 'home')
      * @param {string|null} path View filename (optional, default: /{route})
-     * @param {object} metaInfo View meta info (optional, default: default meta infos)
+     * @param {object|function|null} metaInfo View meta info (optional, default: default meta infos)
      * @return {object} router, for chaining purpose
      */
     add: function(route, path, metaInfo)
     {
         const absoluteRoute = '/' + route
         const absolutePath = (!path) ? absoluteRoute : path
-        const viewMetaInfo = (_.isObject(metaInfo) && !_.isEmptyObject(metaInfo)) ? metaInfo : router.metaInfo
+        const viewMetaInfo = (!metaInfo) ? {} : metaInfo
 
         this.routes.push({
             path: absoluteRoute,
@@ -77,4 +77,16 @@ router.add('', '/home') // Default route
 .add('authenticate')
 .add('lies')
 .add('lie/:uid', '/lie')
-.add('lie-form')
+.add('lie-form', null, function()
+{
+    return {
+        title: app.vue.$t('views.lieForm.title'),
+        meta: [
+            {
+                vmid: 'description',
+                name: 'description',
+                content: app.vue.$t('views.lieForm.description'),
+            },
+        ],
+    }
+})

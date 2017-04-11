@@ -1,4 +1,18 @@
 {
+    "views": {
+        "authenticate": {
+            "title": "Connexion",
+            "description": "Connectez-vous à LiarBustr avec Facebook, Twitter, Google ou votre adresse e-mail."
+        },
+        "lieForm": {
+            "title": "J'accuse",
+            "description": "Soumettez de nouveaux mensonges (politique, économie…) à la communauté."
+        },
+        "liesList": {
+            "title": "Mensonges politiques",
+            "description": "Découvrez de nouveaux mensonges politiques et votez !"
+        }
+    },
     "msc": {
         "authenticate": "Connexion",
         "lie-form": "J'accuse",
@@ -56,7 +70,7 @@
             "description": "\"{title}\" - {liar}",
             "title": "{liar} a t-il menti ?",
             "url": "Lien direct :"
-        },
+        }
     },
     "lieForm": {
         "liar": "Qui a dit ce mensonge ? ",
