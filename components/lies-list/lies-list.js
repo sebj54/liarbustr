@@ -5,12 +5,23 @@
  * @type {VueComponent}
  */
 Vue.component('lies-list', app.resolveTemplate('lies-list', {
-    data: function()
+    metaInfo: function()
     {
-        const data = {}
-        router.title = 'Politicians lies'
-        router.description = 'Discover new politians lies and vote!'
-        return data
+        const metaInfo = {}
+
+        if (this.updateMeta)
+        {
+            metaInfo.title = 'Politician lies'
+            metaInfo.meta = [
+                {
+                    vmid: 'description',
+                    name: 'description',
+                    content: 'Discover new politians lies and vote!',
+                },
+            ]
+        }
+
+        return metaInfo
     },
     firebase: function()
     {
@@ -18,6 +29,9 @@ Vue.component('lies-list', app.resolveTemplate('lies-list', {
             lies: app.db.ref('/lies').orderByChild('isModerated').equalTo(true),
         }
     },
+    props: [
+        'update-meta',
+    ],
     computed: {
         /**
          * Get lies count

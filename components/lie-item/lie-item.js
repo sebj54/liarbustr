@@ -5,6 +5,44 @@
  * @type {VueComponent}
  */
 Vue.component('lie-item', app.resolveTemplate('lie-item', {
+    metaInfo: function()
+    {
+        const metaInfo = {}
+
+        if (this.updateMeta && _.hasProp(this.lie, 'liar'))
+        {
+            metaInfo.title = this.$t('lie.share.title', { liar: this.lie.liar })
+            metaInfo.meta = [
+                {
+                    vmid: 'description',
+                    name: 'description',
+                    content: this.getDescriptionSample,
+                },
+                {
+                    property: 'og:title',
+                    content: this.$t('lie.share.title', { liar: this.lie.liar }),
+                },
+                {
+                    property: 'og:type',
+                    content: 'article',
+                },
+                {
+                    property: 'og:image',
+                    content: this.liePictureUrl('main'),
+                },
+                {
+                    property: 'og:url',
+                    content: this.shareUrl,
+                },
+                {
+                    property: 'og:description',
+                    content: this.getDescriptionSample,
+                },
+            ]
+        }
+
+        return metaInfo
+    },
     data: function()
     {
         const data = {
@@ -56,7 +94,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
     },
     props: [
         'lie-uid',
-        'meta',
+        'update-meta',
     ],
     computed: {
         /**
@@ -154,39 +192,6 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         shareUrl: function()
         {
             return window.location.protocol + '//' + window.location.hostname + '/lie/' + (_.hasProp(this.lie, 'uid') ? this.lie.uid : this.lieUid)
-        },
-    },
-    watch: {
-        lie: function()
-        {
-            if (this.meta)
-            {
-                router.meta.length = 0
-                router.meta.push(
-                    {
-                        property: 'og:title',
-                        content: this.$t('lie.share.title', { liar: this.lie.liar }),
-                    },
-                    {
-                        property: 'og:type',
-                        content: 'article',
-                    },
-                    {
-                        property: 'og:image',
-                        content: this.liePictureUrl('main'),
-                    },
-                    {
-                        property: 'og:url',
-                        content: this.shareUrl,
-                    },
-                    {
-                        property: 'og:description',
-                        content: this.getDescriptionSample,
-                    }
-                )
-                router.title = this.$t('lie.share.title', { liar: this.lie.liar })
-                router.description = this.getDescriptionSample
-            }
         },
     },
     methods: {
