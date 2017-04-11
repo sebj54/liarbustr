@@ -15,7 +15,7 @@ Vue.component('lies-list', app.resolveTemplate('lies-list', {
     firebase: function()
     {
         return {
-            lies: app.db.ref('/lies'),
+            lies: app.db.ref('/lies').orderByChild('isModerated').equalTo(true),
         }
     },
     computed: {

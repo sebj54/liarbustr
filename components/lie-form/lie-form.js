@@ -77,6 +77,7 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
         {
             return {
                 uid: _.generateUUID(),
+                isModerated: false,
                 accuser: null,
                 title: '',
                 liar: '',
