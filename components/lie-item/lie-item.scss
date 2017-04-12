@@ -155,6 +155,16 @@
         font-size: 1.4em;
     }
 
+    &-liars-list {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        transform: translateY(100%);
+
+        background-color: white;
+    }
+
     &-share-button {
         margin-bottom: auto;
         margin-left: auto;
@@ -511,6 +521,14 @@
             &.-liar {
                 max-width: 100%;
                 text-align: right;
+                transition: .3s background-color .3s color;
+
+                &:focus {
+                    color: $color-grey-dark;
+                    border-color: white;
+                    background-color: white;
+                }
+
             }
 
             &.-text {

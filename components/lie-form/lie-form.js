@@ -39,6 +39,7 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
     {
         return {
             lies: app.db.ref('/lies'),
+            liars: app.db.ref('/liars'),
         }
     },
     methods: {

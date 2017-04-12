@@ -17,9 +17,17 @@
             <textarea name="title" :id="fieldId('title')" class="lie-item-form-field -title" :placeholder="$t('lieForm.title')" rows="1" autofocus required v-model="lie.title" v-autosize></textarea>
         </div>
 
-        <p class="lie-item-liar">
+        <div class="lie-item-liar">
             <input type="text" name="liar" :id="fieldId('liar')" class="lie-item-form-field -liar" :placeholder="$t('lieForm.liar')" required v-model="lie.liar" v-autosize>
-        </p>
+            <ul class="lie-item-liars-list">
+                <li class="lie-item-liars-list-item" v-for="liar in liars">
+                    <div class="pp" v-bind:style='{ backgroundImage: "url(" + liar.liarPictureUrl + ")", }'>
+
+                    </div>
+                    <span>{{liar.name + ' ' + liar.familyName}}</span>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <div class="lie-item-content">
