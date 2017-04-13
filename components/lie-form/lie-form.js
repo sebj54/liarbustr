@@ -54,11 +54,25 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
             })
         },
         /**
-         * Add a source for the statement
+         * Add a statement source
          */
         addStatement: function()
         {
             this.addSource('statements')
+        },
+        /**
+         * Add a refutation source
+         */
+        addRefutation: function()
+        {
+            this.addSource('refutations')
+        },
+        /**
+         * Add a confirmation source
+         */
+        addConfirmation: function()
+        {
+            this.addSource('confirmations')
         },
         /**
          * Get field ID (html attribute)
@@ -87,9 +101,18 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
                     notLiar: 0,
                 },
                 sources: {
-                    statements: [],
-                    refutations: [],
-                    confirmations: [],
+                    statements: [{
+                        title: '',
+                        url: '',
+                    }],
+                    refutations: [{
+                        title: '',
+                        url: '',
+                    }],
+                    confirmations: [{
+                        title: '',
+                        url: '',
+                    }],
                 },
                 pictures: {
                     main: {
@@ -161,7 +184,6 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
             app.router.push('lie/' + this.lie.uid)
 
             this.lie = this.lieEmptyStructure()
-            setTimeout(this.addStatement) // setTimeout is mandatory for rendering to avoid not cleared source input
         },
         /**
          * Upload main picture and store it. Function must be a callback triggered on change on a file input
@@ -188,7 +210,6 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
     },
     created: function()
     {
-        this.addStatement()
         window.addEventListener('scroll', this.checkIfReady)
     },
     destroyed: function()
