@@ -38,11 +38,41 @@
 
                     <ul class="lie-item-sources -statements">
                         <li class="lie-item-source" v-for="(statement, index) in lie.sources.statements">
-                            <lie-form-source :id="fieldId('source-' + index)" :number="index + 1" :source="lie.sources.statements[index]" :is-required="index === 0"></lie-form-source>
+                            <lie-form-source :id="fieldId('source-statement-' + index)" :number="index + 1" :source="lie.sources.statements[index]" :is-required="index === 0"></lie-form-source>
                         </li>
                     </ul>
 
-                    <button type="button" class="lie-item-form-add-source" @click="addStatement">{{ $t('lieForm.sources.add') }}</button>
+                    <button type="button" class="lie-item-form-add-source -statement" @click="addStatement">{{ $t('lieForm.sources.add') }}</button>
+                </div>
+
+                <div class="lie-item-sources-wrapper">
+                    <h3 class="lie-item-sources-title -refutations">
+                        <svg-icon name="megaphone" class="lie-item-sources-title-icon -refutation"></svg-icon>
+                        <span>{{ $tc('lie.sources.refutationsTitle', lie.sources.refutations.length) }}</span>
+                    </h3>
+
+                    <ul class="lie-item-sources -refutations">
+                        <li class="lie-item-source" v-for="(refutation, index) in lie.sources.refutations">
+                            <lie-form-source :id="fieldId('source-refutation-' + index)" :number="index + 1" :source="lie.sources.refutations[index]" :is-required="index === 0"></lie-form-source>
+                        </li>
+                    </ul>
+
+                    <button type="button" class="lie-item-form-add-source -refutation" @click="addRefutation">{{ $t('lieForm.sources.add') }}</button>
+                </div>
+
+                <div class="lie-item-sources-wrapper">
+                    <h3 class="lie-item-sources-title -confirmations">
+                        <svg-icon name="handshake" class="lie-item-sources-title-icon -confirmation"></svg-icon>
+                        <span>{{ $tc('lie.sources.confirmationsTitle', lie.sources.confirmations.length) }}</span>
+                    </h3>
+
+                    <ul class="lie-item-sources -confirmations">
+                        <li class="lie-item-source" v-for="(confirmation, index) in lie.sources.confirmations">
+                            <lie-form-source :id="fieldId('source-confirmation-' + index)" :number="index + 1" :source="lie.sources.confirmations[index]" :is-required="index === 0"></lie-form-source>
+                        </li>
+                    </ul>
+
+                    <button type="button" class="lie-item-form-add-source -confirmation" @click="addConfirmation">{{ $t('lieForm.sources.add') }}</button>
                 </div>
             </div>
         </div>
