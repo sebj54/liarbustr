@@ -161,18 +161,24 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
         {
             return new Promise(function(resolve, reject)
             {
-                const vibrant = new Vibrant(this.liePictureUrl(type))
-                vibrant.getPalette(function(err, palette)
+                if (!this.lie.pictures[type].color)
                 {
-                    if (palette)
+                    const vibrant = new Vibrant(this.liePictureUrl(type))
+                    vibrant.getPalette(function(err, palette)
                     {
-                        const color = palette.Vibrant.getHex()
-                        this.lie.pictures[type].color = color
-                        resolve(color)
-                    }
-                }.bind(this))
+                        if (palette)
+                        {
+                            const color = palette.Vibrant.getHex()
+                            this.lie.pictures[type].color = color
+                            resolve(color)
+                        }
+                    }.bind(this))
+                }
             }.bind(this))
         },
+        /**
+         * Remove empty sources (essential before saving in database)
+         */
         removeEmptySources: function()
         {
             Object.keys(this.lie.sources).forEach(function(type)
