@@ -53,7 +53,7 @@
 
                     <ul class="lie-item-sources -refutations">
                         <li class="lie-item-source" v-for="(refutation, index) in lie.sources.refutations">
-                            <lie-form-source :id="fieldId('source-refutation-' + index)" :number="index + 1" :source="lie.sources.refutations[index]" :is-required="index === 0"></lie-form-source>
+                            <lie-form-source :id="fieldId('source-refutation-' + index)" :number="index + 1" :source="lie.sources.refutations[index]"></lie-form-source>
                         </li>
                     </ul>
 
@@ -68,7 +68,7 @@
 
                     <ul class="lie-item-sources -confirmations">
                         <li class="lie-item-source" v-for="(confirmation, index) in lie.sources.confirmations">
-                            <lie-form-source :id="fieldId('source-confirmation-' + index)" :number="index + 1" :source="lie.sources.confirmations[index]" :is-required="index === 0"></lie-form-source>
+                            <lie-form-source :id="fieldId('source-confirmation-' + index)" :number="index + 1" :source="lie.sources.confirmations[index]"></lie-form-source>
                         </li>
                     </ul>
 
