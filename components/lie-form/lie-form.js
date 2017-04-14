@@ -173,11 +173,25 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
                 }.bind(this))
             }.bind(this))
         },
+        removeEmptySources: function()
+        {
+            Object.keys(this.lie.sources).forEach(function(type)
+            {
+                this.lie.sources[type].forEach(function(source, index)
+                {
+                    if (source.url.length === 0)
+                    {
+                        this.lie.sources[type].splice(index, 1)
+                    }
+                }.bind(this))
+            }.bind(this))
+        },
         /**
          * Save a lie
          */
         saveLie: function()
         {
+            this.removeEmptySources()
             this.lie.accuser = user.uid
             this.$firebaseRefs.lies.child(this.lie.uid).set(this.lie)
 
