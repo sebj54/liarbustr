@@ -89,13 +89,15 @@ const app = {
 
         Vue.use(SocialSharing)
 
-        app.vue = new Vue({
-            el: '#app',
-            router: app.router,
-            metaInfo: router.metaInfo,
-        })
-
         user.init()
+        .then(function()
+        {
+            app.vue = new Vue({
+                el: '#app',
+                router: app.router,
+                metaInfo: router.metaInfo,
+            })
+        })
     },
 
     /**

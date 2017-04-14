@@ -43,21 +43,44 @@ const user = {
 
     /**
      * Init function
+     * @return {Promise<object>} A promise to the logged in user (even anonymously)
      */
     init: function()
     {
-        firebase.auth().onAuthStateChanged(function(firebaseUser)
+        return new Promise(function(resolve, reject)
         {
-            if (firebaseUser)
+            let isInit = true
+
+            firebase.auth().onAuthStateChanged(function(firebaseUser)
             {
-                user.fetch(firebaseUser)
-                .then(user.updateFromFirebaseUser)
-            }
-            else
-            {
-                firebase.auth().signInAnonymously()
-                .catch(user.handleError)
-            }
+                if (firebaseUser)
+                {
+                    user.fetch(firebaseUser)
+                    .then(function(fetchedUser)
+                    {
+                        if (isInit)
+                        {
+                            isInit = false
+                            resolve(fetchedUser)
+                        }
+
+                        user.updateFromFirebaseUser(fetchedUser)
+                    })
+                }
+                else
+                {
+                    firebase.auth().signInAnonymously()
+                    .then(function()
+                    {
+                        if (isInit)
+                        {
+                            isInit = false
+                            resolve(user)
+                        }
+                    })
+                    .catch(user.handleError)
+                }
+            })
         })
     },
 
