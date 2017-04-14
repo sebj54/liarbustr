@@ -74,6 +74,19 @@ const app = {
             mode: 'history',
         })
 
+        // Temporary redirect (home to lies)
+        app.router.beforeEach(function(to, from, next)
+        {
+            if (to.path === '/')
+            {
+                next('/lies')
+            }
+            else
+            {
+                next()
+            }
+        })
+
         Vue.use(SocialSharing)
 
         app.vue = new Vue({
