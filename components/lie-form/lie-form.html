@@ -1,35 +1,8 @@
+<!-- // IMPORTANT
+// FORM CONTENT IS DOM REVERSED AND ORDERED CORRECTLY BY FLEX DIRECTION PROPERTY IN components/lie-item/lie-item.scss -->
+
 <form action="" class="lie-item lie-item-form -is-ready" @submit.prevent="saveLie">
-    <div class="lie-item-header">
-        <figure class="lie-item-figure" :style="{ color: liePictureColor('main') }">
-            <img :src="liePictureUrl('main')" :alt="$t('lie.picture', { liar: lie.liar })" class="lie-item-picture -main" @load="checkIfReady">
-        </figure>
-
-        <div class="lie-item-form-group -upload-picture">
-            <input type="file" name="upload[pictures][main]" :id="fieldId('upload-picture-main')" class="lie-item-form-field -upload-picture -main" required @change="uploadMainPicture" accept=".png,.jpg">
-            <label :for="fieldId('upload-picture-main')" class="lie-item-form-label -upload-picture -main button">
-                <svg-icon name="upload" v-if="!isUploading"></svg-icon>
-                <spinner v-if="isUploading"></spinner>
-                <span>{{ isUploading ? $t('lieForm.uploading') : $t('lieForm.upload.pictures.main') }}</span>
-            </label>
-        </div>
-
-        <div class="lie-item-title">
-            <textarea name="title" :id="fieldId('title')" class="lie-item-form-field -title" :placeholder="$t('lieForm.title')" rows="1" autofocus required v-model="lie.title" v-autosize></textarea>
-        </div>
-
-        <div class="lie-item-liar">
-            <input type="text" name="liar" :id="fieldId('liar')" class="lie-item-form-field -liar" :placeholder="$t('lieForm.liar')" required v-model="lie.liar" v-autosize>
-            <ul class="lie-item-liars-list">
-                <li class="lie-item-liars-list-item" v-for="liar in liars">
-                    <div class="pp" v-bind:style='{ backgroundImage: "url(" + liar.liarPictureUrl + ")", }'>
-
-                    </div>
-                    <span>{{liar.name + ' ' + liar.familyName}}</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-
+    <!-- BOTTOM  -->
     <div class="lie-item-content">
         <div class="lie-item-more">
             <div class="lie-item-more-content">
@@ -89,4 +62,41 @@
             <button type="submit" class="lie-item-form-submit">{{ $t('lieForm.submit') }}</button>
         </div>
     </div>
+    <!--  END BOTTOM -->
+
+
+
+    <!-- HEAD -->
+    <div class="lie-item-header">
+        <figure class="lie-item-figure" :style="{ color: liePictureColor('main') }">
+            <img :src="liePictureUrl('main')" :alt="$t('lie.picture', { liar: lie.liar })" class="lie-item-picture -main" @load="checkIfReady">
+        </figure>
+
+        <div class="lie-item-form-group -upload-picture">
+            <input type="file" name="upload[pictures][main]" :id="fieldId('upload-picture-main')" class="lie-item-form-field -upload-picture -main" required @change="uploadMainPicture" accept=".png,.jpg">
+            <label :for="fieldId('upload-picture-main')" class="lie-item-form-label -upload-picture -main button">
+                <svg-icon name="upload" v-if="!isUploading"></svg-icon>
+                <spinner v-if="isUploading"></spinner>
+                <span>{{ isUploading ? $t('lieForm.uploading') : $t('lieForm.upload.pictures.main') }}</span>
+            </label>
+        </div>
+
+        <div class="lie-item-title">
+            <textarea name="title" :id="fieldId('title')" class="lie-item-form-field -title" :placeholder="$t('lieForm.title')" rows="1" autofocus required v-model="lie.title" v-autosize></textarea>
+        </div>
+
+        <div class="lie-item-liar">
+            <input type="text" name="liar" :id="fieldId('liar')" class="lie-item-form-field -liar" :placeholder="$t('lieForm.liar')" required v-model="lie.liar" v-autosize>
+            <ul class="lie-item-liars-list">
+                <li class="lie-item-liars-list-item" v-for="liar in liars">
+                    <div class="lie-item-liars-list-item-picture" v-bind:style='{ backgroundImage: "url(" + liar.liarPictureUrl + ")", }'>
+
+                    </div>
+                    <span class="lie-item-liars-list-item-name" >{{liar.name + ' ' + liar.familyName}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- HEAD END -->
 </form>

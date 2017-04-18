@@ -150,19 +150,65 @@
         position: relative;
         align-self: flex-end;
         margin: 0;
-        padding: .2em .4em;
+        margin: .2em .4em;
         text-align: right;
         font-size: 1.4em;
     }
 
     &-liars-list {
+        display: none;
         position: absolute;
-        bottom: 0;
+        bottom: 1px;
         right: 0;
         left: 0;
+        margin: 0;
         transform: translateY(100%);
 
+        color: $font-color;
+        box-shadow: 3px 4px 5px -1px rgba(73, 73, 73, 0.4);
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
         background-color: white;
+
+        &-item {
+            position: relative;
+            display: flex;
+            padding: .6rem 1.2rem;
+            transition: .3s background-color;
+            cursor: pointer;
+            background-image: linear-gradient(to left, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+            &:after {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 1px;
+                background-color: $color-grey-light;
+            }
+
+            &:hover {
+                background-color: $color-grey-light;
+            }
+
+            &-picture {
+                flex-shrink: 0;
+                height: 34px;
+                width: 34px;
+
+                border-radius: 50%;
+                background-size: cover;
+                background-position: center;
+            }
+
+            &-name {
+                margin: auto 1.2rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
     }
 
     &-share-button {
@@ -395,6 +441,8 @@
     }
 
     &-form {
+        display: flex;
+        flex-direction: column-reverse; //IMPORTANT
         box-shadow: 0 10px 20px rgba($color-grey-dark, .19), 0 6px 6px rgba($color-grey-dark, .23);
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
@@ -408,10 +456,6 @@
 
         .lie-item-title {
             align-self: stretch;
-        }
-
-        .lie-item-liar {
-            width: 100%;
         }
 
         .lie-item-more {
@@ -519,6 +563,7 @@
             }
 
             &.-liar {
+                min-width: 250px; //Not good for english wording
                 max-width: 100%;
                 text-align: right;
                 transition: .3s background-color .3s color;
@@ -526,7 +571,14 @@
                 &:focus {
                     color: $color-grey-dark;
                     border-color: white;
+                    text-shadow: none;
+                    color: $color-grey;
                     background-color: white;
+
+
+                    & + .lie-item-liars-list {
+                        display: block;
+                    }
                 }
 
             }
