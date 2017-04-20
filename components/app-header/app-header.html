@@ -1,26 +1,30 @@
 <header class="header">
-    <router-link to="/" class="header-brand">
+    <button type="button" class="header-content-toggler" :class="{ '-close': isContentToggled }" @click="toggleContent"></button>
+
+    <router-link to="/" class="header-brand" @click.native="hideContent">
         LiarBustr
     </router-link>
 
-    <nav class="header-nav">
-        <router-link to="/lies" class="header-nav-link">{{ $t('msc.lies-list') }}</router-link>
-        <router-link to="/lie-form" class="header-nav-link">{{ $t('msc.lie-form') }}</router-link>
-    </nav>
+    <div class="header-content" :class="{ '-is-shown': isContentToggled }" @click="hideContent">
+        <nav class="header-nav">
+            <router-link to="/lies" class="header-nav-link">{{ $t('msc.lies-list') }}</router-link>
+            <router-link to="/lie-form" class="header-nav-link">{{ $t('msc.lie-form') }}</router-link>
+        </nav>
 
-    <div class="header-profile" v-if="isAnonymous">
-        <router-link to="/authenticate" class="header-nav-link">{{ $t('msc.authenticate') }}</router-link>
-    </div>
-
-    <div class="header-profile" v-if="!isAnonymous">
-        <div class="header-profile-infos">
-            <p class="header-profile-name">{{ user.name }}</p>
-            <button type="button" class="header-profile-logout" @click="logout">
-                <svg-icon name="logout" class="header-profile-logout-icon"></svg-icon>
-                <span class="header-profile-logout-text">{{ $t('authenticate.logout') }}</span>
-            </button>
+        <div class="header-profile" v-if="isAnonymous">
+            <router-link to="/authenticate" class="header-nav-link">{{ $t('msc.authenticate') }}</router-link>
         </div>
 
-        <div class="header-profile-picture" :style="{ backgroundImage: (user.profilePicture ? 'url(' + user.profilePicture + ')' : 'none') }"></div>
+        <div class="header-profile" v-if="!isAnonymous">
+            <div class="header-profile-infos">
+                <p class="header-profile-name">{{ user.name }}</p>
+                <button type="button" class="header-profile-logout" @click="logout">
+                    <svg-icon name="logout" class="header-profile-logout-icon"></svg-icon>
+                    <span class="header-profile-logout-text">{{ $t('authenticate.logout') }}</span>
+                </button>
+            </div>
+
+            <div class="header-profile-picture" :style="{ backgroundImage: (user.profilePicture ? 'url(' + user.profilePicture + ')' : 'none') }"></div>
+        </div>
     </div>
 </header>
