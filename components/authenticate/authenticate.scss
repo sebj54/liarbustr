@@ -26,10 +26,16 @@
         }
     }
 
+    &-buttons-wrapper {
+        max-width: 100%;
+    }
+
     &-button {
         display: flex;
-        min-width: 280px;
+        width: 100%;
         margin-bottom: 20px;
+        margin-left: auto;
+        margin-right: auto;
         @include button-large();
 
         &-icon {
@@ -123,5 +129,13 @@
     &-got-account {
         font-size: .9em;
         color: #848484;
+    }
+}
+
+@media (max-width: $screen-width-small - 1px) {
+    .authenticate {
+        width: 100%;
+        padding-left: 12px;
+        padding-right: 12px;
     }
 }
