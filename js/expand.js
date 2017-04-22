@@ -1,38 +1,51 @@
 /* global Vue window _ */
 
 /**
- * Calculate height of a given element
- * @param  {DOMElement} el Element for which calculate height
- * @param  {boolean} expanded Expanded state (true: expanded, false otherwise)
- */
-function calcHeight(el, expanded)
-{
-    const currentClass = expanded ? '-is-expanded' : '-is-not-expanded'
-
-    el.classList.add('u-no-transition')
-    el.classList.remove(currentClass)
-    el.style.height = null
-    el.style.height = el.clientHeight + 'px'
-    el.classList.add(currentClass)
-    el.classList.remove('u-no-transition')
-}
-
-/**
  * Expand Vue directive
  * Dynamically add classes to a block from a simple boolean
  * @type {VueDirective}
  */
 Vue.directive('expand', {
+    /**
+     * Element bound
+     * @type {DOMElement}
+     */
+    el: null,
+    /**
+     * isExpanded state (true if expanded)
+     * @type {Boolean}
+     */
+    isExpanded: false,
+    /**
+     * Calculate height of a given element
+     * @param  {DOMElement} el Element for which calculate height
+     */
+    calcHeight: function()
+    {
+        const currentClass = this.isExpanded ? '-is-expanded' : '-is-not-expanded'
+
+        this.el.classList.add('u-no-transition')
+        this.el.classList.remove(currentClass)
+        this.el.style.height = null
+        this.el.style.height = this.el.clientHeight + 'px'
+        this.el.classList.add(currentClass)
+        this.el.classList.remove('u-no-transition')
+    },
     inserted: function(el, binding)
     {
-        calcHeight(el, binding.value)
+        binding.def.el = el
+        binding.def.isExpanded = binding.value
+        binding.def.calcHeight()
+
         window.addEventListener('resize', _.debounce(function()
         {
-            calcHeight(el, binding.value)
+            binding.def.calcHeight()
         }, 250))
     },
     update: function(el, binding)
     {
+        binding.def.isExpanded = binding.value
+
         if (el.style.height)
         {
             if (binding.value)
@@ -48,7 +61,7 @@ Vue.directive('expand', {
         }
         else
         {
-            calcHeight(el, binding.value)
+            binding.def.calcHeight()
         }
     },
 })
