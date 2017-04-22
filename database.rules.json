@@ -8,6 +8,9 @@
             ],
 
             "$lieUid": {
+                "uid": {
+                    ".validate": "!data.exists() && newData.isString() && newData.val() === $lieUid"
+                },
                 "isModerated": {
                     ".validate": "newData.isBoolean() && (root.child('users').child(auth.uid).child('isAdmin').val() === true || newData.val() === false)"
                 },
