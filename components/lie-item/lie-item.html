@@ -5,8 +5,10 @@
                 <img :src="liePictureUrl('main')" :alt="$t('lie.picture', { liar: lie.liar })" class="lie-item-picture -main" @load="checkIfReady">
             </figure>
             <button @click="showCardBack" class="lie-item-share-button">
-                <span>{{ $t('msc.share.global') }}</span>
-                <svg-icon name="share"></svg-icon>
+                <span>
+                    <span>{{ $t('msc.share.global') }}</span>
+                    <svg-icon name="share"></svg-icon>
+                </span>
             </button>
             <h2 class="lie-item-title">{{ lie.title }}</h2>
 
@@ -101,16 +103,20 @@
                 <li class="lie-item-share-social-network-item -facebook">
                     <network network="facebook" class="lie-item-share-action-button-wrapper">
                         <button type="button" name="button" class="lie-item-share-action-button -facebook">
-                            <svg-icon name="facebook" class="lie-item-share-action-button-icon"></svg-icon>
-                            <span class="lie-item-share-action-button-text">{{ $t('msc.share.facebook') }}</span>
+                            <span>
+                                <svg-icon name="facebook" class="lie-item-share-action-button-icon"></svg-icon>
+                                <span class="lie-item-share-action-button-text">{{ $t('msc.share.facebook') }}</span>
+                            </span>
                         </button>
                     </network>
                 </li>
                 <li class="lie-item-share-social-network-item -twitter">
                     <network network="twitter" class="lie-item-share-action-button-wrapper -twitter">
                         <button type="button" name="button" class="lie-item-share-action-button -twitter">
-                            <svg-icon name="twitter" class="lie-item-share-action-button-icon"></svg-icon>
-                            <span class="lie-item-share-action-button-text">{{ $t('msc.share.twitter') }}</span>
+                            <span>
+                                <svg-icon name="twitter" class="lie-item-share-action-button-icon"></svg-icon>
+                                <span class="lie-item-share-action-button-text">{{ $t('msc.share.twitter') }}</span>
+                            </span>
                         </button>
                     </network>
                 </li>

@@ -42,10 +42,14 @@ textarea:focus {
     @include button-color(#43cec0, #99d8fc);
 }
 
-button,
-.button {
+.button,
+button span:only-child {
     display: inline-flex;
     align-items: center;
+}
+
+button,
+.button {
     padding-top: 6px;
     padding-bottom: 6px;
     padding-left: 12px;
