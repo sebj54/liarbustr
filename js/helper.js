@@ -187,4 +187,13 @@ const _ = {
     {
         return object !== null && typeof object === 'object'
     },
+
+    /**
+     * Get UNIX current timestamp
+     * @return {Number} timestamp
+     */
+    timestamp: function()
+    {
+        return Math.floor(Date.now() / 1000)
+    },
 }

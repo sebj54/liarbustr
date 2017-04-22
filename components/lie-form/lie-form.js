@@ -91,6 +91,7 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
         {
             return {
                 uid: _.generateUUID(),
+                timestamp: 0,
                 isModerated: false,
                 accuser: null,
                 title: '',
@@ -198,6 +199,7 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
         saveLie: function()
         {
             this.removeEmptySources()
+            this.lie.timestamp = _.timestamp()
             this.lie.accuser = user.uid
             this.$firebaseRefs.lies.child(this.lie.uid).set(this.lie)
 
