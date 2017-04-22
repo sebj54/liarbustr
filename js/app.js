@@ -1,4 +1,4 @@
-/* global firebase Vue VueRouter XMLHttpRequest _ router user document SocialSharing */
+/* global firebase Vue VueRouter XMLHttpRequest _ router user document SocialSharing navigator */
 
 /**
  * App - Provide useful methods across components
@@ -63,6 +63,9 @@ const app = {
         const availableLangs = Object.keys(app.locales)
         app.changeLocale(availableLangs[1])
         app.changeLocale(availableLangs[0], true) // fallback lang
+
+        // Set user's language
+        app.changeLocale(navigator.language.split('-')[0])
 
         Vue.config.missingHandler = function(lang, key, vm)
         {
