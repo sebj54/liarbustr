@@ -19,8 +19,10 @@
             <div class="header-profile-infos">
                 <p class="header-profile-name">{{ user.name }}</p>
                 <button type="button" class="header-profile-logout" @click="logout">
-                    <svg-icon name="logout" class="header-profile-logout-icon"></svg-icon>
-                    <span class="header-profile-logout-text">{{ $t('authenticate.logout') }}</span>
+                    <span>
+                        <svg-icon name="logout" class="header-profile-logout-icon"></svg-icon>
+                        <span class="header-profile-logout-text">{{ $t('authenticate.logout') }}</span>
+                    </span>
                 </button>
             </div>
 
