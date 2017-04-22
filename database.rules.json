@@ -1,9 +1,13 @@
 {
     "rules": {
+        "collections": {
+            ".read": true,
+        },
         "lies": {
             ".read": true,
             ".write": "auth !== null",
             ".indexOn": [
+                "timestamp",
                 "isModerated"
             ],
 

@@ -26,7 +26,10 @@ Vue.component('lies-list', app.resolveTemplate('lies-list', {
     firebase: function()
     {
         return {
-            lies: app.db.ref('/lies').orderByChild('isModerated').equalTo(true),
+            collection: {
+                source: app.db.ref('/collections/9cc5406a-446d-4831-b821-b473485ed865'),
+                asObject: true,
+            },
         }
     },
     props: [
@@ -39,7 +42,7 @@ Vue.component('lies-list', app.resolveTemplate('lies-list', {
          */
         count: function()
         {
-            return (this.lies) ? this.lies.length : 0
+            return (this.collection.lies) ? this.collection.lies.length : 0
         },
     },
 }))
