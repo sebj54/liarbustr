@@ -48,6 +48,10 @@ button span:only-child {
     align-items: center;
 }
 
+button span:only-child {
+    width: 100%;
+}
+
 button,
 .button {
     padding-top: 6px;

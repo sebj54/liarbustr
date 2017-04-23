@@ -94,12 +94,12 @@
             <svg-icon name="close"></svg-icon>
         </button>
         <div class="lie-item-back-head">
-            <h2 class="lie-item-title -white">
+            <h2 class="lie-item-title">
                 {{ lie.title }}
             </h2>
         </div>
         <social-sharing :url="shareUrl" :title="$t('lie.share.title', {liar: lie.liar})" :description=" $t('lie.share.description', {title: lie.title, liar: lie.liar}) " inline-template>
-            <ul class="lie-item-share-social-network-list -facebook">
+            <ul class="lie-item-share-social-network-list">
                 <li class="lie-item-share-social-network-item -facebook">
                     <network network="facebook" class="lie-item-share-action-button-wrapper">
                         <button type="button" name="button" class="lie-item-share-action-button -facebook">
