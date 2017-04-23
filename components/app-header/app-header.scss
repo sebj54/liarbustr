@@ -228,6 +228,29 @@ header {
         }
     }
 
+    .header-close {
+        position: fixed;
+        top: $header-height;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: block;
+        width: 100%;
+        background-color: rgba($color-grey-dark, .7);
+        visibility: hidden;
+        opacity: 0;
+        transition-property: visibility, opacity;
+        transition-timing-function: linear;
+        transition-duration: 0s, .3s;
+        transition-delay: .3s, 0s;
+
+        &.-is-shown {
+            visibility: visible;
+            opacity: 1;
+            transition-delay: 0s;
+        }
+    }
+
     .header-nav {
         order: 2;
 

@@ -1,6 +1,8 @@
 <header class="header">
     <button type="button" class="header-content-toggler" :class="{ '-close': isContentToggled }" @click="toggleContent"></button>
 
+    <button type="button" class="header-close" :class="{ '-is-shown': isContentToggled }" @click="hideContent"></button>
+
     <router-link to="/" class="header-brand" @click.native="hideContent">
         LiarBustr
     </router-link>
