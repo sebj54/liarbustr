@@ -1,10 +1,10 @@
 <article class="lie-item" :class="{ '-is-a-lie': isALie, '-is-not-a-lie': !isALie, '-is-ready': isReady, '-is-flipped' : isFlipped, '-is-expanded' : isExpanded }">
     <div class="lie-item-front">
-        <div class="lie-item-header">
+        <router-link :to="'/lie/' + lie.uid" class="lie-item-header">
             <figure class="lie-item-figure" :style="{ color: liePictureColor('main') }">
                 <img :src="liePictureUrl('main')" :alt="$t('lie.picture', { liar: lie.liar })" class="lie-item-picture -main" @load="checkIfReady">
             </figure>
-            <button @click="showCardBack" class="lie-item-share-button">
+            <button @click.prevent="showCardBack" class="lie-item-share-button">
                 <span>
                     <span>{{ $t('msc.share.global') }}</span>
                     <svg-icon name="share"></svg-icon>
@@ -13,7 +13,7 @@
             <h2 class="lie-item-title">{{ lie.title }}</h2>
 
             <p class="lie-item-liar">{{ lie.liar }}</p>
-        </div>
+        </router-link>
 
         <div class="lie-item-not-moderated">
             <alert class="lie-item-not-moderated-alert" type="info" :message="$t('lie.notModerated')" v-if="!lie.isModerated"></alert>
