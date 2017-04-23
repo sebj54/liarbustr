@@ -64,9 +64,6 @@ const app = {
         app.changeLocale(availableLangs[1])
         app.changeLocale(availableLangs[0], true) // fallback lang
 
-        // Set user's language
-        app.changeLocale(navigator.language.split('-')[0])
-
         Vue.config.missingHandler = function(lang, key, vm)
         {
             console.warn('Translation error: (lang: "' + lang + '" for key: "' + key + '")')
@@ -95,6 +92,9 @@ const app = {
         user.init()
         .then(function()
         {
+            // Set user's language
+            app.changeLocale(navigator.language.split('-')[0])
+
             app.vue = new Vue({
                 el: '#app',
                 router: app.router,
