@@ -7,44 +7,56 @@
  */
 Vue.directive('expand', {
     /**
-     * Element bound
-     * @type {DOMElement}
+     * Object containing elements (uid as a key) and isExpanded state
+     * @type {object}
      */
-    el: null,
+    els: {},
     /**
-     * isExpanded state (true if expanded)
+     * Resize event set (true if set)
      * @type {Boolean}
      */
-    isExpanded: false,
+    resizeEventSet: false,
     /**
      * Calculate height of a given element
-     * @param  {DOMElement} el Element for which calculate height
+     * @param  {string} uid Element's UID
      */
-    calcHeight: function()
+    calcHeight: function(uid)
     {
-        const currentClass = this.isExpanded ? '-is-expanded' : '-is-not-expanded'
+        const currentClass = this.els[uid].isExpanded ? '-is-expanded' : '-is-not-expanded'
 
-        this.el.classList.add('u-no-transition')
-        this.el.classList.remove(currentClass)
-        this.el.style.height = null
-        this.el.style.height = this.el.clientHeight + 'px'
-        this.el.classList.add(currentClass)
-        this.el.classList.remove('u-no-transition')
+        this.els[uid].el.classList.add('u-no-transition')
+        this.els[uid].el.classList.remove(currentClass)
+        this.els[uid].el.style.height = null
+        this.els[uid].el.style.height = this.els[uid].el.clientHeight + 'px'
+        this.els[uid].el.classList.add(currentClass)
+        this.els[uid].el.classList.remove('u-no-transition')
     },
     inserted: function(el, binding)
     {
-        binding.def.el = el
-        binding.def.isExpanded = binding.value
-        binding.def.calcHeight()
+        const uid = _.generateUUID()
+        el.dataset.uid = uid
+        binding.def.els[uid] = {
+            el: el,
+            isExpanded: binding.value,
+        }
 
-        window.addEventListener('resize', _.debounce(function()
+        binding.def.calcHeight(uid)
+
+        if (!binding.def.resizeEventSet)
         {
-            binding.def.calcHeight()
-        }, 250))
+            binding.def.resizeEventSet = true
+            window.addEventListener('resize', _.debounce(function()
+            {
+                Object.keys(binding.def.els).forEach(function(elUid)
+                {
+                    binding.def.calcHeight(elUid)
+                })
+            }, 250))
+        }
     },
     update: function(el, binding)
     {
-        binding.def.isExpanded = binding.value
+        binding.def.els[el.dataset.uid].isExpanded = binding.value
 
         if (el.style.height)
         {
@@ -61,7 +73,11 @@ Vue.directive('expand', {
         }
         else
         {
-            binding.def.calcHeight()
+            binding.def.calcHeight(el.dataset.uid)
         }
+    },
+    unbind: function(el, binding)
+    {
+        delete binding.def.els[el.dataset.uid]
     },
 })
