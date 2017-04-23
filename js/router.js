@@ -52,7 +52,7 @@ const router = {
             path: absoluteRoute,
             component: function(resolve, reject)
             {
-                app.get('views' + absolutePath + absolutePath + '.html', function(template)
+                app.get('/views' + absolutePath + absolutePath + '.html', function(template)
                 {
                     resolve({
                         data: function()

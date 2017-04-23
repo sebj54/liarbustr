@@ -192,7 +192,7 @@ const app = {
                 if (_.isEmptyObject(app.locales[lang]))
                 {
                     app.get(
-                        'locales/' + lang + '.json',
+                        '/locales/' + lang + '.json',
                         function(locale)
                         {
                             app.locales[lang] = (typeof locale === 'object') ? locale : {}
@@ -225,7 +225,7 @@ const app = {
     resolveTemplate: function(name, component = {})
     {
         const fullName = (name.indexOf('/') !== -1) ? name : name + '/' + name
-        const path = 'components/' + fullName + '.html'
+        const path = '/components/' + fullName + '.html'
 
         return function(resolve, reject)
         {
