@@ -1,51 +1,71 @@
 /* global Vue app _ user window Vibrant */
 
 /**
- * Lie form component
- * @type {VueComponent}
- */
+* Lie form component
+* @type {VueComponent}
+*/
 Vue.component('lie-form', app.resolveTemplate('lie-form', {
     data: function()
     {
         return {
             /**
-             * Lie-item header
-             * @type {DOMElement}
-             */
+            * Lie-item header
+            * @type {DOMElement}
+            */
             $header: null,
             /**
-             * Lie item header image
-             * @type {DOMElement}
-             */
+            * Lie item header image
+            * @type {DOMElement}
+            */
             $headerImg: null,
             /**
-             * Lie
-             * @type {object}
-             */
+            * Lie
+            * @type {object}
+            */
             lie: this.lieEmptyStructure(),
             /**
-             * Indicates if lie-item is in viewport and loaded
-             * @type {Boolean}
-             */
+            * Indicates if lie-item is in viewport and loaded
+            * @type {Boolean}
+            */
+
             isReady: false,
             /**
-             * Indicates if a picture is being uploaded
-             * @type {Boolean}
-             */
+            * Indicates if a picture is being uploaded
+            * @type {Boolean}
+            */
             isUploading: false,
+
+            /**
+            *   Used to open or close Liars list
+            */
+            liarListOpened: false,
+
+            selectedLiar: {},
+
+
         }
     },
     firebase: function()
     {
         return {
             lies: app.db.ref('/lies'),
+            liars: app.db.ref('/liars'),
         }
+    },
+    computed: {
+        liarFullName: function()
+        {
+            if (this.selectedLiar.name)
+            {
+                return this.selectedLiar.name + ' ' + this.selectedLiar.familyName
+            }
+        },
     },
     methods: {
         /**
-         * Add a source
-         * @param {string} type Source type
-         */
+        * Add a source
+        * @param {string} type Source type
+        */
         addSource: function(type)
         {
             this.lie.sources[type].push({
@@ -53,40 +73,53 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
                 url: '',
             })
         },
+
+        selectLiar: function(liar)
+        {
+            this.selectedLiar = liar
+            this.lie.liar = liar.uid
+            this.liarListOpened = false
+        },
+
+        openLiarList: function()
+        {
+            this.liarListOpened = true
+        },
         /**
-         * Add a statement source
-         */
+        * Add a statement source
+        */
         addStatement: function()
         {
             this.addSource('statements')
         },
         /**
-         * Add a refutation source
-         */
+        * Add a refutation source
+        */
         addRefutation: function()
         {
             this.addSource('refutations')
         },
         /**
-         * Add a confirmation source
-         */
+        * Add a confirmation source
+        */
         addConfirmation: function()
         {
             this.addSource('confirmations')
         },
         /**
-         * Get field ID (html attribute)
-         * @param  {string} name Field name
-         * @return {string} Field name + unique identifier
-         */
+        * Get field ID (html attribute)
+        * @param  {string} name Field name
+        * @return {string} Field name + unique identifier
+        */
+
         fieldId: function(name)
         {
             return name + '-' + this._uid
         },
         /**
-         * Get empty structure of a lie
-         * @return {object} Lie
-         */
+        * Get empty structure of a lie
+        * @return {object} Lie
+        */
         lieEmptyStructure: function()
         {
             return {
@@ -123,8 +156,8 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
             }
         },
         /**
-         * Check if lie-item is ready: if item is visible in viewport and header image is loaded
-         */
+        * Check if lie-item is ready: if item is visible in viewport and header image is loaded
+        */
         checkIfReady: function()
         {
             if (!this.isReady)
@@ -144,19 +177,19 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
             }
         },
         /**
-         * Get lie picture path for a given type
-         * @param  {string} type Picture type
-         * @return {string} Picture path
-         */
+        * Get lie picture path for a given type
+        * @param  {string} type Picture type
+        * @return {string} Picture path
+        */
         liePictureUrl: function(type)
         {
             return _.getPropValue(this.lie, 'pictures.' + type + '.url')
         },
         /**
-         * Get picture's main color for a given image type
-         * @param  {string} type Image type
-         * @return {Promise<object>} A promise to the color
-         */
+        * Get picture's main color for a given image type
+        * @param  {string} type Image type
+        * @return {Promise<object>} A promise to the color
+        */
         liePictureColor: function(type)
         {
             return new Promise(function(resolve, reject)
@@ -177,8 +210,8 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
             }.bind(this))
         },
         /**
-         * Remove empty sources (essential before saving in database)
-         */
+        * Remove empty sources (essential before saving in database)
+        */
         removeEmptySources: function()
         {
             Object.keys(this.lie.sources).forEach(function(type)
@@ -193,8 +226,8 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
             }.bind(this))
         },
         /**
-         * Save a lie
-         */
+        * Save a lie
+        */
         saveLie: function()
         {
             this.removeEmptySources()
@@ -206,9 +239,9 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
             this.lie = this.lieEmptyStructure()
         },
         /**
-         * Upload main picture and store it. Function must be a callback triggered on change on a file input
-         * @param  {event} e Event
-         */
+        * Upload main picture and store it. Function must be a callback triggered on change on a file input
+        * @param  {event} e Event
+        */
         uploadMainPicture: function(e)
         {
             if (e.currentTarget.files.length)

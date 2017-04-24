@@ -1,0 +1,32 @@
+<form class="liar-form">
+    <div class="lie-item-form-group -upload-picture">
+        <input type="file" id="upload-liar-picture" class="lie-item-form-field -upload-picture -main" required @change="uploadMainPicture">
+        <label for="upload-liar-picture" class="lie-item-form-label -upload-picture -main button">
+            <svg-icon name="upload" v-if="!isUploading"></svg-icon>
+            <spinner v-if="isUploading"></spinner>
+            <span>{{ isUploading ? $t('lieForm.uploading') : $t('lieForm.upload.pictures.main') }}</span>
+        </label>
+    </div>
+    <div class="input-wrapper">
+        <label class="liar-form-label">Name</label>
+        <input class="liar-form-input" type="text" name="name" v-model="liar.name" placeholder="Donald">
+    </div>
+
+    <div class="input-wrapper">
+        <label class="liar-form-label">Family name</label>
+        <input class="liar-form-input" type="text" name="family-name" v-model="liar.familyName" placeholder="Trump">
+    </div>
+
+    <div class="input-wrapper">
+        <label class="liar-form-label">Political Family</label>
+        <input class="liar-form-input" type="text" name="name" v-model="liar.politicalFamily" placeholder="Political Family">
+    </div>
+
+    <div class="input-wrapper">
+        <label class="liar-form-label">Role</label>
+        <input class="liar-form-input" type="text" name="name" v-model="liar.role" placeholder="President">
+    </div>
+
+
+    <button type="button" name="button" @click="saveLiar">Sauvegarder le menteur</button>
+</form>

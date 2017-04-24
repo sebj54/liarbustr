@@ -17,6 +17,7 @@
         "authenticate": "Authenticate",
         "lie-form": "I accuse",
         "lies-list": "Lies",
+        "liar-form": "Add a liar",
         "share": {
             "global": "Share",
             "facebook": "Share on Facebook",
