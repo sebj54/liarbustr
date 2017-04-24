@@ -84,12 +84,17 @@
         <div class="lie-item-title">
             <textarea name="title" :id="fieldId('title')" class="lie-item-form-field -title" :placeholder="$t('lieForm.title')" rows="1" autofocus required v-model="lie.title" v-autosize></textarea>
         </div>
-
         <div class="lie-item-liar">
-            <input type="text" name="liar" :id="fieldId('liar')" class="lie-item-form-field -liar" :placeholder="$t('lieForm.liar')" required v-model="lie.liar" v-autosize>
+            <div class="lie-item-selected-liar">
+                <div class="lie-item-selected-liar-picture" :style='{ backgroundImage: "url(" + selectedLiar.liarPictureUrl + ")", }'>
+                </div>
+                <div class="lie-item-selected-liar-name">
+                </div>
+            </div>
+            <input type="text" name="liar" :id="fieldId('liar')" class="lie-item-form-field -liar" :class="{active : liarListOpened, selected : selectedLiar.uid }" :placeholder="$t('lieForm.liar')" required v-model="liarFullName" v-autosize @click="openLiarList">
             <ul class="lie-item-liars-list">
-                <li class="lie-item-liars-list-item" v-for="liar in liars">
-                    <div class="lie-item-liars-list-item-picture" v-bind:style='{ backgroundImage: "url(" + liar.liarPictureUrl + ")", }'>
+                <li class="lie-item-liars-list-item" v-for="liar in liars" @click="selectLiar(liar)">
+                    <div class="lie-item-liars-list-item-picture" :style='{ backgroundImage: "url(" + liar.liarPictureUrl + ")", }'>
 
                     </div>
                     <span class="lie-item-liars-list-item-name" >{{liar.name + ' ' + liar.familyName}}</span>

@@ -440,166 +440,6 @@
         }
     }
 
-    &-form {
-        display: flex;
-        flex-direction: column-reverse; //IMPORTANT
-        box-shadow: 0 10px 20px rgba($color-grey-dark, .19), 0 6px 6px rgba($color-grey-dark, .23);
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 4px;
-        background-color: $color-whitey;
-
-        .lie-item-figure {
-            color: #b58e4f;
-            border-top-left-radius: 4px;
-            border-top-right-radius: 4px;
-        }
-
-        .lie-item-title {
-            align-self: stretch;
-        }
-
-        .lie-item-more {
-            &-content {
-                overflow: visible;
-            }
-        }
-
-        &-footer {
-            text-align: center;
-        }
-
-        &-group {
-            display: flex;
-            align-items: center;
-
-            &.-upload-picture {
-                position: relative;
-                margin-bottom: auto;
-                padding-top: 1em;
-                padding-bottom: 1em;
-            }
-
-            &.-source {
-                margin-bottom: 1rem;
-            }
-        }
-
-        &-group & {
-            &-label {
-                margin-right: 12px;
-            }
-
-            &-field {
-                flex-grow: 1;
-            }
-        }
-
-        &-label {
-            &.-upload-picture {
-                @include button-color-secondary();
-                @include button-small();
-                margin-left: auto;
-                margin-right: auto;
-
-                & :first-child {
-                    margin-left: auto;
-                }
-
-                & :last-child {
-                    margin-right: auto;
-                }
-            }
-
-            &.-title {
-                display: block;
-                line-height: 1.2;
-            }
-        }
-
-        &-field {
-            &.-upload-picture {
-                position: absolute;
-                z-index: -1;
-                bottom: 1em;
-                left: 50%;
-                width: 1px;
-                height: 1px;
-                flex-grow: 0;
-                opacity: 0;
-                overflow: hidden;
-
-                &:focus + .lie-item-form-label {
-                    box-shadow: 0 0 6px #43cec0;
-                }
-            }
-
-            &.-title,
-            &.-liar {
-                border-style: dashed;
-                border-width: 3px;
-                background-color: transparent;
-                text-shadow: inherit;
-                color: inherit;
-
-                &:not(:focus) {
-                    border-color: currentColor;
-                }
-
-                &:hover,
-                &:focus {
-                    box-shadow: none;
-                }
-
-                &::placeholder {
-                    color: inherit;
-                    font-style: italic;
-                }
-            }
-
-            &.-title {
-                display: block;
-                width: 100%;
-                text-align: center;
-            }
-
-            &.-liar {
-                min-width: 250px; //Not good for english wording
-                max-width: 100%;
-                text-align: right;
-                transition: .3s background-color .3s color;
-
-                &:focus {
-                    color: $color-grey-dark;
-                    border-color: white;
-                    text-shadow: none;
-                    color: $color-grey;
-                    background-color: white;
-
-
-                    & + .lie-item-liars-list {
-                        display: block;
-                    }
-                }
-
-            }
-
-            &.-text {
-                width: 100%;
-                min-height: 8em * 1.2;
-            }
-        }
-
-        &-add-source {
-            @include button-color-secondary();
-            @include button-small();
-            margin-left: auto;
-        }
-
-        &-submit {
-            @include button-color();
-        }
-    }
-
     &.-is-ready & {
         &-content {
             transition-duration: $appear-duration * 1s;
@@ -726,6 +566,16 @@
                     }
                 }
             }
+        }
+    }
+
+    &-selected-liar {
+        &-picture {
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
         }
     }
 }
