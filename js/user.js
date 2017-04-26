@@ -11,6 +11,11 @@ const user = {
      */
     email: null,
     /**
+     * User is an admin if true
+     * @type {Boolean}
+     */
+    isAdmin: true,
+    /**
      * User is not actually logged in if true
      * @type {Boolean}
      */
@@ -131,7 +136,13 @@ const user = {
                 user.email = _.getPropValue(providerData, 'email')
             }
 
-            resolve(user)
+            app.db.ref('/users/' + user.uid + '/isAdmin').once('value')
+            .then(function(snapshot)
+            {
+                user.isAdmin = Boolean(snapshot.val())
+
+                resolve(user)
+            })
         })
     },
 
