@@ -85,7 +85,7 @@ const user = {
     },
 
     /**
-     * Get property value from an object or null if property doesn't exist
+     * Fetch user object from user datas
      * @param  {object|null} userData User datas - if null or empty object, user will be emptied
      * @return {Promise<object>} A promise to the fetched user
      */
@@ -314,6 +314,7 @@ const user = {
         app.db.ref('/users/' + firebaseUser.uid).once('value')
         .then(function(snapshot)
         {
+            const userSnapshot = snapshot.val()
             const keys = [
                 'email',
                 'isAnonymous',
@@ -324,7 +325,7 @@ const user = {
 
             keys.forEach(function(key)
             {
-                if (!_.hasProp(snapshot, key) || snapshot[key] !== firebaseUser[key])
+                if (!_.hasProp(userSnapshot, key) || userSnapshot[key] !== firebaseUser[key])
                 {
                     updates['/users/' + firebaseUser.uid + '/' + key] = firebaseUser[key]
                 }
