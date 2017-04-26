@@ -46,3 +46,10 @@ body {
 .u-no-transition {
     transition-duration: 0 !important;
 }
+
+.pp {
+    object-fit: cover;
+    object-position: center;
+
+    border-radius: 50%;
+}

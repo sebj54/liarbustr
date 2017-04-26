@@ -9,8 +9,11 @@
                 <svg-icon name="share"></svg-icon>
             </button>
             <h2 class="lie-item-title">{{ lie.title }}</h2>
-
-            <p class="lie-item-liar">{{ lie.liar }}</p>
+            <router-link :to="'/liar/' + lie.liar" class="lie-item-liar">
+                <span>{{ liarName }}</span>
+                <img class="lie-item-liar-picture pp" :src="liarPictureUrl">
+                </img>
+            </router-link>
         </div>
 
         <div class="lie-item-not-moderated">

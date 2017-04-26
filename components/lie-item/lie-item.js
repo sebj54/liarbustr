@@ -76,6 +76,8 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
              * @type {object}
              */
             lie: null,
+
+            liar: null,
         }
         return data
     },
@@ -96,6 +98,12 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         'lie-uid',
         'update-meta',
     ],
+    watch: {
+        lie: function()
+        {
+            this.$bindAsObject('liar', app.db.ref('/liars/' + this.lie.liar))
+        },
+    },
     computed: {
         /**
          * Get actual vote
@@ -192,6 +200,16 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         shareUrl: function()
         {
             return window.location.protocol + '//' + window.location.hostname + '/lie/' + (_.hasProp(this.lie, 'uid') ? this.lie.uid : this.lieUid)
+        },
+
+        liarName: function()
+        {
+            return _.getPropValue(this.liar, 'name') + ' ' + _.getPropValue(this.liar, 'familyName')
+        },
+
+        liarPictureUrl: function()
+        {
+            return _.getPropValue(this.liar, 'liarPictureUrl')
         },
     },
     methods: {

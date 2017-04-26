@@ -148,11 +148,20 @@
 
     &-liar {
         position: relative;
+        display: flex;
         align-self: flex-end;
+        align-items: center;
         margin: 0;
         margin: .2em .4em;
         text-align: right;
         font-size: 1.4em;
+
+        border-width: 0; //Override
+        &-picture {
+            height: 30px;
+            width: 30px;
+            margin-left: 12px;
+        }
     }
 
     &-liars-list {
