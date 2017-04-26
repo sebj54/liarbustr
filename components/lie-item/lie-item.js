@@ -60,7 +60,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
              * Expanded state (content shown)
              * @type {Boolean}
              */
-            isExpanded: false,
+            isExpanded: (this.expandedDefault) ? true : false,
             /**
              * Flipped state (true if back of the card is shown)
              * @type {Boolean}
@@ -93,6 +93,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
         }
     },
     props: [
+        'expanded-default',
         'lie-uid',
         'update-meta',
     ],
