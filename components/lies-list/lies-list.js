@@ -27,12 +27,13 @@ Vue.component('lies-list', app.resolveTemplate('lies-list', {
     {
         return {
             collection: {
-                source: app.db.ref('/collections/9cc5406a-446d-4831-b821-b473485ed865'),
+                source: app.db.ref('/collections/' + this.collectionUid),
                 asObject: true,
             },
         }
     },
     props: [
+        'collection-uid',
         'update-meta',
     ],
     computed: {
