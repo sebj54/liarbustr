@@ -56,17 +56,35 @@
         border-bottom-width: 0;
     }
 
+    &-alert {
+        margin-bottom: 0;
+        border-radius: 0;
+
+        &-button {
+            @include button-small();
+            margin-left: .2em;
+            margin-right: .2em;
+
+            &.-validate {
+                @include button-color(#adfd40, #67c875);
+            }
+
+            &.-refuse {
+                @include button-color(#ff8f8e, #cc2c28);
+            }
+
+            .svg-icon {
+                width: 1em;
+                height: 1em;
+            }
+        }
+    }
+
     &-content {
         padding: 2rem;
         overflow: hidden;
         transition-property: height;
         transition-timing-function: ease-out;
-    }
-
-    &-not-moderated {
-        &-alert {
-            border-radius: 0;
-        }
     }
 
     &-figure {

@@ -17,6 +17,7 @@
         "authenticate": "Authenticate",
         "lie-form": "I accuse",
         "lies-list": "Lies",
+        "moderate": "Moderate",
         "share": {
             "global": "Share",
             "facebook": "Share on Facebook",
@@ -93,5 +94,10 @@
             }
         },
         "uploading": "Uploading"
+    },
+    "moderate": {
+        "mustBeAdminAlert": "You must be an admin to moderate lies!",
+        "refuse": "Refuse",
+        "validate": "Validate"
     }
 }

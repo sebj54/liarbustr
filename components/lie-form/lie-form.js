@@ -201,7 +201,9 @@ Vue.component('lie-form', app.resolveTemplate('lie-form', {
             this.removeEmptySources()
             this.lie.timestamp = _.timestamp()
             this.lie.accuser = user.uid
+
             this.$firebaseRefs.lies.child(this.lie.uid).set(this.lie)
+            app.db.ref('/collections/recent-unmoderated/lies').push(this.lie.uid)
 
             app.router.push('lie/' + this.lie.uid)
 
