@@ -1,5 +1,5 @@
 <header class="header">
-    <button type="button" class="header-content-toggler" :class="{ '-close': isContentToggled }" @click="toggleContent"></button>
+    <button type="button" class="header-content-toggler btn" :class="{ '-close': isContentToggled }" @click="toggleContent"></button>
 
     <button type="button" class="header-close" :class="{ '-is-shown': isContentToggled }" @click="hideContent"></button>
 
@@ -25,7 +25,7 @@
         <div class="header-profile" v-if="!isAnonymous">
             <div class="header-profile-infos">
                 <p class="header-profile-name">{{ user.name }}</p>
-                <button type="button" class="header-profile-logout" @click="logout">
+                <button type="button" class="header-profile-logout btn" @click="logout">
                     <span>
                         <svg-icon name="logout" class="header-profile-logout-icon"></svg-icon>
                         <span class="header-profile-logout-text">{{ $t('authenticate.logout') }}</span>

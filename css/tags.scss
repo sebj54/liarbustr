@@ -38,26 +38,7 @@ textarea:focus {
     }
 }
 
-@mixin button-color-secondary() {
-    @include button-color(#43cec0, #99d8fc);
-}
-
-.button,
-button span:only-child {
-    align-items: center;
-}
-
-.button {
-    display: inline-flex;
-}
-
-button span:only-child {
-    display: flex;
-    width: 100%;
-}
-
-button,
-.button {
+.btn {
     padding-top: 6px;
     padding-bottom: 6px;
     padding-left: 12px;
@@ -93,6 +74,14 @@ button,
         }
     }
 
+    &.-primary {
+        @include button-color();
+    }
+
+    &.-secondary {
+        @include button-color(#43cec0, #99d8fc);
+    }
+
     &.-facebook {
         @include button-color(#3b5998, #2b4170);
     }
@@ -103,6 +92,12 @@ button,
 
     &.-twitter {
         @include button-color(#00aced, #0081ce);
+    }
+
+    span:only-child {
+        display: flex;
+        align-items: center;
+        width: 100%;
     }
 }
 

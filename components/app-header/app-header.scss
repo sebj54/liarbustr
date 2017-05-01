@@ -184,7 +184,7 @@ header {
         &-icon {
             margin-right: .2em;
 
-            button & {
+            .btn & {
                 width: 18px;
                 height: 18px;
             }
@@ -216,6 +216,10 @@ header {
         &-toggler {
             display: none;
         }
+    }
+
+    .header-close {
+        display: none;
     }
 }
 

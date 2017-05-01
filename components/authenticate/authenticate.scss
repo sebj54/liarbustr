@@ -111,19 +111,11 @@
             margin-top: 20px;
             margin-bottom: 0;
         }
-
-        &-submit {
-            @include button-color();
-        }
     }
 
     &-login {
         text-decoration: underline;
         color: #505050;
-    }
-
-    &-logout {
-        @include button-color();
     }
 
     &-got-account {

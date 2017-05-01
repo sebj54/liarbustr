@@ -6,10 +6,12 @@
 
         <div class="lie-item-form-group -upload-picture">
             <input type="file" name="upload[pictures][main]" :id="fieldId('upload-picture-main')" class="lie-item-form-field -upload-picture -main" required @change="uploadMainPicture" accept=".png,.jpg">
-            <label :for="fieldId('upload-picture-main')" class="lie-item-form-label -upload-picture -main button">
-                <svg-icon name="upload" v-if="!isUploading"></svg-icon>
-                <spinner v-if="isUploading"></spinner>
-                <span>{{ isUploading ? $t('lieForm.uploading') : $t('lieForm.upload.pictures.main') }}</span>
+            <label :for="fieldId('upload-picture-main')" class="lie-item-form-label -upload-picture -main btn -secondary">
+                <span>
+                    <svg-icon name="upload" v-if="!isUploading"></svg-icon>
+                    <spinner v-if="isUploading"></spinner>
+                    <span>{{ isUploading ? $t('lieForm.uploading') : $t('lieForm.upload.pictures.main') }}</span>
+                </span>
             </label>
         </div>
 
@@ -42,7 +44,7 @@
                         </li>
                     </ul>
 
-                    <button type="button" class="lie-item-form-add-source -statement" @click="addStatement">{{ $t('lieForm.sources.add') }}</button>
+                    <button type="button" class="lie-item-form-add-source -statement btn -secondary" @click="addStatement">{{ $t('lieForm.sources.add') }}</button>
                 </div>
 
                 <div class="lie-item-sources-wrapper">
@@ -57,7 +59,7 @@
                         </li>
                     </ul>
 
-                    <button type="button" class="lie-item-form-add-source -refutation" @click="addRefutation">{{ $t('lieForm.sources.add') }}</button>
+                    <button type="button" class="lie-item-form-add-source -refutation btn -secondary" @click="addRefutation">{{ $t('lieForm.sources.add') }}</button>
                 </div>
 
                 <div class="lie-item-sources-wrapper">
@@ -72,13 +74,13 @@
                         </li>
                     </ul>
 
-                    <button type="button" class="lie-item-form-add-source -confirmation" @click="addConfirmation">{{ $t('lieForm.sources.add') }}</button>
+                    <button type="button" class="lie-item-form-add-source -confirmation btn -secondary" @click="addConfirmation">{{ $t('lieForm.sources.add') }}</button>
                 </div>
             </div>
         </div>
 
         <div class="lie-item-form-footer">
-            <button type="submit" class="lie-item-form-submit">{{ $t('lieForm.submit') }}</button>
+            <button type="submit" class="lie-item-form-submit btn -primary">{{ $t('lieForm.submit') }}</button>
         </div>
     </div>
 </form>

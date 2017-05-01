@@ -4,7 +4,7 @@
             <figure class="lie-item-figure" :style="{ color: liePictureColor('main') }">
                 <img :src="liePictureUrl('main')" :alt="$t('lie.picture', { liar: lie.liar })" class="lie-item-picture -main" @load="checkIfReady">
             </figure>
-            <button type="button" @click.prevent="showCardBack" class="lie-item-share-button">
+            <button type="button" @click.prevent="showCardBack" class="lie-item-share-button btn">
                 <span>
                     <span>{{ $t('msc.share.global') }}</span>
                     <svg-icon name="share"></svg-icon>
@@ -18,13 +18,13 @@
         <div class="lie-item-not-moderated" v-if="!lie.isModerated">
             <alert class="lie-item-alert -not-moderated" type="info" :message="$t('lie.notModerated')" v-if="!user.isAdmin"></alert>
             <alert class="lie-item-alert -moderate" type="warning" :message="$t('lie.notModerated')" v-if="user.isAdmin">
-                <button type="button" class="lie-item-alert-button -validate" slot="footer" @click="moderate(true)">
+                <button type="button" class="lie-item-alert-button -validate btn" slot="footer" @click="moderate(true)">
                     <span>
                         <svg-icon name="checked"></svg-icon>
                         <span>{{ $t('moderate.validate' )}}</span>
                     </span>
                 </button>
-                <button type="button" class="lie-item-alert-button -refuse" slot="footer" @click="moderate(false)">
+                <button type="button" class="lie-item-alert-button -refuse btn" slot="footer" @click="moderate(false)">
                     <span>
                         <svg-icon name="close"></svg-icon>
                         <span>{{ $t('moderate.refuse' )}}</span>
@@ -44,7 +44,7 @@
                         {{ lieVotesCountLiar }}
                         <svg-icon name="checked" class="lie-item-vote-indicator"></svg-icon>
                     </div>
-                    <button type="button" class="lie-item-vote-button -liar" @click="voteLiar">{{ $t('lie.votes.liar') }}</button>
+                    <button type="button" class="lie-item-vote-button -liar btn" @click="voteLiar">{{ $t('lie.votes.liar') }}</button>
                 </div>
                 <div class="lie-item-vote -not-liar" :class="{ '-is-actual-vote': actualVoteValue === 'notLiar' }">
                     <div class="lie-item-vote-bar -not-liar">
@@ -55,7 +55,7 @@
                         {{ lieVotesCountNotLiar }}
                         <svg-icon name="checked" class="lie-item-vote-indicator"></svg-icon>
                     </div>
-                    <button type="button" class="lie-item-vote-button -not-liar" @click="voteNotLiar">{{ $t('lie.votes.notLiar') }}</button>
+                    <button type="button" class="lie-item-vote-button -not-liar btn" @click="voteNotLiar">{{ $t('lie.votes.notLiar') }}</button>
                 </div>
             </div>
 
@@ -98,13 +98,13 @@
                     </div>
                 </div>
 
-                <button type="button" class="lie-item-more-button" @click="toggleContent">{{ $t(isExpanded ? 'lie.readLess' : 'lie.readMore') }}</button>
+                <button type="button" class="lie-item-more-button btn -primary" @click="toggleContent">{{ $t(isExpanded ? 'lie.readLess' : 'lie.readMore') }}</button>
             </div>
         </div>
     </div>
 
     <div class="lie-item-back">
-        <button class="lie-item-back-close" type="button" @click="hideCardBack">
+        <button type="button" class="lie-item-back-close btn" @click="hideCardBack">
             <svg-icon name="close"></svg-icon>
         </button>
         <div class="lie-item-back-head">
@@ -116,7 +116,7 @@
             <ul class="lie-item-share-social-network-list">
                 <li class="lie-item-share-social-network-item -facebook">
                     <network network="facebook" class="lie-item-share-action-button-wrapper">
-                        <button type="button" class="lie-item-share-action-button -facebook">
+                        <button type="button" class="lie-item-share-action-button btn -facebook">
                             <span>
                                 <svg-icon name="facebook" class="lie-item-share-action-button-icon"></svg-icon>
                                 <span class="lie-item-share-action-button-text">{{ $t('msc.share.facebook') }}</span>
@@ -126,7 +126,7 @@
                 </li>
                 <li class="lie-item-share-social-network-item -twitter">
                     <network network="twitter" class="lie-item-share-action-button-wrapper -twitter">
-                        <button type="button" class="lie-item-share-action-button -twitter">
+                        <button type="button" class="lie-item-share-action-button btn -twitter">
                             <span>
                                 <svg-icon name="twitter" class="lie-item-share-action-button-icon"></svg-icon>
                                 <span class="lie-item-share-action-button-text">{{ $t('msc.share.twitter') }}</span>

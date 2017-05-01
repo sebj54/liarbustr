@@ -2,19 +2,19 @@
     <h1 class="authenticate-title">{{ $t('authenticate.title') }}</h1>
 
     <div class="authenticate-buttons-wrapper">
-        <button type="button" class="authenticate-button -facebook" @click="loginWithFacebook" v-if="isAnonymous">
+        <button type="button" class="authenticate-button btn -facebook" @click="loginWithFacebook" v-if="isAnonymous">
             <span>
                 <svg-icon name="facebook" class="authenticate-button-icon -facebook"></svg-icon>
                 <span class="authenticate-button-text -facebook">{{ $t('authenticate.loginWithFacebook') }}</span>
             </span>
         </button>
-        <button type="button" class="authenticate-button -twitter" @click="loginWithTwitter" v-if="isAnonymous">
+        <button type="button" class="authenticate-button btn -twitter" @click="loginWithTwitter" v-if="isAnonymous">
             <span>
                 <svg-icon name="twitter" class="authenticate-button-icon -twitter"></svg-icon>
                 <span class="authenticate-button-text -twitter">{{ $t('authenticate.loginWithTwitter') }}</span>
             </span>
         </button>
-        <button type="button" class="authenticate-button -google" @click="loginWithGoogle" v-if="isAnonymous">
+        <button type="button" class="authenticate-button btn -google" @click="loginWithGoogle" v-if="isAnonymous">
             <span>
                 <svg-icon name="google" class="authenticate-button-icon -google"></svg-icon>
                 <span class="authenticate-button-text -google">{{ $t('authenticate.loginWithGoogle') }}</span>
@@ -22,10 +22,10 @@
         </button>
     </div>
 
-    <button type="button" class="authenticate-logout" @click="logout" v-if="!isAnonymous">{{ $t('authenticate.logout') }}</button>
+    <button type="button" class="authenticate-logout btn -primary" @click="logout" v-if="!isAnonymous">{{ $t('authenticate.logout') }}</button>
 
-    <button type="button "class="authenticate-login" v-if="!showRegisterWithEmail && isAnonymous" @click="showRegisterForm">{{ $t('authenticate.signUpTitle') }}</button>
-    <button class="authenticate-got-account" v-if="!showLoginWithEmail && isAnonymous" @click="showLoginForm">{{ $t('authenticate.gotAnAccountTitle') }}</button>
+    <button type="button" class="authenticate-login btn" v-if="!showRegisterWithEmail && isAnonymous" @click="showRegisterForm">{{ $t('authenticate.signUpTitle') }}</button>
+    <button type="button" class="authenticate-got-account btn" v-if="!showLoginWithEmail && isAnonymous" @click="showLoginForm">{{ $t('authenticate.gotAnAccountTitle') }}</button>
 
     <alert class="authenticate-form-alert" type="danger" :message="error.message" v-for="(error, errorKey) in errors" :key="errorKey"></alert>
 
@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="authenticate-form-submit">{{ $t('authenticate.signupSubmitButton') }}</button>
+            <button type="submit" class="authenticate-form-submit btn -primary">{{ $t('authenticate.signupSubmitButton') }}</button>
         </form>
     </div>
 
@@ -76,7 +76,7 @@
                     <input class="authenticate-input" type="password" name="password" v-model="signin.password" :placeholder="$t('authenticate.password')">
                 </div>
             </div>
-            <button type="submit" class="authenticate-form-submit"  name="signin">{{ $t('authenticate.signinSubmitButton') }}</button>
+            <button type="submit" class="authenticate-form-submit btn -primary"  name="signin">{{ $t('authenticate.signinSubmitButton') }}</button>
         </form>
     </div>
 </div>
