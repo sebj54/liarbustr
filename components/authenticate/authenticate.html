@@ -27,7 +27,7 @@
     <button type="button "class="authenticate-login" v-if="!showRegisterWithEmail && isAnonymous" @click="showRegisterForm">{{ $t('authenticate.signUpTitle') }}</button>
     <button class="authenticate-got-account" v-if="!showLoginWithEmail && isAnonymous" @click="showLoginForm">{{ $t('authenticate.gotAnAccountTitle') }}</button>
 
-    <alert class="authenticate-form-alert" type="danger" :message="error.message" v-for="error in errors"></alert>
+    <alert class="authenticate-form-alert" type="danger" :message="error.message" v-for="(error, errorKey) in errors" :key="errorKey"></alert>
 
     <div class="authenticate-form-container" v-expand="showRegisterWithEmail && isAnonymous">
         <form class="authenticate-form" @submit.prevent="registerWithEmail">
