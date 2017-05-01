@@ -44,11 +44,15 @@ textarea:focus {
 
 .button,
 button span:only-child {
-    display: inline-flex;
     align-items: center;
 }
 
+.button {
+    display: inline-flex;
+}
+
 button span:only-child {
+    display: flex;
     width: 100%;
 }
 

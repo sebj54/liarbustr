@@ -4,7 +4,7 @@
             <figure class="lie-item-figure" :style="{ color: liePictureColor('main') }">
                 <img :src="liePictureUrl('main')" :alt="$t('lie.picture', { liar: lie.liar })" class="lie-item-picture -main" @load="checkIfReady">
             </figure>
-            <button @click.prevent="showCardBack" class="lie-item-share-button">
+            <button type="button" @click.prevent="showCardBack" class="lie-item-share-button">
                 <span>
                     <span>{{ $t('msc.share.global') }}</span>
                     <svg-icon name="share"></svg-icon>
@@ -15,12 +15,26 @@
             <p class="lie-item-liar">{{ lie.liar }}</p>
         </router-link>
 
-        <div class="lie-item-not-moderated">
-            <alert class="lie-item-not-moderated-alert" type="info" :message="$t('lie.notModerated')" v-if="!lie.isModerated"></alert>
+        <div class="lie-item-not-moderated" v-if="!lie.isModerated">
+            <alert class="lie-item-alert -not-moderated" type="info" :message="$t('lie.notModerated')" v-if="!user.isAdmin"></alert>
+            <alert class="lie-item-alert -moderate" type="warning" :message="$t('lie.notModerated')" v-if="user.isAdmin">
+                <button type="button" class="lie-item-alert-button -validate" slot="footer" @click="moderate(true)">
+                    <span>
+                        <svg-icon name="checked"></svg-icon>
+                        <span>{{ $t('moderate.validate' )}}</span>
+                    </span>
+                </button>
+                <button type="button" class="lie-item-alert-button -refuse" slot="footer" @click="moderate(false)">
+                    <span>
+                        <svg-icon name="close"></svg-icon>
+                        <span>{{ $t('moderate.refuse' )}}</span>
+                    </span>
+                </button>
+            </alert>
         </div>
 
         <div class="lie-item-content">
-            <div class="lie-item-votes">
+            <div class="lie-item-votes"  v-if="lie.isModerated">
                 <div class="lie-item-vote -liar" :class="{ '-is-actual-vote': actualVoteValue === 'liar' }">
                     <div class="lie-item-vote-bar -liar">
                         <div class="lie-item-vote-bar-part" :style="{ width: lieVotesPercentageLiar + '%' }"></div>
@@ -90,7 +104,7 @@
     </div>
 
     <div class="lie-item-back">
-        <button class="lie-item-back-close"type="button" name="button" @click="hideCardBack">
+        <button class="lie-item-back-close" type="button" @click="hideCardBack">
             <svg-icon name="close"></svg-icon>
         </button>
         <div class="lie-item-back-head">
@@ -102,7 +116,7 @@
             <ul class="lie-item-share-social-network-list">
                 <li class="lie-item-share-social-network-item -facebook">
                     <network network="facebook" class="lie-item-share-action-button-wrapper">
-                        <button type="button" name="button" class="lie-item-share-action-button -facebook">
+                        <button type="button" class="lie-item-share-action-button -facebook">
                             <span>
                                 <svg-icon name="facebook" class="lie-item-share-action-button-icon"></svg-icon>
                                 <span class="lie-item-share-action-button-text">{{ $t('msc.share.facebook') }}</span>
@@ -112,7 +126,7 @@
                 </li>
                 <li class="lie-item-share-social-network-item -twitter">
                     <network network="twitter" class="lie-item-share-action-button-wrapper -twitter">
-                        <button type="button" name="button" class="lie-item-share-action-button -twitter">
+                        <button type="button" class="lie-item-share-action-button -twitter">
                             <span>
                                 <svg-icon name="twitter" class="lie-item-share-action-button-icon"></svg-icon>
                                 <span class="lie-item-share-action-button-text">{{ $t('msc.share.twitter') }}</span>

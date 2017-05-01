@@ -90,3 +90,4 @@ router.add('', '/home') // Default route
         ],
     }
 })
+.add('moderate')

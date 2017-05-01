@@ -1,0 +1,7 @@
+<div class="moderate-view">
+    <alert type="danger" :message="$t('moderate.mustBeAdminAlert')" v-if="!user.isAdmin"></alert>
+
+    <authenticate v-if="user.isAnonymous"></authenticate>
+
+    <lies-list collection-uid="recent-unmoderated" v-if="!user.isAnonymous && user.isAdmin"></lies-list>
+</div>

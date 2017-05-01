@@ -60,7 +60,7 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
              * Expanded state (content shown)
              * @type {Boolean}
              */
-            isExpanded: (this.expandedDefault) ? true : false,
+            isExpanded: Boolean(this.expandedDefault),
             /**
              * Flipped state (true if back of the card is shown)
              * @type {Boolean}
@@ -76,6 +76,11 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
              * @type {object}
              */
             lie: null,
+            /**
+             * User
+             * @type {object}
+             */
+            user: user,
         }
         return data
     },
@@ -259,6 +264,27 @@ Vue.component('lie-item', app.resolveTemplate('lie-item', {
             const votesCountOfType = this.lieVotesCount(type)
             const ratio = votesCountOfType / (votesCountOfType + this.lieVotesCount(this.otherType(type)))
             return ratio * 100
+        },
+        /**
+         * Moderate a lie (set it validated or refused)
+         * @param  {Boolean} isValidated Validated indicator (new state)
+         */
+        moderate: function(isValidated)
+        {
+            const unmoderatedCollection = app.db.ref('/collections/recent-unmoderated/lies')
+            const destinationCollectionKey = (isValidated) ? 'recent-moderated' : 'recent-refused'
+
+            this.$firebaseRefs.lie.child('isModerated').set(true)
+            app.db.ref('/collections/' + destinationCollectionKey + '/lies').push(this.lie.uid)
+
+            // Remove lie from unmoderated collection
+            unmoderatedCollection.orderByValue().equalTo(this.lie.uid).once('value', function(snapshot)
+            {
+                Object.keys(snapshot.val()).forEach(function(lieKey)
+                {
+                    unmoderatedCollection.child(lieKey).remove()
+                })
+            })
         },
         /**
          * Toggle content's visibility
