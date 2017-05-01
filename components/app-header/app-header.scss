@@ -121,6 +121,26 @@ header {
             border-bottom-color: rgba($header-font-color, .8);
         }
     }
+
+    &-badge {
+        display: inline-block;
+        padding-top: .2em;
+        padding-bottom: .3em;
+        padding-left: .4em;
+        padding-right: .4em;
+        border-radius: .25em;
+        background-color: $header-font-color;
+        color: $color-primary-normal;
+        line-height: 1;
+
+        &:not(:last-child) {
+            margin-right: .4em;
+        }
+
+        &:not(:first-child) {
+            margin-left: .4em;
+        }
+    }
 }
 
 .header-profile {
@@ -264,6 +284,11 @@ header {
             &:focus {
                 border-bottom-width: 0;
             }
+        }
+
+        &-badge {
+            background-color: $color-primary-normal;
+            color: $header-font-color;
         }
     }
 
