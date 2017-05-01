@@ -1,3 +1,5 @@
 <div class="alert" :class="'-' + type">
+    <slot name="header"></slot>
     <p>{{ message }}</p>
+    <slot name="footer"></slot>
 </div>
