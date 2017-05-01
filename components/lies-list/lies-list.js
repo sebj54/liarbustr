@@ -1,4 +1,4 @@
-/* global Vue app router */
+/* global Vue app router _ */
 
 /**
  * Lies list component
@@ -44,6 +44,24 @@ Vue.component('lies-list', app.resolveTemplate('lies-list', {
         count: function()
         {
             return (this.collection.lies) ? this.collection.lies.length : 0
+        },
+        /**
+         * Collection lies (correctly sorted)
+         * @return {array} Sorted lies
+         */
+        lies: function()
+        {
+            const lies = []
+
+            if (_.hasProp(this, 'collection.lies'))
+            {
+                Object.keys(this.collection.lies).reverse().forEach(function(lieIndex)
+                {
+                    lies.push(this.collection.lies[lieIndex])
+                }.bind(this))
+            }
+
+            return lies
         },
     },
 }))
